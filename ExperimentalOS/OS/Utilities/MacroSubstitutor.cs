@@ -3,6 +3,8 @@
  * http://www.codeproject.com/Articles/10049/A-Macro-Preprocessor-in-C
  * 
  * No license was given
+ *     
+ * source code: https://github.com/wwestlake/ExperimentalOS.git 
  * 
  * Modifications:
  *   1.  Added namespace to make access more convenient
