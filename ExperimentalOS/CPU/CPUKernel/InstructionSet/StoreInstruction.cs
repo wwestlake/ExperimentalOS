@@ -29,11 +29,11 @@ using System.Threading.Tasks;
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
     /// <summary>
-    /// Loads data from memory to a register
-    /// Load r1, value          ; imediate
-    /// Load r1, $address       ; direct addressing
-    /// Load r1, r2            ; indirect addressing
-    /// Load r1, r2, address   ; indexed indirect addressing  
+    /// Stores data from a register to a memory
+    /// Store value, $address   ; imediate
+    /// Store r1, $address      ; direct addressing
+    /// Store r1, r2            ; indirect addressing
+    /// Store r1, r2, address   ; indexed indirect addressing  
     /// </summary>
     internal class StoreInstruction : Instruction
     {
@@ -42,7 +42,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         private int value;
 
         /// <summary>
-        /// Create a load instruction
+        /// Create a store instruction
         /// </summary>
         /// <param name="r1">Register 1</param>
         /// <param name="r2">Register 2</param>
