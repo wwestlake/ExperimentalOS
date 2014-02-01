@@ -38,21 +38,34 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         {
             // no operation
         }
+
         internal void Load(Instruction inst)
         {
         }
+
         internal void Move(Instruction inst)
         {
             MoveInstruction move = inst as MoveInstruction;
             Processor.Registers[move.r1] = Processor.Registers[move.r2];
         }
+
         internal void Pop(Instruction inst)
         {
         }
+
         internal void Push(Instruction inst)
         {
         }
 
+        internal void In(Instruction inst)
+        {
+
+        }
+
+        internal void Out(Instruction inst)
+        {
+
+        }
 
         internal Hardware.CPU Processor { get; set; }
     }

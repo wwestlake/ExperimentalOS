@@ -68,12 +68,14 @@
     <Compile Include="CPU\CPUKernel\Instruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionCodes.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\Delegates.cs" />
+    <Compile Include="CPU\CPUKernel\InstructionSet\InInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InstructionFactory.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InstructionParseException.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\LoadInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\ModesAndStates.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\MoveInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\NopInstruction.cs" />
+    <Compile Include="CPU\CPUKernel\InstructionSet\OutInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\PopInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\PushInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\StoreInstruction.cs" />

@@ -6,9 +6,13 @@ using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
 
 namespace ExperimentalOSTestSuite
 {
-    [TestFixture]
+    [TestFixture(Category="Kernel Tests", 
+        Description="Basic Instruction Object Tests not executing instructions in CPUKernel")]
     public class InstructionSetTests
     {
+
+        // Nop Tests
+
         [Test]
         public void NopInstructionIsCreated()
         {
@@ -37,6 +41,7 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(nopInstruction.Code, newNopInst.Code);
         }
 
+        // Move Tests
 
         [Test]
         public void MoveInstructionIsCreated()
@@ -66,6 +71,8 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(MoveInstruction.Code, newMoveInst.Code);
         }
 
+        // Load Tests
+
         [Test]
         public void LoadInstructionIsCreated()
         {
@@ -94,6 +101,7 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(LoadInstruction.Code, newLoadInst.Code);
         }
 
+        // Store Tests
 
         [Test]
         public void StoreInstructionIsCreated()
@@ -123,6 +131,8 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(StoreInstruction.Code, newStoreInst.Code);
         }
 
+        // Push Tests
+
         [Test]
         public void PushInstructionIsCreated()
         {
@@ -151,6 +161,7 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(PushInstruction.Code, newPushInst.Code);
         }
 
+        // Pop Tests
 
         [Test]
         public void PopInstructionIsCreated()
@@ -179,6 +190,68 @@ namespace ExperimentalOSTestSuite
             Instruction newPopInst = PopInstruction.Read(buffer, 0);
             Assert.AreEqual(PopInstruction.Code, newPopInst.Code);
         }
+
+
+        // In Tests
+
+        [Test]
+        public void InInstructionIsCreated()
+        {
+            Instruction InInstruction = InstructionFactory.In(0,0);
+            Assert.AreEqual(InInstruction.Code, InstructionCodes.In);
+        }
+
+        [Test]
+        public void InInstructionsLoadsFromAssemblyLanguage()
+        {
+            string asmIn = "In r21, $44 ; this is an In instruction";
+            Instruction InInstruction = InstructionFactory.In(0,0).CreateInstruction(asmIn);
+            Assert.AreEqual(InInstruction.Code, InstructionCodes.In);
+            string asmOut = InInstruction.ToString();
+            Assert.IsTrue(asmIn.StartsWith("In r21, $44"));
+            Assert.IsTrue(asmOut.StartsWith("In r21, $44"));
+        }
+
+        [Test]
+        public void InInstructionEmitsByteCodeAndLoadsFromByteCode()
+        {
+            byte[] buffer = new byte[10];
+            Instruction InInstruction = InstructionFactory.In(0,0);
+            InInstruction.Write(buffer, 0);
+            Instruction newInInst = InInstruction.Read(buffer, 0);
+            Assert.AreEqual(InInstruction.Code, newInInst.Code);
+        }
+
+        // Out Tests
+
+        [Test]
+        public void OutInstructionIsCreated()
+        {
+            Instruction OutInstruction = InstructionFactory.Out(0, 0);
+            Assert.AreEqual(OutInstruction.Code, InstructionCodes.Out);
+        }
+
+        [Test]
+        public void OutInstructionsLoadsFromAssemblyLanguage()
+        {
+            string asmIn = "Out r21, $44 ; this is an Out instruction";
+            Instruction OutInstruction = InstructionFactory.Out(0, 0).CreateInstruction(asmIn);
+            Assert.AreEqual(OutInstruction.Code, InstructionCodes.Out);
+            string asmOut = OutInstruction.ToString();
+            Assert.IsTrue(asmIn.StartsWith("Out r21, $44"));
+            Assert.IsTrue(asmOut.StartsWith("Out r21, $44"));
+        }
+
+        [Test]
+        public void OutInstructionEmitsByteCodeAndLoadsFromByteCode()
+        {
+            byte[] buffer = new byte[10];
+            Instruction OutInstruction = InstructionFactory.Out(0, 0);
+            OutInstruction.Write(buffer, 0);
+            Instruction newOutInst = OutInstruction.Read(buffer, 0);
+            Assert.AreEqual(OutInstruction.Code, newOutInst.Code);
+        }
+
 
 
     }

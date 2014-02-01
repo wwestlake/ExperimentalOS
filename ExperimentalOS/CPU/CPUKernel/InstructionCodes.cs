@@ -79,6 +79,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// In r1, $port            // port number imedediate
         /// In r1, r2               // port numher in register 2
         /// </summary>
+        /// <remarks>inst completed</remarks>
         In = 6,
  
         /// <summary>
@@ -86,6 +87,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Out r1, $port           
         /// Out r1, r2
         /// </summary>
+        /// <remarks>inst completed</remarks>
         Out = 7,
 
         /// <summary>

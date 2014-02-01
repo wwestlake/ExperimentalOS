@@ -66,6 +66,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.FreeMemory:
                         break;
                     case InstructionCodes.In:
+                        result = InstructionFactory.In(0, 0).Read(buffer, index);
+                        result.Execute = kernel.In;
                         break;
                     case InstructionCodes.Inc:
                         break;
@@ -81,6 +83,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                         break;
                     case InstructionCodes.Load:
                         result = InstructionFactory.Load(0, 0, 0, 0).Read(buffer, index);
+                        result.Execute = kernel.Load;
                         break;
                     case InstructionCodes.Lock:
                         break;
@@ -88,6 +91,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                         break;
                     case InstructionCodes.Move:
                         result = InstructionFactory.Move(0, 0).Read(buffer, index);
+                        result.Execute = kernel.Move;
                         break;
                     case InstructionCodes.Mul:
                         break;
@@ -96,12 +100,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                         result.Execute = kernel.Nop;
                         break;
                     case InstructionCodes.Out:
+                        result = InstructionFactory.Out(0, 0).Read(buffer, index);
+                        result.Execute = kernel.Out;
                         break;
                     case InstructionCodes.Pop:
                         result = InstructionFactory.Pop(0).Read(buffer, index);
+                        result.Execute = kernel.Pop;
                         break;
                     case InstructionCodes.Push:
                         result = InstructionFactory.Push(0).Read(buffer, index);
+                        result.Execute = kernel.Push;
                         break;
                     case InstructionCodes.Return:
                         break;

@@ -214,6 +214,7 @@
             In r1, $port            // port number imedediate
             In r1, r2               // port numher in register 2
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Out">
             <summary>
@@ -221,6 +222,7 @@
             Out r1, $port           
             Out r1, r2
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Jump">
             <summary>
@@ -445,7 +447,7 @@
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
             <param name="comment">Comment</param>
-            <returns></returns>
+            <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
             <summary>
@@ -455,7 +457,7 @@
             <param name="r2">Register 2</param>
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
-            <returns></returns>
+            <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
             <summary>
@@ -466,7 +468,7 @@
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
             <param name="comment">Comment</param>
-            <returns></returns>
+            <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32)">
             <summary>
@@ -476,7 +478,7 @@
             <param name="r2">Register 2</param>
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
-            <returns></returns>
+            <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Push(System.Int32,System.String)">
             <summary>
@@ -507,6 +509,40 @@
             </summary>
             <param name="r1">Register 1</param>
             <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.In(System.Int32,System.Int32,System.String)">
+            <summary>
+            Create a In Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="port">The port to read from</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.In(System.Int32,System.Int32)">
+            <summary>
+            Create a Pop Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="port">The port to read from</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Out(System.Int32,System.Int32)">
+            <summary>
+            Creates an Out Instruction
+            </summary>
+            <param name="r1">Register to send to port</param>
+            <param name="port">Port to write to</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Out(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates an Out Instruction with comment
+            </summary>
+            <param name="r1">Register to send to port</param>
+            <param name="port">The port to write to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionParseException">
             <summary>

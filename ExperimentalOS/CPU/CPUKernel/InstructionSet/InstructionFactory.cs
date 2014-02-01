@@ -64,7 +64,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
-        /// <returns></returns>
+        /// <returns>Instruction</returns>
         public static Instruction Load(int r1, int r2, int value, uint address, string comment) { return new LoadInstruction(r1, r2, value, address, comment); }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r2">Register 2</param>
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
-        /// <returns></returns>
+        /// <returns>Instruction</returns>
         public static Instruction Load(int r1, int r2, int value, uint address) { return new LoadInstruction(r1, r2, value, address, string.Empty); }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
-        /// <returns></returns>
+        /// <returns>Instruction</returns>
         public static Instruction Store(int r1, int r2, int value, uint address, string comment) { return new StoreInstruction(r1, r2, value, address, comment); }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r2">Register 2</param>
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
-        /// <returns></returns>
+        /// <returns>Instruction</returns>
         public static Instruction Store(int r1, int r2, int value, uint address) { return new StoreInstruction(r1, r2, value, address, string.Empty); }
 
         /// <summary>
@@ -127,6 +127,40 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r1">Register 1</param>
         /// <returns></returns>
         public static Instruction Pop(int r1) { return new PopInstruction(r1); }
-    
+
+        /// <summary>
+        /// Create a In Instruction with comment
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="port">The port to read from</param>
+        /// <param name="comment">Comment</param>
+        /// <returns>Instruction</returns>
+        public static Instruction In(int r1, int port, string comment) { return new InInstruction(r1, port, comment); }
+
+        /// <summary>
+        /// Create a Pop Instruction
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="port">The port to read from</param>
+        /// <returns>Instruction</returns>
+        public static Instruction In(int r1, int port) { return new InInstruction(r1, port); }
+
+        /// <summary>
+        /// Creates an Out Instruction
+        /// </summary>
+        /// <param name="r1">Register to send to port</param>
+        /// <param name="port">Port to write to</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Out(int r1, int port) { return new OutInstruction(r1, port); }
+
+        /// <summary>
+        /// Creates an Out Instruction with comment
+        /// </summary>
+        /// <param name="r1">Register to send to port</param>
+        /// <param name="port">The port to write to</param>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Out(int r1, int port, string comment) { return new OutInstruction(r1, port, comment); }
+
     }
 }
