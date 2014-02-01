@@ -97,8 +97,36 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="address">Address</param>
         /// <returns></returns>
         public static Instruction Store(int r1, int r2, int value, uint address) { return new StoreInstruction(r1, r2, value, address, string.Empty); }
-    
 
+        /// <summary>
+        /// Create a Push Instruction with comment
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="comment">Comment</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Push(int r1, string comment) { return new PushInstruction(r1, comment); }
+
+        /// <summary>
+        /// Create a Push Instruction
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <returns></returns>
+        public static Instruction Push(int r1) { return new PushInstruction(r1); }
+
+        /// <summary>
+        /// Create a Pop Instruction with comment
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="comment">Comment</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Pop(int r1, string comment) { return new PopInstruction(r1, comment); }
+
+        /// <summary>
+        /// Create a Pop Instruction
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <returns></returns>
+        public static Instruction Pop(int r1) { return new PopInstruction(r1); }
     
     }
 }

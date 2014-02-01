@@ -29,12 +29,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// <summary>
         /// No operation
         /// NOP
+        /// <remarks>Inst completed</remarks>
         /// </summary>
         NOP = 0,
 
         /// <summary>
         /// Moves data from register 1 to register 2
         /// Move r1, r2
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Move = 1,
 
@@ -44,6 +46,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Load r1, $address       ; direct addressing
         /// Load r1, r2            ; indirect addressing
         /// Load r1, r2, $address   ; indexed indirect addressing  
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Load = 2,
 
@@ -53,12 +56,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Store r1, $address      // direct addressing
         /// Store r1, r2            // indirect addressing address in r2
         /// Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Store = 3,
 
         /// <summary>
         /// pushes a register onto the stack
         /// Push r1
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Push = 4,
 

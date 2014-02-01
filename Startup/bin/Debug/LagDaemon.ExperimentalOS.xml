@@ -169,12 +169,14 @@
             <summary>
             No operation
             NOP
+            <remarks>Inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Move">
             <summary>
             Moves data from register 1 to register 2
             Move r1, r2
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Load">
@@ -184,6 +186,7 @@
             Load r1, $address       ; direct addressing
             Load r1, r2            ; indirect addressing
             Load r1, r2, $address   ; indexed indirect addressing  
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Store">
@@ -193,12 +196,14 @@
             Store r1, $address      // direct addressing
             Store r1, r2            // indirect addressing address in r2
             Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Push">
             <summary>
             pushes a register onto the stack
             Push r1
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Pop">
@@ -477,6 +482,36 @@
             <param name="address">Address</param>
             <returns></returns>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Push(System.Int32,System.String)">
+            <summary>
+            Create a Push Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Push(System.Int32)">
+            <summary>
+            Create a Push Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Pop(System.Int32,System.String)">
+            <summary>
+            Create a Pop Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Pop(System.Int32)">
+            <summary>
+            Create a Pop Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <returns></returns>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionParseException">
             <summary>
             This exception is thrown whenever the assembly routines run into an error in the 
@@ -688,6 +723,86 @@
             <param name="offset">Position in the buffer to start reading</param>
             <returns>The Instruction created</returns>
             <exception>Application Exception if bytes are incorrect</exception>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction">
+            <summary>
+            Represents a single atomic Push instruction.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructs a Pop instruction
+            </summary>
+            <param name="r1">register</param>
+            <param name="comment">comments</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.#ctor(System.Int32)">
+            <summary>
+            Constructs a Pop instruction
+            </summary>
+            <param name="r1">register</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.DisAssemble">
+            <summary>
+            Converts instruction to assembly language representation
+            </summary>
+            <returns>String assembly language representation</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.Emit(System.Byte[],System.Int32)">
+            <summary>
+            Emits byte code representation of Push instruction
+            </summary>
+            <param name="buffer">buffer to write to</param>
+            <param name="offset">offset in buffer</param>
+            <returns>count of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates a push instruction from byte code
+            </summary>
+            <param name="buffer">buffer where bytes are stored</param>
+            <param name="offset">offset into buffer</param>
+            <returns>An Instruciton</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction">
+            <summary>
+            Represents a single atomic Push instruction.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructs a Push instruction
+            </summary>
+            <param name="r1">register</param>
+            <param name="comment">comments</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.#ctor(System.Int32)">
+            <summary>
+            Constructs a Push instruction
+            </summary>
+            <param name="r1">register</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.DisAssemble">
+            <summary>
+            Converts instruction to assembly language representation
+            </summary>
+            <returns>String assembly language representation</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.Emit(System.Byte[],System.Int32)">
+            <summary>
+            Emits byte code representation of Push instruction
+            </summary>
+            <param name="buffer">buffer to write to</param>
+            <param name="offset">offset in buffer</param>
+            <returns>count of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates a push instruction from byte code
+            </summary>
+            <param name="buffer">buffer where bytes are stored</param>
+            <param name="offset">offset into buffer</param>
+            <returns>An Instruciton</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction">
             <summary>
