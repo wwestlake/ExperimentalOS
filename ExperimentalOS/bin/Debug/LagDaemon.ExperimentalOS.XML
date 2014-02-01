@@ -25,6 +25,16 @@
             Array of actual registers in this CPU
             </summary>
         </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.InstructionQueue">
+            <summary>
+            The instruction queue loaded in the order of executing instructions.
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.CpuKernel">
+            <summary>
+            The CPUKernel for this CPU
+            </summary>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel">
             <summary>
             Represents the microcode side of the CPU for execution of instruction codes

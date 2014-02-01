@@ -18,7 +18,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 using LagDaemon.ExperimentalOS.OS.Utilities;
+using System.Collections.Generic;
 
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
@@ -28,7 +30,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
     /// </summary>
     public abstract class CPU
     {
-        private CPUKernel.CPUKernel _cpuKernel;
 
         /// <summary>
         /// Constructis a CPU
@@ -36,10 +37,11 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
         /// <param name="cpuKernel">The Kernel for this CPU</param>
         internal CPU(CPUKernel.CPUKernel cpuKernel)
         {
-            this._cpuKernel = cpuKernel;
-            this._cpuKernel.Processor = this;
+            this.CpuKernel = cpuKernel;
+            this.CpuKernel.Processor = this;
             this.RegisterCount = Settings.NumberOfRegisters;
-            this.Registers = new int[Settings.NumberOfRegisters];            
+            this.Registers = new int[Settings.NumberOfRegisters];
+            this.InstructionQueue = new Queue<Instruction>();
         }
 
         /// <summary>
@@ -52,6 +54,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
         /// </summary>
         internal int[] Registers { get; private set; }
 
+        /// <summary>
+        /// The instruction queue loaded in the order of executing instructions.
+        /// </summary>
+        internal Queue<Instruction> InstructionQueue { get; private set; }
 
+        /// <summary>
+        /// The CPUKernel for this CPU
+        /// </summary>
+        internal CPUKernel.CPUKernel CpuKernel { get; private set; }
     }
 }
