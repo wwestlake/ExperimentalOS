@@ -35,7 +35,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// Load r1, r2            ; indirect addressing
     /// Load r1, r2, address   ; indexed indirect addressing  
     /// </summary>
-    internal class LoadInstruction : Instruction
+    internal class StoreInstruction : Instruction
     {
         private int r1, r2;
         private uint address;
@@ -49,8 +49,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
-        internal LoadInstruction(int r1, int r2, int value, uint address, string comment)
-            : base(InstructionCodes.Load, comment) 
+        internal StoreInstruction(int r1, int r2, int value, uint address, string comment)
+            : base(InstructionCodes.Store, comment)
         {
             this.r1 = r1;
             this.r2 = r2;
@@ -83,32 +83,32 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         protected override Instruction Assemble(string assemblyLine)
         {
             Match m;
-            string pattern1 = InstructionCodes.Load.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+),\s*\$(?<address>\d+)\s*[;]*(?<comment>[\s\S]*)";
-            string pattern2 = InstructionCodes.Load.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+)\s*[;]*(?<comment>[\s\S]*)";
-            string pattern3 = InstructionCodes.Load.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*\$(?<address>\d+)\s*[;]*(?<comment>[\s\S]*)";
-            string pattern4 = InstructionCodes.Load.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*(?<value>[\+\-]*\d+)\s*[;]*(?<comment>[\s\S]*)";
+            string pattern1 = InstructionCodes.Store.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+),\s*\$(?<address>\d+)\s*[;]*(?<comment>[\s\S]*)";
+            string pattern2 = InstructionCodes.Store.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+)\s*[;]*(?<comment>[\s\S]*)";
+            string pattern3 = InstructionCodes.Store.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*\$(?<address>\d+)\s*[;]*(?<comment>[\s\S]*)";
+            string pattern4 = InstructionCodes.Store.ToString().ToLower() + @"\s+(?<value>\d+)\s*,\s*\$(?<address>[\+\-]*\d+)\s*[;]*(?<comment>[\s\S]*)";
             string line = assemblyLine.Trim().ToLower();
-            if (line.StartsWith(InstructionCodes.Load.ToString().ToLower()))
+            if (line.StartsWith(InstructionCodes.Store.ToString().ToLower()))
             {
                 m = Regex.Match(line, pattern1, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 if (m.Success)
                 {
-                    return new LoadInstruction(int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), 0, uint.Parse(m.Groups["address"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                    return new StoreInstruction(int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), 0, uint.Parse(m.Groups["address"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
                 }
                 m = Regex.Match(line, pattern2, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 if (m.Success)
                 {
-                    return new LoadInstruction(int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), 0, (uint)Symbols.NullAddress, m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                    return new StoreInstruction(int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), 0, (uint)Symbols.NullAddress, m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
                 }
                 m = Regex.Match(line, pattern3, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 if (m.Success)
                 {
-                    return new LoadInstruction(int.Parse(m.Groups["r1"].Value), Symbols.NullRegister, 0, uint.Parse(m.Groups["address"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                    return new StoreInstruction(int.Parse(m.Groups["r1"].Value), Symbols.NullRegister, 0, uint.Parse(m.Groups["address"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
                 }
                 m = Regex.Match(line, pattern4, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 if (m.Success)
                 {
-                    return new LoadInstruction(int.Parse(m.Groups["r1"].Value), Symbols.NullRegister, int.Parse(m.Groups["value"].Value), (uint)Symbols.NullAddress, m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                    return new StoreInstruction(int.Parse(m.Groups["r1"].Value), Symbols.NullRegister, int.Parse(m.Groups["value"].Value), (uint)Symbols.NullAddress, m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
                 }
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
@@ -126,7 +126,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 builder.AppendFormat(", r{0}, ${1}", r2, address);
             }
-            else if (r2 != Symbols.NullRegister) 
+            else if (r2 != Symbols.NullRegister)
             {
                 builder.AppendFormat(", r{0}", r2);
             }
@@ -134,9 +134,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 builder.AppendFormat(", ${0}", address);
             }
-            else if (r2 == Symbols.NullRegister && address == (ulong)Symbols.NullAddress)
+            else if (r2 == Symbols.NullRegister && address != (ulong)Symbols.NullAddress)
             {
-                builder.AppendFormat(", {0}", value);
+                builder.AppendFormat("{0}, {1}", value, address);
             }
             if (!string.IsNullOrEmpty(Comment))
             {
@@ -168,7 +168,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 extInstCode = AddressingMode.Direct;
             }
-            else if (r2 == Symbols.NullRegister && address == (uint)Symbols.NullAddress)
+            else if (r2 == Symbols.NullRegister && address != (uint)Symbols.NullAddress)
             {
                 extInstCode = AddressingMode.Imediate;
             }
@@ -190,7 +190,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
                     break;
                 case AddressingMode.Imediate:
                     for (int i = 0; i < valueBytes.Length; i++) buffer[index++] = valueBytes[i];
-                        break;
+                    for (int i = 0; i < addressBytes.Length; i++) buffer[index++] = addressBytes[i];
+                    break;
             }
             return index;
         }
@@ -211,7 +212,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             int r2 = Symbols.NullRegister;
             uint address = (uint)Symbols.NullAddress;
             int value = 0;
-            if (code != InstructionCodes.Load) throw new InvalidOperationException(string.Format("Expected Move Instruction but encountered: {0} instruction", code));
+            if (code != InstructionCodes.Store) throw new InvalidOperationException(string.Format("Expected Move Instruction but encountered: {0} instruction", code));
             extInstCode = (AddressingMode)buffer[index++];
             r1 = (int)buffer[index++];
             switch (extInstCode)
@@ -224,13 +225,15 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
                     break;
                 case AddressingMode.IndexedInderect:
                     r2 = (int)buffer[index++];
-                    address = BitConverter.ToUInt32(buffer, index++);
+                    address = BitConverter.ToUInt32(buffer, index);
                     break;
                 case AddressingMode.Imediate:
                     value = BitConverter.ToInt32(buffer, index);
+                    index += sizeof(int);
+                    address = BitConverter.ToUInt32(buffer, index);
                     break;
             }
-            return new LoadInstruction(r1, r2, value, address, string.Empty);
+            return new StoreInstruction(r1, r2, value, address, string.Empty);
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="..\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.dll" />
+    <assembly path="..\ExperimentalOSTestSuite\bin\Debug\ExperimentalOSTestSuite.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="..\ExperimentalOS\bin\Release\LagDaemon.ExperimentalOS.dll" />
+    <assembly path="..\ExperimentalOSTestSuite\bin\Release\ExperimentalOSTestSuite.dll" />
+  </Config>
+</NUnitProject>

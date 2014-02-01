@@ -76,7 +76,29 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="address">Address</param>
         /// <returns></returns>
         public static Instruction Load(int r1, int r2, int value, uint address) { return new LoadInstruction(r1, r2, value, address, string.Empty); }
+
+        /// <summary>
+        /// Create a Store Instruction with comment
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="value">Imediate value</param>
+        /// <param name="address">Address</param>
+        /// <param name="comment">Comment</param>
+        /// <returns></returns>
+        public static Instruction Store(int r1, int r2, int value, uint address, string comment) { return new StoreInstruction(r1, r2, value, address, comment); }
+
+        /// <summary>
+        /// Create a Store Instruction
+        /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="value">Imediate value</param>
+        /// <param name="address">Address</param>
+        /// <returns></returns>
+        public static Instruction Store(int r1, int r2, int value, uint address) { return new StoreInstruction(r1, r2, value, address, string.Empty); }
     
+
     
     }
 }

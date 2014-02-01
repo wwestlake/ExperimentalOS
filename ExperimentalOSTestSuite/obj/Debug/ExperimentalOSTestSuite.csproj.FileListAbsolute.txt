@@ -1,0 +1,10 @@
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\ExperimentalOSTestSuite.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\ExperimentalOSTestSuite.pdb
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\LagDaemon.ExperimentalOS.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\nunit.framework.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\LagDaemon.ExperimentalOS.pdb
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\LagDaemon.ExperimentalOS.xml
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\nunit.framework.xml
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\obj\Debug\ExperimentalOSTestSuite.csprojResolveAssemblyReference.cache
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\obj\Debug\ExperimentalOSTestSuite.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\obj\Debug\ExperimentalOSTestSuite.pdb
