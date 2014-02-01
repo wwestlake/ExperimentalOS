@@ -1,0 +1,780 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LagDaemon.ExperimentalOS</name>
+    </assembly>
+    <members>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU">
+            <summary>
+            Emulates a CPU with task switching, memory management, registers and instruction codes.
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU._cache">
+            <summary>
+            Shared between CPU threads to allow caching of instructions from OS level memory to CPU memory
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU._registers">
+            <summary>
+            The registers for this CPU
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU._cpuMemory">
+            <summary>
+            Holds the CPU level kernel
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel)">
+            <summary>
+            Constructis a CPU
+            </summary>
+            <param name="cpuKernel">The Kernel for this CPU</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel">
+            <summary>
+            Represents the microcode side of the CPU for execution of instruction codes
+            and handles CPU level memory management and task switching.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel.#ctor">
+            <summary>
+            Constructs a CPUKernel
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelException">
+            <summary>
+            A CPUKernel Exception is thrown in the CPU Kernel code when ever a condition is encountered
+            that will prevent the correct operation of the CPU Kernel.  In some cases they may be caught and recovered.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelException.#ctor(System.String)">
+            <summary>
+            Create a CPUKernelException from a string message
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelException.#ctor(System.String,System.Object[])">
+            <summary>
+            Create a CPUKernelMessage from a format string and arguments
+            </summary>
+            <param name="format">Format String</param>
+            <param name="args">Arguments</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction">
+            <summary>
+            Represents a single atomic CPU instruction.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes)">
+            <summary>
+            Constructs an initial instruction which may require further initialization
+            by a derived class
+            </summary>
+            <param name="code">The instruction code for this instruction</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.String)">
+            <summary>
+            Constructs an Instruction from InstructionCode and Comment
+            </summary>
+            <param name="code">The InstructionCode</param>
+            <param name="comment">The Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateInstruction(System.String)">
+            <summary>
+            Creates an instruction from an assembly line
+            </summary>
+            <param name="assemblyLine">The assembly line to use</param>
+            <returns>An instruction object</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Read(System.Byte[],System.Int32)">
+            <summary>
+            Reads bytes from a buffer to produce an Instruction
+            </summary>
+            <param name="buffer">The buffer to read from</param>
+            <param name="offset">The offset into the buffer to start reading at</param>
+            <returns>An Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Write(System.Byte[],System.Int32)">
+            <summary>
+            Writes the instruction to the buffer starting at offset
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offset in the buffer to write at</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Assemble(System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <returns>An Instruction object</returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Emit(System.Byte[],System.Int32)">
+            <summary>
+            When implemented Writes the op codes into buffer
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offiset within the buffer to write to</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an instruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.ToString">
+            <summary>
+            Converts this to a disassembled string
+            </summary>
+            <returns>The assembly language equivilant</returns>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Execute">
+            <summary>
+            Internally set by the CPUKernal for execution of the instruction
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Code">
+            <summary>
+            Returns the instruction code for this instruction
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Comment">
+            <summary>
+            Any comment from the assembly file or from construction
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Size">
+            <summary>
+            Returns the actual size in bytes that this instruction requires for storage
+            in memory.  This size includes the data.
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes">
+            <summary>
+            Defines the CPU instruction set
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.NOP">
+            <summary>
+            No operation
+            NOP
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Move">
+            <summary>
+            Moves data from register 1 to register 2
+            Move r1, r2
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Load">
+            <summary>
+            Loads data from memory to a register
+            Load r1, value          ; imediate
+            Load r1, $address       ; direct addressing
+            Load r1, r2            ; indirect addressing
+            Load r1, r2, $address   ; indexed indirect addressing  
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Store">
+            <summary>
+            stores data from a register or imnediate to memory
+            Store value, $address   // imediate value to address
+            Store r1, $address      // direct addressing
+            Store r1, r2            // indirect addressing address in r2
+            Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Push">
+            <summary>
+            pushes a register onto the stack
+            Push r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Pop">
+            <summary>
+            pops data from the stack into a register
+            Pop R1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.In">
+            <summary>
+            reads from an input port to a register
+            In r1, $port            // port number imedediate
+            In r1, r2               // port numher in register 2
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Out">
+            <summary>
+            writes froma register to an output port
+            Out r1, $port           
+            Out r1, r2
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Jump">
+            <summary>
+            jumps the execution address to the specified address in a register
+            Jump $address           // imediate address
+            Jump r1                 // address in r1
+            Jump r1, $address        // r1 indexes into address (address + r1)
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Call">
+            <summary>
+            pushes the current address to the stack then jumps the desired address
+            Call r1
+            Call r1, $address
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Return">
+            <summary>
+            returns from a call by popping the addess from the stack
+            Ret
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Add">
+            <summary>
+            Add register 2 to register 3 and stores the result in register 1
+            Add r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Sub">
+            <summary>
+            Subtracts r3 from r2 stores result in r1
+            Sub r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Mul">
+            <summary>
+            Multiplies r2 by r3 stores result in r1
+            Mul r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Div">
+            <summary>
+            Divides r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Inc">
+            <summary>
+            Increments register r1 by 1
+            Inc r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Dec">
+            <summary>
+            Decrements r1 by 1
+            Dec r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Compare">
+            <summary>
+            Compares r1 to r2 and sets the comparison flag to be acted upon my a conditional instruction
+            Compare r1, r2
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JE">
+            <summary>
+            Jump IFF conditional flag is Equal
+            JE $address
+            JE r1
+            JE r1, $address
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JNE">
+            <summary>
+            Jump IFF conditional flag is Not Equal (any state other than equal)
+            JNE $address
+            JNE r1
+            JNE r1, $address
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JGT">
+            <summary>
+            Jump IFF conditional flag is Greater Than
+            JGT $address
+            JGT r1
+            JGT r1, $address
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JLT">
+            <summary>
+            Jump IFF coditional flag is Less Than
+            JLT $address
+            JLT r1
+            JLT r1, $address
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Lock">
+            <summary>
+            Obtains a lock on a process where num is the lock number asscociated with the calling process
+            Lock num
+            Lock r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Unlock">
+            <summary>
+            Unlocks a lock obtained by Lock
+            Unlock num
+            Unlock r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Sleep">
+            <summary>
+            Causes the currently executing process to sleep by the specified time in Miliseconds
+            Sleep time
+            Sleep r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.SetPriority">
+            <summary>
+            Sets the priority of the currently executing process
+            SetPriority num
+            SetPriority r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.AllocateMemory">
+            <summary>
+            Alllocates memory to the processor memory manager and places the allocated memory handle in the designated register r1
+            AllocateMemory r1, num
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.FreeMemory">
+            <summary>
+            Frees previously allocated memory as designated by the handle in r1
+            FreeMemory r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.WaitOnEvent">
+            <summary>
+            Waits for an event designated by the event handle in r1
+            WaitOnEvent r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.FireEvent">
+            <summary>
+            Fires the event in r1
+            FireEvent r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.MemoryClear">
+            <summary>
+            Clears the memory starting at the address in r1 for number of bytes in r2
+            MemoryClear r1, r2
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Terminate">
+            <summary>
+            Terminates the currently running process where r1 contains an exit code for the process which will be returned to the OS Kernel
+            Terminate r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.BeginAtomicBlock">
+            <summary>
+            Starts an atomic block (this block will not be interupted by taks switching) and returns an AtomicBlock handle in r1
+            The atomic block begins with the next executing instruction and ends when EndAtomicBlock is encountered with the 
+            appropriate AtomicBlockHandle
+            BeginAtomicBlock r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.EndAtomicBlock">
+            <summary>
+            Ends an AtomicBlock started with BeginAtomicBlock.  r1 must contain the atomic block number that is ending
+            EndAtomicBlock r1
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ExecuteInstruction">
+            <summary>
+            Used to connect an instruction to the CPU Kernal code that executes the instruction
+            </summary>
+            <param name="instruction">The instruction being executed</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory">
+            <summary>
+            Factory methods for creating instructions
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nop">
+            <summary>
+            Create a Nop Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nop(System.String)">
+            <summary>
+            Create a Nop instruction with comment
+            </summary>
+            <param name="comment">A Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Move(System.Int32,System.Int32)">
+            <summary>
+            Create a Move instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Move(System.Int32,System.Int32,System.String)">
+            <summary>
+            Create a Move isntruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+            <summary>
+            Create a Load Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <param name="comment">Comment</param>
+            <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            Create a Load Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <returns></returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionParseException">
+            <summary>
+            This exception is thrown whenever the assembly routines run into an error in the 
+            format of the instructions
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionParseException.#ctor(System.String)">
+            <summary>
+            Constructs an InstructionParseException from a string
+            </summary>
+            <param name="message">The error message</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionParseException.#ctor(System.String,System.Object[])">
+            <summary>
+            Constructs an InstructionParseException from a format string and array of arguments
+            </summary>
+            <param name="format">The format string</param>
+            <param name="args">The arguments</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction">
+            <summary>
+            Loads data from memory to a register
+            Load r1, value          ; imediate
+            Load r1, $address       ; direct addressing
+            Load r1, r2            ; indirect addressing
+            Load r1, r2, address   ; indexed indirect addressing  
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.#ctor(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+            <summary>
+            Create a load instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.Assemble(System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <returns>An Instruction object</returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.Emit(System.Byte[],System.Int32)">
+            <summary>
+            When implemented Writes the op codes into buffer
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offiset within the buffer to write to</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an instruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode">
+            <summary>
+            Addressing modes supported by instructions that use addresses.
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode.Direct">
+            <summary>
+            Direct addressing is where an address appears in memory imediately following the instruction code
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode.Indirect">
+            <summary>
+            Indirect addressing is where a register contains the address to use
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode.Indexed">
+            <summary>
+            Indexed addressing is where an address appears imediately following the instruction code and a register 
+            indexes to some point beyond that address.
+            </summary>
+            
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode.IndexedInderect">
+            <summary>
+            This is where two registers are used to compute the final address, one contains the address the other indexes into
+            memory.
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode.Imediate">
+            <summary>
+            Imediate takes an operand imediately following the op code
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction">
+            <summary>
+            Moves data from register 1 to register 2
+            Move r1, r2
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructs a MoveInstruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Constructs a MoveInstruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction)">
+            <summary>
+            Copies a MoveInstruction to this new object
+            </summary>
+            <param name="inst">The instruction to copy</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.Assemble(System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine"></param>
+            <returns></returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.Emit(System.Byte[],System.Int32)">
+            <summary>
+            When implemented Writes the op codes into buffer
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offiset within the buffer to write to</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an MoveInstruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction">
+            <summary>
+            Represents No Operation instruction
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.#ctor">
+            <summary>
+            Construciton a Nop Instruciton
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.#ctor(System.String)">
+            <summary>
+            Constructs a NOP instruction
+            </summary>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="inst">The NopInstruction to copy</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.Assemble(System.String)">
+            <summary>
+            Assembly a Nop Instruction
+            </summary>
+            <param name="assemblyLine">Assembly line representing a NOP</param>
+            <returns>The instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.DisAssemble">
+            <summary>
+            Generates Assembly code for a Nop instruction
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.Emit(System.Byte[],System.Int32)">
+            <summary>
+            Emit a NOP instuction code into the buffer
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an NopInstruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.Symbols">
+            <summary>
+            Special symbols used to control instruction code operations
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.Symbols.NullAddress">
+            <summary>
+            Designates an address that is not valid.  This is for absolute addresses only, a relative address of -1 is computed against
+            an absolute address to obtain another absolute address.
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.Symbols.NullRegister">
+            <summary>
+            Designates that no register is specified.  In some instances this may result in the CPUKernel or OSKernal selecting an unused register.
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache">
+            <summary>
+            The SymbolCache is used to store symbols found and the location where an address
+            needs to be place, but prior to the symbol being defined.  Once the symbol is defined the
+            SymbolCache is checked to find all location where the address needs to be placed.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache.#ctor(System.String)">
+            <summary>
+            Construct a SymbolCache for the specified scope
+            </summary>
+            <param name="scope">The scope of this SymbolCacne</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache.Add(System.String,System.UInt32)">
+            <summary>
+            Adds a Symbol and address to the Cache creating the list of addresses 
+            if this this the first time the symbol is added. 
+            </summary>
+            <param name="symbol">The symbol to add and address for</param>
+            <param name="address">The address where the symbol resides</param>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache.Item(System.String)">
+            <summary>
+            Produces and Emumeration of all addresses in this scope that are 
+            associated with the supplied symbol
+            </summary>
+            <param name="symbol">The symbol for this scope</param>
+            <returns>An enumeration of all addresses for this symbol</returns>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache.Scope">
+            <summary>
+            The Scope of this SymbolCache
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable">
+            <summary>
+            A SymbolTable is a look up table and cross reference for Symbols that have been assigned an address.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable.#ctor(System.String)">
+            <summary>
+            Constructs a SymbolTable for the specified scope
+            </summary>
+            <param name="scope">The Scope of this SymbolTable</param>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable.Item(System.UInt32)">
+            <summary>
+            Produces the Symbol for the specified address (reverse lookup)
+            </summary>
+            <param name="address">The address</param>
+            <returns>The Symbol</returns>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable.Item(System.String)">
+            <summary>
+            Produces an address for a given symbol
+            </summary>
+            <param name="symbol">The Symbol</param>
+            <returns>The address</returns>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable.Scope">
+            <summary>
+            The Scope of this SymbolTable
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.Utilities.MacroExpander">
+            <summary>
+            Expands Macros used in Assembly Files
+            <remarks>This routine is experimental and may not be implemented in release</remarks>
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Utilities.MacroExpander.#ctor">
+            <summary>
+            Parses and expands a macro that had a definition of the for define MyMacro(args) = now is the {0} for all good {1} to come to the aid of their {2}
+            such that MyMacro(time, men, country) expands to "now is the time for all good men to come to the aid of their country
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Utilities.MacroExpander.AddMacro(System.String)">
+            <summary>
+            Add a Macro to the expander
+            </summary>
+            <param name="macro">The Macro to add</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.Utilities.Settings">
+            <summary>
+            Helper class for accessing the configuration settings
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Utilities.Settings.MaximumSymbolLength">
+            <summary>
+            Get the setting for Maximum Symbol Length
+            </summary>
+        </member>
+    </members>
+</doc>
