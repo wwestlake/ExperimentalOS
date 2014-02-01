@@ -27,7 +27,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// </summary>
     internal class PushInstruction : Instruction
     {
-        private int r1;
+        internal int r1;
 
         /// <summary>
         /// Constructs a Push instruction
@@ -37,13 +37,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         internal PushInstruction(int r1, string comment) : base(InstructionCodes.Push, comment) 
         {
             this.r1 = r1;
+            Size = 2;
         }
 
         /// <summary>
         /// Constructs a Push instruction
         /// </summary>
         /// <param name="r1">register</param>
-        internal PushInstruction(int r1) : base(InstructionCodes.Push, string.Empty) { }
+        internal PushInstruction(int r1) : this(r1, string.Empty) { }
 
         protected override Instruction Assemble(string assemblyLine)
         {

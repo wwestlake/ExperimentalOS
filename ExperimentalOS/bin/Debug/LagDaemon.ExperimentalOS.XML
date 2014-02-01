@@ -9,26 +9,21 @@
             Emulates a CPU with task switching, memory management, registers and instruction codes.
             </summary>
         </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU._cache">
-            <summary>
-            Shared between CPU threads to allow caching of instructions from OS level memory to CPU memory
-            </summary>
-        </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU._registers">
-            <summary>
-            The registers for this CPU
-            </summary>
-        </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU._cpuMemory">
-            <summary>
-            Holds the CPU level kernel
-            </summary>
-        </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel)">
             <summary>
             Constructis a CPU
             </summary>
             <param name="cpuKernel">The Kernel for this CPU</param>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.RegisterCount">
+            <summary>
+            Count of available registers
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.Registers">
+            <summary>
+            Array of actual registers in this CPU
+            </summary>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel">
             <summary>
@@ -169,15 +164,15 @@
             <summary>
             No operation
             NOP
-            <remarks>Inst completed</remarks>
             </summary>
+            <remarks>Inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Move">
             <summary>
             Moves data from register 1 to register 2
             Move r1, r2
-            <remarks>inst completed</remarks>
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Load">
             <summary>
@@ -186,8 +181,8 @@
             Load r1, $address       ; direct addressing
             Load r1, r2            ; indirect addressing
             Load r1, r2, $address   ; indexed indirect addressing  
-            <remarks>inst completed</remarks>
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Store">
             <summary>
@@ -196,22 +191,22 @@
             Store r1, $address      // direct addressing
             Store r1, r2            // indirect addressing address in r2
             Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index
-            <remarks>inst completed</remarks>
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Push">
             <summary>
             pushes a register onto the stack
             Push r1
-            <remarks>inst completed</remarks>
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Pop">
             <summary>
             pops data from the stack into a register
             Pop R1
-            <remarks>inst completed</remarks>
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.In">
             <summary>

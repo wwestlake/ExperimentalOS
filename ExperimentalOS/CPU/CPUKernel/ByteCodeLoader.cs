@@ -29,11 +29,17 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {
     internal class ByteCodeLoader
     {
-        internal ByteCodeLoader() { }
+        private CPUKernel kernel;
+
+        internal ByteCodeLoader(CPUKernel kernel) 
+        {
+            this.kernel = kernel;
+        }
 
         internal IEnumerable<Instruction> ReadByteCode(byte[] buffer, int offset, int count)
         {
             int index = offset;
+            Instruction result = null;
             while (index < count)
             {
                 InstructionCodes code = (InstructionCodes)buffer[index];
@@ -74,31 +80,28 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.Jump:
                         break;
                     case InstructionCodes.Load:
-                        Instruction load = InstructionFactory.Load(0, 0, 0, 0).Read(buffer, index);
-                        index += load.Size;
-                        yield return load;
+                        result = InstructionFactory.Load(0, 0, 0, 0).Read(buffer, index);
                         break;
                     case InstructionCodes.Lock:
                         break;
                     case InstructionCodes.MemoryClear:
                         break;
                     case InstructionCodes.Move:
-                        Instruction mov = InstructionFactory.Move(0, 0).Read(buffer, index);
-                        index += mov.Size;
-                        yield return mov;
+                        result = InstructionFactory.Move(0, 0).Read(buffer, index);
                         break;
                     case InstructionCodes.Mul:
                         break;
                     case InstructionCodes.NOP:
-                        Instruction nop = InstructionFactory.Nop().Read(buffer, index);
-                        index += nop.Size;
-                        yield return nop;
+                        result = InstructionFactory.Nop().Read(buffer, index);
+                        result.Execute = kernel.Nop;
                         break;
                     case InstructionCodes.Out:
                         break;
                     case InstructionCodes.Pop:
+                        result = InstructionFactory.Pop(0).Read(buffer, index);
                         break;
                     case InstructionCodes.Push:
+                        result = InstructionFactory.Push(0).Read(buffer, index);
                         break;
                     case InstructionCodes.Return:
                         break;
@@ -117,7 +120,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.WaitOnEvent:
                         break;
                 }
-
+                index += result.Size;
+                result.Address = index;
+                yield return result;
             }
         }
 

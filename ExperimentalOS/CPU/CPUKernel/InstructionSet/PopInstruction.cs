@@ -27,7 +27,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// </summary>
     internal class PopInstruction : Instruction
     {
-        private int r1;
+        internal int r1;
 
         /// <summary>
         /// Constructs a Pop instruction
@@ -38,13 +38,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             : base(InstructionCodes.Pop, comment)
         {
             this.r1 = r1;
+            Size = 2;
         }
 
         /// <summary>
         /// Constructs a Pop instruction
         /// </summary>
         /// <param name="r1">register</param>
-        internal PopInstruction(int r1) : base(InstructionCodes.Pop, string.Empty) { }
+        internal PopInstruction(int r1) : this(r1, string.Empty) { }
 
         protected override Instruction Assemble(string assemblyLine)
         {

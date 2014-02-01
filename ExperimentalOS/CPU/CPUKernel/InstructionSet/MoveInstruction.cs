@@ -29,7 +29,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// </summary>
     internal class MoveInstruction : Instruction
     {
-        private int r1, r2;
+        internal int r1, r2;
 
         internal MoveInstruction() : base(InstructionCodes.Move) { }
 

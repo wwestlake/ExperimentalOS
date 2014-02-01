@@ -41,5 +41,14 @@ namespace LagDaemon.ExperimentalOS.OS.Utilities
                 return int.Parse(System.Configuration.ConfigurationManager.AppSettings["MAX_SYMBOL_LENGTH"]);
             }
         }
+
+        public static int NumberOfRegisters
+        {
+            get
+            {
+                return int.Parse(System.Configuration.ConfigurationManager.AppSettings["REGISTERS"]);
+            }
+        }
+
     }
 }

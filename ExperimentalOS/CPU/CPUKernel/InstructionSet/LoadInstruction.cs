@@ -37,9 +37,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// </summary>
     internal class LoadInstruction : Instruction
     {
-        private int r1, r2;
-        private uint address;
-        private int value;
+        internal int r1, r2;
+        internal uint address;
+        internal int value;
 
         /// <summary>
         /// Create a load instruction

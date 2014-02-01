@@ -18,6 +18,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.OS.Utilities;
+
+
 namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
 {
     /// <summary>
@@ -25,32 +28,30 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
     /// </summary>
     public abstract class CPU
     {
-        /// <summary>
-        /// Shared between CPU threads to allow caching of instructions from OS level memory to CPU memory
-        /// </summary>
-        private uint[] _cache;
-
-        /// <summary>
-        /// The registers for this CPU
-        /// </summary>
-        private uint[] _registers;
-
-        /// <summary>
-        /// Holds the CPU level kernel
-        /// </summary>
-        private uint[] _cpuMemory;
-
-
         private CPUKernel.CPUKernel _cpuKernel;
 
         /// <summary>
         /// Constructis a CPU
         /// </summary>
         /// <param name="cpuKernel">The Kernel for this CPU</param>
-        public CPU(CPUKernel.CPUKernel cpuKernel)
+        internal CPU(CPUKernel.CPUKernel cpuKernel)
         {
             this._cpuKernel = cpuKernel;
+            this._cpuKernel.Processor = this;
+            this.RegisterCount = Settings.NumberOfRegisters;
+            this.Registers = new int[Settings.NumberOfRegisters];            
         }
+
+        /// <summary>
+        /// Count of available registers
+        /// </summary>
+        internal int RegisterCount { get; private set; }
+
+        /// <summary>
+        /// Array of actual registers in this CPU
+        /// </summary>
+        internal int[] Registers { get; private set; }
+
 
     }
 }

@@ -31,5 +31,14 @@ namespace LagDaemon.ExperimentalOS.Properties {
                 return ((int)(this["MAX_SYMBOL_LENGTH"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("128")]
+        public int REGISTERS {
+            get {
+                return ((int)(this["REGISTERS"]));
+            }
+        }
     }
 }
