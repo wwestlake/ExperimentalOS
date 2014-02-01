@@ -70,6 +70,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// <summary>
         /// pops data from the stack into a register
         /// Pop R1
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Pop = 5,
 

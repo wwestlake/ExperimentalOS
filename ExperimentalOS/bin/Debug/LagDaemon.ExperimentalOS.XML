@@ -210,6 +210,7 @@
             <summary>
             pops data from the stack into a register
             Pop R1
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.In">
