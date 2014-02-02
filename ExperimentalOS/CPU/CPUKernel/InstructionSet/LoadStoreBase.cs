@@ -34,6 +34,15 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         internal uint address;
         internal int value;
 
+        /// <summary>
+        /// Base class for Load and Store instructions handles all parsing in a consistent manner
+        /// </summary>
+        /// <param name="code">The specific code for this instruction</param>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="value">An imediate value</param>
+        /// <param name="address">An address</param>
+        /// <param name="comment">A comment</param>
         internal LoadStoreBase(InstructionCodes code, int r1, int r2, int value, uint address, string comment)
             : base(code, comment)
         {

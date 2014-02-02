@@ -630,6 +630,17 @@
             <returns>The Instruction created</returns>
             <exception>Application Exception if bytes are incorrect</exception>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+            <summary>
+            Base class for Load and Store instructions handles all parsing in a consistent manner
+            </summary>
+            <param name="code">The specific code for this instruction</param>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">An imediate value</param>
+            <param name="address">An address</param>
+            <param name="comment">A comment</param>
+        </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.Assemble(System.String)">
             <summary>
             When implemented assembles a string into this op code
