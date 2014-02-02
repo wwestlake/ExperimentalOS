@@ -9,7 +9,7 @@
             Emulates a CPU with task switching, memory management, registers and instruction codes.
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.#ctor(LagDaemon.ExperimentalOS.CPU.CPUHardware.HardwareConfiguration,LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel)">
             <summary>
             Constructis a CPU
             </summary>
@@ -68,6 +68,54 @@
             <summary>
             The main memory of the system
             </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPUException">
+            <summary>
+            Thrown by the CPU when an error occurs
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPUException.#ctor(System.String)">
+            <summary>
+            Constuct a CPUException with message
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPUException.#ctor(System.String,System.Object[])">
+            <summary>
+            Construct a CPUException with format and arguments
+            </summary>
+            <param name="format">Format string</param>
+            <param name="args">Argmuments</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPUFactory">
+            <summary>
+            Constructs various CPU configruations
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPUFactory.CreateSingleTaskCPU(System.Collections.Generic.IList{LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction})">
+            <summary>
+            Constructs a single task CPU and returns an IStartable interface
+            </summary>
+            <returns>IStartable</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ByteCodeWriter">
+            <summary>
+            Writes out raw byte code
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.ByteCodeWriter.#ctor">
+            <summary>
+            Constructs a ByteCodeReader
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.ByteCodeWriter.Write(System.Byte[],System.Int32,System.Collections.Generic.IEnumerable{LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction})">
+            <summary>
+            Write the byte code to the buffer
+            </summary>
+            <param name="buffer">Buffer to write to</param>
+            <param name="offset">Index into buffer to start writing</param>
+            <param name="program">The program to write</param>
+            <returns>count of bytes written</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel">
             <summary>
@@ -561,11 +609,17 @@
             <returns>The Instruction created</returns>
             <exception>Application Exception if bytes are incorrect</exception>
         </member>
-        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ExecuteInstruction">
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ExecuteInstruction">
             <summary>
             Used to connect an instruction to the CPU Kernal code that executes the instruction
             </summary>
             <param name="instruction">The instruction being executed</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.TaskCallBackFunction">
+            <summary>
+            Represents a Task execution thread
+            </summary>
+            <param name="taskId"></param>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory">
             <summary>
@@ -739,6 +793,19 @@
             </summary>
             <param name="r1">Index modifier to address or address</param>
             <param name="address">Address to call to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Terminate">
+            <summary>
+            Creates a Terminate Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Terminate(System.String)">
+            <summary>
+            Creates a Terminate Instruction with comment
+            </summary>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1080,6 +1147,17 @@
             Designates that no register is specified.  In some instances this may result in the CPUKernel or OSKernal selecting an unused register.
             </summary>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction.#ctor">
+            <summary>
+            Construciton a Terminate Instruciton
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction.#ctor(System.String)">
+            <summary>
+            Constructs a Terminate instruction
+            </summary>
+            <param name="comment">Comment</param>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache">
             <summary>
             The SymbolCache is used to store symbols found and the location where an address
@@ -1161,21 +1239,6 @@
             Add a Macro to the expander
             </summary>
             <param name="macro">The Macro to add</param>
-        </member>
-        <member name="T:LagDaemon.ExperimentalOS.OS.Utilities.Settings">
-            <summary>
-            Helper class for accessing the configuration settings
-            </summary>
-        </member>
-        <member name="P:LagDaemon.ExperimentalOS.OS.Utilities.Settings.MaximumSymbolLength">
-            <summary>
-            Get the setting for Maximum Symbol Length
-            </summary>
-        </member>
-        <member name="P:LagDaemon.ExperimentalOS.OS.Utilities.Settings.NumberOfRegisters">
-            <summary>
-            The number of register available to this CPU
-            </summary>
         </member>
     </members>
 </doc>

@@ -96,7 +96,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <exception>Application Exception if bytes are incorrect</exception>
         protected override Instruction CreateFromBytes(byte[] buffer, int offset)
         {
-            if (buffer[offset] == Convert.ToByte(InstructionCodes.NOP)) return this;
+            if (buffer[offset] == Convert.ToByte(Code)) return this;
             throw new ApplicationException("Byte stream does not contain NOP at designated offset.");
         }
     }

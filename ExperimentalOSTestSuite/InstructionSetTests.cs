@@ -306,11 +306,42 @@ namespace ExperimentalOSTestSuite
         public void CallInstructionEmitsByteCodeAndLoadsFromByteCode()
         {
             byte[] buffer = new byte[10];
-            Instruction CallInstruction = InstructionFactory.Jump(0, 0);
+            Instruction CallInstruction = InstructionFactory.Call(0, 0);
             CallInstruction.Write(buffer, 0);
             Instruction newCallInst = CallInstruction.Read(buffer, 0);
             Assert.AreEqual(CallInstruction.Code, newCallInst.Code);
         }
+
+        // Terminate Tests
+
+        [Test]
+        public void TerminateInstructionIsCreated()
+        {
+            Instruction TerminateInstruction = InstructionFactory.Terminate();
+            Assert.AreEqual(TerminateInstruction.Code, InstructionCodes.Terminate);
+        }
+
+        [Test]
+        public void TerminateInstructionsLoadsFromAssemblyLanguage()
+        {
+            string asmIn = "Terminate ; this is a Terminate instruction";
+            Instruction TerminateInstruction = InstructionFactory.Terminate().CreateInstruction(asmIn);
+            Assert.AreEqual(TerminateInstruction.Code, InstructionCodes.Terminate);
+            string asmOut = TerminateInstruction.ToString();
+            Assert.IsTrue(asmIn.StartsWith("Terminate"));
+            Assert.IsTrue(asmOut.StartsWith("Terminate"));
+        }
+
+        [Test]
+        public void TerminateInstructionEmitsByteCodeAndLoadsFromByteCode()
+        {
+            byte[] buffer = new byte[10];
+            Instruction TerminateInstruction = InstructionFactory.Terminate();
+            TerminateInstruction.Write(buffer, 0);
+            Instruction newTerminateInst = TerminateInstruction.Read(buffer, 0);
+            Assert.AreEqual(TerminateInstruction.Code, newTerminateInst.Code);
+        }
+
 
 
     }

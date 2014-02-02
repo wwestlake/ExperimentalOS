@@ -19,6 +19,7 @@
 */
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel;
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using LagDaemon.ExperimentalOS.OS.Utilities;
 using System.Collections.Generic;
 
@@ -28,21 +29,27 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
     /// <summary>
     /// Emulates a CPU with task switching, memory management, registers and instruction codes.
     /// </summary>
-    internal abstract class CPU
+    internal abstract class CPU : IStartable
     {
 
         /// <summary>
         /// Constructis a CPU
         /// </summary>
         /// <param name="cpuKernel">The Kernel for this CPU</param>
-        internal CPU(CPUKernel.CPUKernel cpuKernel)
+        internal CPU(HardwareConfiguration config, CPUKernel.CPUKernel cpuKernel)
         {
+            this.Configuration = config;
             this.CpuKernel = cpuKernel;
             this.CpuKernel.Processor = this;
-            this.RegisterCount = Settings.NumberOfRegisters;
-            this.Registers = new int[Settings.NumberOfRegisters];
+            this.RegisterCount = Configuration.Registers;
+            this.Registers = new int[Configuration.Registers];
             this.InstructionQueue = new Queue<Instruction>();
+            this.IP = 0;
         }
+
+        internal HardwareConfiguration Configuration { get; set; }
+
+        internal int IP { get; set; }
 
         /// <summary>
         /// Count of available registers
@@ -99,6 +106,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
         /// </summary>
         internal MemoryController Memory { get; set; }
 
-        internal abstract void ProcessorStart();
+        internal abstract void ProcessInstruction();
+
+        public abstract void Start();
     }
 }

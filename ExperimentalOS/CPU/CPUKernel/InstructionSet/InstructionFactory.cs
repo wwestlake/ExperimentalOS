@@ -196,5 +196,19 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <returns>Instruction</returns>
         public static Instruction Call(int r1, uint address, string comment) { return new CallInstruction(r1, address, comment); }
 
+        /// <summary>
+        /// Creates a Terminate Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public static Instruction Terminate() { return new TerminateInstruction(); }
+
+        /// <summary>
+        /// Creates a Terminate Instruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Terminate(string comment) { return new TerminateInstruction(comment); }
+
+    
     }
 }

@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
 {
-    internal class MemoryController
+    public class HardwareConfiguration
     {
-
-        internal MemoryController()
+        public HardwareConfiguration(int registers)
         {
-
+            this.Registers = registers;
         }
 
-        
-
+        public int Registers { get; internal set; }
 
     }
 }

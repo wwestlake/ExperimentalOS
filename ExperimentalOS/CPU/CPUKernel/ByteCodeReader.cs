@@ -27,16 +27,16 @@ using System.Threading.Tasks;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {
-    internal class ByteCodeLoader
+    internal class ByteCodeReader
     {
         private CPUKernel kernel;
 
-        internal ByteCodeLoader(CPUKernel kernel) 
+        internal ByteCodeReader(CPUKernel kernel) 
         {
             this.kernel = kernel;
         }
 
-        internal IEnumerable<Instruction> ReadByteCode(byte[] buffer, int offset, int count)
+        internal IEnumerable<Instruction> Read(byte[] buffer, int offset, int count)
         {
             int index = offset;
             Instruction result = null;
@@ -126,6 +126,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.Sub:
                         break;
                     case InstructionCodes.Terminate:
+                        result = InstructionFactory.Terminate().Read(buffer, index);
+                        result.Execute = kernel.Terminate;
                         break;
                     case InstructionCodes.Unlock:
                         break;

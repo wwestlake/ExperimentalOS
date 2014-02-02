@@ -1,7 +1,4 @@
-﻿using LagDaemon.ExperimentalOS.CPU.CPUHardware;
-using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
-using System;
-/*
+﻿/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
     
@@ -20,6 +17,10 @@ using System;
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+using LagDaemon.ExperimentalOS.CPU.CPUHardware;
+using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
+using System;
+using System.Collections.Generic;
 using Hardware = LagDaemon.ExperimentalOS.CPU.CPUHardware;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
@@ -28,15 +29,29 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
     /// Represents the microcode side of the CPU for execution of instruction codes
     /// and handles CPU level memory management and task switching.
     /// </summary>
-    public class CPUKernel
+    public abstract class CPUKernel
     {
 
         /// <summary>
         /// Constructs a CPUKernel
         /// </summary>
-        internal CPUKernel() { }
+        internal CPUKernel() 
+        { 
+        
+        }
 
-        internal void Nop(Instruction inst) { throw new NotImplementedException(); }
+        internal T CastInstruction<T>(Instruction inst) where T: Instruction
+        {
+            T result = inst as T;
+            if (null == inst) throw new CPUKernelException("Expected {0} but got: {1}", typeof(T).FullName, inst.GetType().FullName);
+            return result;
+        }
+
+        internal void Nop(Instruction inst) 
+        { 
+            // nop 
+        }
+
         internal void Load(Instruction inst) { throw new NotImplementedException(); }
         internal void Move(Instruction inst) { throw new NotImplementedException(); }
         internal void Pop(Instruction inst) { throw new NotImplementedException(); }
@@ -44,16 +59,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 
         internal void In(Instruction inst) 
         {
-            InInstruction inInst = inst as InInstruction;
-            if (null == inInst) throw new CPUKernelException("Expected InInstruction but got: {0}", inst.GetType().FullName);
+            InInstruction inInst = CastInstruction<InInstruction>(inst);
             IOPort port = Processor.Devices.Ports[ inInst.port ];
             Processor.Registers[inInst.r1] = port.Read();
         }
         
         internal void Out(Instruction inst) 
         {
-            OutInstruction outInst = inst as OutInstruction;
-            if (null == outInst) throw new CPUKernelException("Expected OutInstruction but got: {0}", inst.GetType().FullName);
+            OutInstruction outInst = CastInstruction<OutInstruction>(inst);
             IOPort port = Processor.Devices.Ports[outInst.port];
             port.Write((byte)Processor.Registers[outInst.r1]);
         }
@@ -84,12 +97,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         internal void WaitOnEvent(Instruction inst) { throw new NotImplementedException(); }
         internal void FireEvent(Instruction inst) { throw new NotImplementedException(); }
         internal void MemoryClear(Instruction inst) { throw new NotImplementedException(); }
-        internal void Terminate(Instruction inst) { throw new NotImplementedException(); }
+        internal void Terminate(Instruction inst)
+        {
+            Processor.ProcessorMode = ProcessorModes.Stopped;
+        }
         internal void BeginAtomicBlock(Instruction inst) { throw new NotImplementedException(); }
         internal void EndAtomicBlock(Instruction inst) { throw new NotImplementedException(); }
         internal void EnterMultitaskingMode(Instruction inst) { throw new NotImplementedException(); }
 
 
         internal Hardware.CPU Processor { get; set; }
+
+        internal abstract void Fetch();
+
     }
 }

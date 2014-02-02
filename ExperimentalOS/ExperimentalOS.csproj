@@ -68,17 +68,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CPU\CPUHardware\CPU.cs" />
+    <Compile Include="CPU\CPUHardware\CPUException.cs" />
+    <Compile Include="CPU\CPUHardware\CPUFactory.cs" />
     <Compile Include="CPU\CPUHardware\DeviceController.cs" />
+    <Compile Include="CPU\CPUHardware\HardwareConfiguration.cs" />
     <Compile Include="CPU\CPUHardware\IOPort.cs" />
     <Compile Include="CPU\CPUHardware\MemoryController.cs" />
-    <Compile Include="CPU\CPUKernel\ByteCodeLoader.cs" />
+    <Compile Include="CPU\CPUHardware\SingleTaskCPU.cs" />
+    <Compile Include="CPU\CPUKernel\ByteCodeReader.cs" />
+    <Compile Include="CPU\CPUKernel\ByteCodeWriter.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernel.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernelException.cs" />
     <Compile Include="CPU\CPUKernel\Flags.cs" />
     <Compile Include="CPU\CPUKernel\Instruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionCodes.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\CallInstruction.cs" />
-    <Compile Include="CPU\CPUKernel\InstructionSet\Delegates.cs" />
+    <Compile Include="CPU\CPUKernel\Delegates.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InstructionFactory.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InstructionParseException.cs" />
@@ -94,26 +99,19 @@
     <Compile Include="CPU\CPUKernel\InstructionSet\PushInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\StoreInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\Symbols.cs" />
+    <Compile Include="CPU\CPUKernel\InstructionSet\TerminateInstruction.cs" />
+    <Compile Include="CPU\CPUKernel\SingleTaskCPUKernel.cs" />
     <Compile Include="CPU\CPUKernel\SymbolCache.cs" />
     <Compile Include="CPU\CPUKernel\SymbolTable.cs" />
+    <Compile Include="CPU\Interfaces\IStartable.cs" />
     <Compile Include="OS\Utilities\MacroExpander.cs" />
     <Compile Include="OS\Utilities\MacroSubstitutor.cs" />
-    <Compile Include="OS\Utilities\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="ExperimentalOSKeys.pfx" />
     <None Include="PrivateKey.ppk" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="OS\Kernel\" />

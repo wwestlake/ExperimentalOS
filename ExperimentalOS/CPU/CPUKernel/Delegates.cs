@@ -19,11 +19,20 @@
 */
 
 
-namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
+using System;
+
+namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {
     /// <summary>
     /// Used to connect an instruction to the CPU Kernal code that executes the instruction
     /// </summary>
     /// <param name="instruction">The instruction being executed</param>
     public delegate void ExecuteInstruction(Instruction instruction);
+
+    /// <summary>
+    /// Represents a Task execution thread
+    /// </summary>
+    /// <param name="taskId"></param>
+    public delegate void TaskCallBackFunction(Guid taskId);
+
 }

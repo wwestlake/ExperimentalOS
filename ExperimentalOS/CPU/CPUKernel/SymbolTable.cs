@@ -34,7 +34,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
     /// </summary>
     public class SymbolTable
     {
-
+        public static readonly int MaximumSymbolLength = 32;
         private Dictionary<uint, string> symbolsByAddress = new Dictionary<uint, string>();
         private Dictionary<string, uint> addressBySymbol = new Dictionary<string, uint>();
 
@@ -50,7 +50,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 
         private void Add(string symbol, uint address)
         {
-            if (symbol.Length > Settings.MaximumSymbolLength) throw new CPUKernelException("Symbol length exceeds maximum of {0} bytes: {1}", Settings.MaximumSymbolLength, symbol);
+            if (symbol.Length > MaximumSymbolLength) throw new CPUKernelException("Symbol length exceeds maximum of {0} bytes: {1}", MaximumSymbolLength, symbol);
             if (!symbolsByAddress.ContainsKey(address)) symbolsByAddress.Add(address, symbol);
             if (!addressBySymbol.ContainsKey(symbol)) addressBySymbol.Add(symbol, address);
         }

@@ -1,7 +1,11 @@
-﻿using LagDaemon.ExperimentalOS.CPU.CPUKernel;
+﻿using LagDaemon.ExperimentalOS.CPU.CPUHardware;
+using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace LagDaemon.ExperimentalOS.Startup
@@ -10,13 +14,27 @@ namespace LagDaemon.ExperimentalOS.Startup
     {
         static void Main(string[] args)
         {
-            byte[] buffer = new byte[10];
-            Instruction StoreInstruction = InstructionFactory.Store(0, 0, 0, 0);
-            StoreInstruction.Write(buffer, 0);
-            Instruction newStoreInst = StoreInstruction.Read(buffer, 0);
-            Console.WriteLine("{0}\n{1}", StoreInstruction, newStoreInst);
-            Console.ReadKey();
+            IList<Instruction> program = new List<Instruction>();
 
+            // boot loader will go here
+            program.Add(InstructionFactory.Nop());
+            program.Add(InstructionFactory.Nop());
+            program.Add(InstructionFactory.Nop());
+            program.Add(InstructionFactory.Nop());
+            program.Add(InstructionFactory.Nop());
+            program.Add(InstructionFactory.Terminate());
+
+            byte[] buffer = new byte[512];
+
+            ByteCodeWriter writer = new ByteCodeWriter();
+            writer.Write(buffer, 0, program);
+
+
+            IStartable cpu = CPUFactory.Factory(new HardwareConfiguration(128)).CreateSingleTaskCPU(buffer);
+
+            cpu.Start();
+
+            Console.ReadKey();
         }
     }
 }

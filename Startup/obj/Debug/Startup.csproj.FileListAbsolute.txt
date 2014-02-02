@@ -1,4 +1,3 @@
-C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\LagDaemon.ExperimentalOS.Startup.exe.config
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\LagDaemon.ExperimentalOS.Startup.exe
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\LagDaemon.ExperimentalOS.Startup.pdb
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\LagDaemon.ExperimentalOS.dll
