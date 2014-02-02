@@ -56,12 +56,10 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <returns>The instruction</returns>
         protected override Instruction Assemble(string assemblyLine)
         {
-            Match m;
-            string pattern = InstructionCodes.Move.ToString().ToLower() + @"\s*;(?<comment>[\s\S]*)";
-            string line = assemblyLine.Trim().ToLower();
-            if (assemblyLine.Trim().ToLower().StartsWith(InstructionCodes.NOP.ToString().ToLower()))
+            string line = PreProcess(assemblyLine);
+            Match m = CreateMatch(line, @"\s*;(?<comment>[\s\S]*)");
+            if (line.StartsWith(Code.ToString().ToLower()))
             {
-                m = Regex.Match(line, pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 return new NopInstruction(m.Groups["comment"].Value);
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);

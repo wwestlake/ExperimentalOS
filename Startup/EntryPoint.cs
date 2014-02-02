@@ -10,9 +10,11 @@ namespace LagDaemon.ExperimentalOS.Startup
     {
         static void Main(string[] args)
         {
-            string asmIn = "In r21, $44 ; this is an In instruction";
-            Instruction InInstruction = InstructionFactory.In(0, 0).CreateInstruction(asmIn);
-
+            byte[] buffer = new byte[10];
+            Instruction StoreInstruction = InstructionFactory.Store(0, 0, 0, 0);
+            StoreInstruction.Write(buffer, 0);
+            Instruction newStoreInst = StoreInstruction.Read(buffer, 0);
+            Console.WriteLine("{0}\n{1}", StoreInstruction, newStoreInst);
             Console.ReadKey();
 
         }

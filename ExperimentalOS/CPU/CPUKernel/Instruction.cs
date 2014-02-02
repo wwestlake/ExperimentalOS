@@ -19,6 +19,7 @@
 */
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
+using System.Text.RegularExpressions;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {
@@ -127,6 +128,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// <exception>Application Exception if bytes are incorrect</exception>
         protected abstract Instruction CreateFromBytes(byte[] buffer, int offset);
 
+
         /// <summary>
         /// Converts this to a disassembled string
         /// </summary>
@@ -146,6 +148,24 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// in memory.  This size includes the data.
         /// </summary>
         public int Size { get; internal set; }
+
+        internal Match CreateMatch(string line, string pattern)
+        {
+            string matchPattern = Code.ToString().ToLower() + " " + pattern;
+            return Regex.Match(line, pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        }
+
+        /// <summary>
+        /// Cleans up the source line
+        /// 
+        /// TODO: Add symbol lookup here and replace with addresses.????
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        internal string PreProcess(string line)
+        {
+            return line.ToLower().Trim();
+        }
 
     }
 

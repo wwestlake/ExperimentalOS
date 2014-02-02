@@ -72,12 +72,10 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         protected override Instruction Assemble(string assemblyLine)
         {
-            Match m;
-            string pattern = InstructionCodes.Move.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+)\s*[;]*(?<comment>[\s\S]*)";
-            string line = assemblyLine.Trim().ToLower();
-            if (line.StartsWith(InstructionCodes.Move.ToString().ToLower()))
+            string line = PreProcess(assemblyLine);
+            Match m = CreateMatch(line, @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+)\s*[;]*(?<comment>[\s\S]*)");
+            if (line.StartsWith(Code.ToString().ToLower()))
             {
-                m = Regex.Match(line, pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 return new MoveInstruction(int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);

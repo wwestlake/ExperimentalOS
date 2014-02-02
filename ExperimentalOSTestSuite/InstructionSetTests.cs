@@ -252,6 +252,36 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(OutInstruction.Code, newOutInst.Code);
         }
 
+        // Jump Tests
+
+        [Test]
+        public void JumpInstructionIsCreated()
+        {
+            Instruction JumpInstruction = InstructionFactory.Jump(0, 0);
+            Assert.AreEqual(JumpInstruction.Code, InstructionCodes.Jump);
+        }
+
+        [Test]
+        public void JumpInstructionsLoadsFromAssemblyLanguage()
+        {
+            string asmIn = "Jump r21, $44 ; this is an Out instruction";
+            Instruction JumpInstruction = InstructionFactory.Jump(0, 0).CreateInstruction(asmIn);
+            Assert.AreEqual(JumpInstruction.Code, InstructionCodes.Jump);
+            string asmOut = JumpInstruction.ToString();
+            Assert.IsTrue(asmIn.StartsWith("Jump r21, $44"));
+            Assert.IsTrue(asmOut.StartsWith("Jump r21, $44"));
+        }
+
+        [Test]
+        public void JumpInstructionEmitsByteCodeAndLoadsFromByteCode()
+        {
+            byte[] buffer = new byte[10];
+            Instruction JumpInstruction = InstructionFactory.Jump(0, 0);
+            JumpInstruction.Write(buffer, 0);
+            Instruction newJumpInst = JumpInstruction.Read(buffer, 0);
+            Assert.AreEqual(JumpInstruction.Code, newJumpInst.Code);
+        }
+
 
 
     }

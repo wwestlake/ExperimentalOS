@@ -52,7 +52,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 
         /// <summary>
         /// stores data from a register or imnediate to memory
-        /// Store value, $address   // imediate value to address
+        /// Store r1, value         // imediate value to address in r1
         /// Store r1, $address      // direct addressing
         /// Store r1, r2            // indirect addressing address in r2
         /// Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index

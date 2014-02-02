@@ -80,6 +80,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.JNE:
                         break;
                     case InstructionCodes.Jump:
+                        result = InstructionFactory.Jump(0, 0).Read(buffer, index);
+                        result.Execute = kernel.Jump;
                         break;
                     case InstructionCodes.Load:
                         result = InstructionFactory.Load(0, 0, 0, 0).Read(buffer, index);

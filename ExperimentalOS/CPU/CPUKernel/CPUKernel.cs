@@ -67,6 +67,11 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 
         }
 
+        internal void Jump(Instruction inst)
+        {
+
+        }
+
         internal Hardware.CPU Processor { get; set; }
     }
 }

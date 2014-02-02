@@ -162,5 +162,23 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <returns>Instruction</returns>
         public static Instruction Out(int r1, int port, string comment) { return new OutInstruction(r1, port, comment); }
 
+        /// <summary>
+        /// Creates an Jump Instruction
+        /// </summary>
+        /// <param name="r1">Index modifier to address or address</param>
+        /// <param name="address">Address to jump to</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Jump(int r1, uint address) { return new JumpInstruction(r1, address); }
+
+        /// <summary>
+        /// Creates an Out Instruction with comment
+        /// </summary>
+        /// <param name="r1">Index modifier to address or address</param>
+        /// <param name="address">Address to jump to</param>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public static Instruction Jump(int r1, uint address, string comment) { return new JumpInstruction(r1, address, comment); }
+
+
     }
 }

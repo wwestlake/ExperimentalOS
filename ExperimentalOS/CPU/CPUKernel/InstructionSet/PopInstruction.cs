@@ -49,12 +49,10 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 
         protected override Instruction Assemble(string assemblyLine)
         {
-            Match m;
-            string pattern1 = InstructionCodes.Pop.ToString().ToLower() + @"\s+r(?<r1>\d+)\s*[;]*(?<comment>[\s\S]*)";
-            string line = assemblyLine.Trim().ToLower();
-            if (line.StartsWith(InstructionCodes.Pop.ToString().ToLower()))
+            string line = PreProcess(assemblyLine);
+            Match m = CreateMatch(line, @"\s+r(?<r1>\d+)\s*[;]*(?<comment>[\s\S]*)");
+            if (line.StartsWith(Code.ToString().ToLower()))
             {
-                m = Regex.Match(line, pattern1, RegexOptions.IgnoreCase | RegexOptions.Compiled);
                 if (m.Success)
                 {
                     return new PopInstruction(int.Parse(m.Groups["r1"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);

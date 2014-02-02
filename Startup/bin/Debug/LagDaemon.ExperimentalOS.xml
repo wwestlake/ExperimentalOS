@@ -144,6 +144,15 @@
             </summary>
             <returns>The assembly language equivilant</returns>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.PreProcess(System.String)">
+            <summary>
+            Cleans up the source line
+            
+            TODO: Add symbol lookup here and replace with addresses.????
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
         <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Execute">
             <summary>
             Internally set by the CPUKernal for execution of the instruction
@@ -197,7 +206,7 @@
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Store">
             <summary>
             stores data from a register or imnediate to memory
-            Store value, $address   // imediate value to address
+            Store r1, value         // imediate value to address in r1
             Store r1, $address      // direct addressing
             Store r1, r2            // indirect addressing address in r2
             Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index
@@ -554,6 +563,23 @@
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.UInt32)">
+            <summary>
+            Creates an Jump Instruction
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to jump to</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.UInt32,System.String)">
+            <summary>
+            Creates an Out Instruction with comment
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to jump to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionParseException">
             <summary>
             This exception is thrown whenever the assembly routines run into an error in the 
@@ -573,6 +599,68 @@
             <param name="format">The format string</param>
             <param name="args">The arguments</param>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Assemble(System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <returns>An Instruction object</returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Emit(System.Byte[],System.Int32)">
+            <summary>
+            When implemented Writes the op codes into buffer
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offiset within the buffer to write to</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an instruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.Assemble(System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <returns>An Instruction object</returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.Emit(System.Byte[],System.Int32)">
+            <summary>
+            When implemented Writes the op codes into buffer
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offiset within the buffer to write to</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an instruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction">
             <summary>
             Loads data from memory to a register
@@ -591,37 +679,6 @@
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
             <param name="comment">Comment</param>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.Assemble(System.String)">
-            <summary>
-            When implemented assembles a string into this op code
-            </summary>
-            <param name="assemblyLine">The line of assembly to create the instruction from</param>
-            <returns>An Instruction object</returns>
-            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.DisAssemble">
-            <summary>
-            When implemented produces a string representation of the instructiuon as assembly language
-            </summary>
-            <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.CreateFromBytes(System.Byte[],System.Int32)">
-            <summary>
-            Creates an instruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddressingMode">
             <summary>
@@ -864,37 +921,6 @@
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
             <param name="comment">Comment</param>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction.Assemble(System.String)">
-            <summary>
-            When implemented assembles a string into this op code
-            </summary>
-            <param name="assemblyLine">The line of assembly to create the instruction from</param>
-            <returns>An Instruction object</returns>
-            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction.DisAssemble">
-            <summary>
-            When implemented produces a string representation of the instructiuon as assembly language
-            </summary>
-            <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction.CreateFromBytes(System.Byte[],System.Int32)">
-            <summary>
-            Creates an instruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.Symbols">
             <summary>
