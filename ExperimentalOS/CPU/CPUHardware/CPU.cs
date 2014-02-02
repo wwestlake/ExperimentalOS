@@ -28,7 +28,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
     /// <summary>
     /// Emulates a CPU with task switching, memory management, registers and instruction codes.
     /// </summary>
-    public abstract class CPU
+    internal abstract class CPU
     {
 
         /// <summary>
@@ -63,5 +63,42 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
         /// The CPUKernel for this CPU
         /// </summary>
         internal CPUKernel.CPUKernel CpuKernel { get; private set; }
+
+        /// <summary>
+        /// A math operation that results in zero sets this flag true
+        /// Flag will remain in this state until another math operation
+        /// changes it
+        /// </summary>
+        internal bool ZeroFlag { get; set; }
+
+        /// <summary>
+        /// Holds the result of the last Compare instruction
+        /// This flag will remain in this state until another compare
+        /// statement or a ClearCompare instruction is encountered.
+        /// </summary>
+        internal ComparisonFlags ComparisonFlag { get; set; }
+
+
+        /// <summary>
+        /// The current operational mode of the processor
+        /// </summary>
+        internal ProcessorModes ProcessorMode { get; set; }
+
+        /// <summary>
+        /// The currently executing instruction
+        /// </summary>
+        internal Instruction CurrentInstruction { get; set; }
+
+        /// <summary>
+        /// Controls all external devices and creates input output ports
+        /// </summary>
+        internal DeviceController Devices { get; set; }
+
+        /// <summary>
+        /// The main memory of the system
+        /// </summary>
+        internal MemoryController Memory { get; set; }
+
+        internal abstract void ProcessorStart();
     }
 }

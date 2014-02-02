@@ -52,6 +52,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.BeginAtomicBlock:
                         break;
                     case InstructionCodes.Call:
+                        result = InstructionFactory.Call(0, 0).Read(buffer, index);
+                        result.Execute = kernel.Call;
                         break;
                     case InstructionCodes.Compare:
                         break;

@@ -68,11 +68,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CPU\CPUHardware\CPU.cs" />
+    <Compile Include="CPU\CPUHardware\DeviceController.cs" />
+    <Compile Include="CPU\CPUHardware\IOPort.cs" />
+    <Compile Include="CPU\CPUHardware\MemoryController.cs" />
     <Compile Include="CPU\CPUKernel\ByteCodeLoader.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernel.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernelException.cs" />
+    <Compile Include="CPU\CPUKernel\Flags.cs" />
     <Compile Include="CPU\CPUKernel\Instruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionCodes.cs" />
+    <Compile Include="CPU\CPUKernel\InstructionSet\CallInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\Delegates.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InInstruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionSet\InstructionFactory.cs" />

@@ -35,6 +35,40 @@
             The CPUKernel for this CPU
             </summary>
         </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.ZeroFlag">
+            <summary>
+            A math operation that results in zero sets this flag true
+            Flag will remain in this state until another math operation
+            changes it
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.ComparisonFlag">
+            <summary>
+            Holds the result of the last Compare instruction
+            This flag will remain in this state until another compare
+            statement or a ClearCompare instruction is encountered.
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.ProcessorMode">
+            <summary>
+            The current operational mode of the processor
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.CurrentInstruction">
+            <summary>
+            The currently executing instruction
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.Devices">
+            <summary>
+            Controls all external devices and creates input output ports
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.Memory">
+            <summary>
+            The main memory of the system
+            </summary>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel">
             <summary>
             Represents the microcode side of the CPU for execution of instruction codes
@@ -64,6 +98,56 @@
             </summary>
             <param name="format">Format String</param>
             <param name="args">Arguments</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ComparisonFlags">
+            <summary>
+            Comparison flags for CPU
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ComparisonFlags.Cleared">
+            <summary>
+            Flag has no meaning, will cause a ProcessorException on any conditional jump instruction
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ComparisonFlags.LessThan">
+            <summary>
+            Last compare was a less than condition
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ComparisonFlags.GreateThan">
+            <summary>
+            Last compare was a greater than condition
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ComparisonFlags.Equal">
+            <summary>
+            Last compare was an equal condition
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ProcessorModes">
+            <summary>
+            Processor modes
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ProcessorModes.Stopped">
+            <summary>
+            CPU is not runnint
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ProcessorModes.SingleTasking">
+            <summary>
+            CPU is operating in SingleTasking mode
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ProcessorModes.MultiTasking">
+            <summary>
+            CPU is operating in multitasking mode
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.ProcessorModes.Exception">
+            <summary>
+            CPU is in an exception state trying to recover if possible before entering stopped state
+            </summary>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction">
             <summary>
@@ -249,11 +333,13 @@
             Jump $address           // imediate address
             Jump r1                 // address in r1
             Jump r1, $address        // r1 indexes into address (address + r1)
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Call">
             <summary>
             pushes the current address to the stack then jumps the desired address
+            Call $address
             Call r1
             Call r1, $address
             </summary>
@@ -306,6 +392,12 @@
             Compare r1, r2
             </summary>
         </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.ClearCompare">
+            <summary>
+            Clears the compare flag to Cleared
+            ClearCompare
+            </summary>
+        </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JE">
             <summary>
             Jump IFF conditional flag is Equal
@@ -338,6 +430,22 @@
             JLT r1, $address
             </summary>
         </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JZ">
+            <summary>
+            Jump IFF zero flag is true
+            JZ $address
+            JZ r1
+            JZ r1, $address
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JNZ">
+            <summary>
+            Jump IFF zero flag is not true
+            JNZ $address
+            JNZ r1
+            JNZ r1, $address
+            </summary>
+        </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Lock">
             <summary>
             Obtains a lock on a process where num is the lock number asscociated with the calling process
@@ -355,7 +463,7 @@
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Sleep">
             <summary>
             Causes the currently executing process to sleep by the specified time in Miliseconds
-            Sleep time
+            Sleep num
             Sleep r1
             </summary>
         </member>
@@ -415,6 +523,43 @@
             Ends an AtomicBlock started with BeginAtomicBlock.  r1 must contain the atomic block number that is ending
             EndAtomicBlock r1
             </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.EnterMultitaskingMode">
+            <summary>
+            Starts multi tasking.
+            EnterMultitaskingMode
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Assemble(System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <returns>An Instruction object</returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Emit(System.Byte[],System.Int32)">
+            <summary>
+            When implemented Writes the op codes into buffer
+            </summary>
+            <param name="buffer">The buffer to write to</param>
+            <param name="offset">The offiset within the buffer to write to</param>
+            <returns>The number of bytes written</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.CreateFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            Creates an instruction from the bytes in the buffer
+            </summary>
+            <param name="buffer">Bytes that hold the instruction</param>
+            <param name="offset">Position in the buffer to start reading</param>
+            <returns>The Instruction created</returns>
+            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ExecuteInstruction">
             <summary>
@@ -573,10 +718,27 @@
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.UInt32,System.String)">
             <summary>
-            Creates an Out Instruction with comment
+            Creates an Jump Instruction with comment
             </summary>
             <param name="r1">Index modifier to address or address</param>
             <param name="address">Address to jump to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Call(System.Int32,System.UInt32)">
+            <summary>
+            Creates a Call Instruction
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to call to</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Call(System.Int32,System.UInt32,System.String)">
+            <summary>
+            Creates a Call Instruction with comment
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to call to</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -598,37 +760,6 @@
             </summary>
             <param name="format">The format string</param>
             <param name="args">The arguments</param>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Assemble(System.String)">
-            <summary>
-            When implemented assembles a string into this op code
-            </summary>
-            <param name="assemblyLine">The line of assembly to create the instruction from</param>
-            <returns>An Instruction object</returns>
-            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.DisAssemble">
-            <summary>
-            When implemented produces a string representation of the instructiuon as assembly language
-            </summary>
-            <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.CreateFromBytes(System.Byte[],System.Int32)">
-            <summary>
-            Creates an instruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
             <summary>
@@ -1039,6 +1170,11 @@
         <member name="P:LagDaemon.ExperimentalOS.OS.Utilities.Settings.MaximumSymbolLength">
             <summary>
             Get the setting for Maximum Symbol Length
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Utilities.Settings.NumberOfRegisters">
+            <summary>
+            The number of register available to this CPU
             </summary>
         </member>
     </members>

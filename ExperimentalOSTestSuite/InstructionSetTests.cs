@@ -282,6 +282,35 @@ namespace ExperimentalOSTestSuite
             Assert.AreEqual(JumpInstruction.Code, newJumpInst.Code);
         }
 
+        // Call Tests
+
+        [Test]
+        public void CallInstructionIsCreated()
+        {
+            Instruction CallInstruction = InstructionFactory.Call(0, 0);
+            Assert.AreEqual(CallInstruction.Code, InstructionCodes.Call);
+        }
+
+        [Test]
+        public void CallInstructionsLoadsFromAssemblyLanguage()
+        {
+            string asmIn = "Call r21, $44 ; this is a Call instruction";
+            Instruction CallInstruction = InstructionFactory.Call(0, 0).CreateInstruction(asmIn);
+            Assert.AreEqual(CallInstruction.Code, InstructionCodes.Call);
+            string asmOut = CallInstruction.ToString();
+            Assert.IsTrue(asmIn.StartsWith("Call r21, $44"));
+            Assert.IsTrue(asmOut.StartsWith("Call r21, $44"));
+        }
+
+        [Test]
+        public void CallInstructionEmitsByteCodeAndLoadsFromByteCode()
+        {
+            byte[] buffer = new byte[10];
+            Instruction CallInstruction = InstructionFactory.Jump(0, 0);
+            CallInstruction.Write(buffer, 0);
+            Instruction newCallInst = CallInstruction.Read(buffer, 0);
+            Assert.AreEqual(CallInstruction.Code, newCallInst.Code);
+        }
 
 
     }

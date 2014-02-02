@@ -42,6 +42,9 @@ namespace LagDaemon.ExperimentalOS.OS.Utilities
             }
         }
 
+        /// <summary>
+        /// The number of register available to this CPU
+        /// </summary>
         public static int NumberOfRegisters
         {
             get

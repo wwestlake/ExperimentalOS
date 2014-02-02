@@ -31,14 +31,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// NOP
         /// </summary>
         /// <remarks>Inst completed</remarks>
-        NOP = 0,
+        NOP,
 
         /// <summary>
         /// Moves data from register 1 to register 2
         /// Move r1, r2
         /// </summary>
         /// <remarks>inst completed</remarks>
-        Move = 1,
+        Move,
 
         /// <summary>
         /// Loads data from memory to a register
@@ -48,7 +48,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Load r1, r2, $address   ; indexed indirect addressing  
         /// </summary>
         /// <remarks>inst completed</remarks>
-        Load = 2,
+        Load,
 
         /// <summary>
         /// stores data from a register or imnediate to memory
@@ -58,21 +58,21 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Store r1, r2, $address  // indexed indirect addressing imediate address + r2 index
         /// </summary>
         /// <remarks>inst completed</remarks>
-        Store = 3,
+        Store,
 
         /// <summary>
         /// pushes a register onto the stack
         /// Push r1
         /// </summary>
         /// <remarks>inst completed</remarks>
-        Push = 4,
+        Push,
 
         /// <summary>
         /// pops data from the stack into a register
         /// Pop R1
         /// </summary>
         /// <remarks>inst completed</remarks>
-        Pop = 5,
+        Pop,
 
         /// <summary>
         /// reads from an input port to a register
@@ -80,7 +80,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// In r1, r2               // port numher in register 2
         /// </summary>
         /// <remarks>inst completed</remarks>
-        In = 6,
+        In,
  
         /// <summary>
         /// writes froma register to an output port
@@ -88,70 +88,79 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Out r1, r2
         /// </summary>
         /// <remarks>inst completed</remarks>
-        Out = 7,
+        Out,
 
         /// <summary>
         /// jumps the execution address to the specified address in a register
         /// Jump $address           // imediate address
         /// Jump r1                 // address in r1
         /// Jump r1, $address        // r1 indexes into address (address + r1)
+        /// <remarks>inst completed</remarks>
         /// </summary>
-        Jump = 8,
+        Jump,
 
         /// <summary>
         /// pushes the current address to the stack then jumps the desired address
+        /// Call $address
         /// Call r1
         /// Call r1, $address
         /// </summary>
-        Call = 9,
+        Call,
 
         /// <summary>
         /// returns from a call by popping the addess from the stack
         /// Ret
         /// </summary>
-        Return = 10,
+        Return,
 
         /// <summary>
         /// Add register 2 to register 3 and stores the result in register 1
         /// Add r1, r2, r3
         /// </summary>
-        Add = 11,
+        Add,
 
         /// <summary>
         /// Subtracts r3 from r2 stores result in r1
         /// Sub r1, r2, r3
         /// </summary>
-        Sub = 12,
+        Sub,
 
         /// <summary>
         /// Multiplies r2 by r3 stores result in r1
         /// Mul r1, r2, r3
         /// </summary>
-        Mul = 13,
+        Mul,
 
         /// <summary>
         /// Divides r2 by r3 stores result in r1
         /// Div r1, r2, r3
         /// </summary>
-        Div = 14,
+        Div,
 
         /// <summary>
         /// Increments register r1 by 1
         /// Inc r1
         /// </summary>
-        Inc = 15,
+        Inc,
 
         /// <summary>
         /// Decrements r1 by 1
         /// Dec r1
         /// </summary>
-        Dec = 16,
+        Dec,
 
         /// <summary>
         /// Compares r1 to r2 and sets the comparison flag to be acted upon my a conditional instruction
         /// Compare r1, r2
         /// </summary>
-        Compare = 17,
+        Compare,
+
+        /// <summary>
+        /// Clears the compare flag to Cleared
+        /// ClearCompare
+        /// </summary>
+        ClearCompare,
+
 
         /// <summary>
         /// Jump IFF conditional flag is Equal
@@ -159,7 +168,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JE r1
         /// JE r1, $address
         /// </summary>
-        JE = 18,
+        JE,
 
         /// <summary>
         /// Jump IFF conditional flag is Not Equal (any state other than equal)
@@ -167,7 +176,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JNE r1
         /// JNE r1, $address
         /// </summary>
-        JNE = 19,
+        JNE,
 
         /// <summary>
         /// Jump IFF conditional flag is Greater Than
@@ -175,7 +184,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JGT r1
         /// JGT r1, $address
         /// </summary>
-        JGT = 20,
+        JGT,
 
         /// <summary>
         /// Jump IFF coditional flag is Less Than
@@ -183,71 +192,87 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JLT r1
         /// JLT r1, $address
         /// </summary>
-        JLT = 21,
+        JLT,
+
+        /// <summary>
+        /// Jump IFF zero flag is true
+        /// JZ $address
+        /// JZ r1
+        /// JZ r1, $address
+        /// </summary>
+        JZ,
+
+        /// <summary>
+        /// Jump IFF zero flag is not true
+        /// JNZ $address
+        /// JNZ r1
+        /// JNZ r1, $address
+        /// </summary>
+        JNZ,
 
         /// <summary>
         /// Obtains a lock on a process where num is the lock number asscociated with the calling process
         /// Lock num
         /// Lock r1
         /// </summary>
-        Lock = 22,
+        Lock,
 
         /// <summary>
         /// Unlocks a lock obtained by Lock
         /// Unlock num
         /// Unlock r1
         /// </summary>
-        Unlock = 23,
+        Unlock,
 
         /// <summary>
         /// Causes the currently executing process to sleep by the specified time in Miliseconds
-        /// Sleep time
+        /// Sleep num
         /// Sleep r1
         /// </summary>
-        Sleep = 24,
+        Sleep,
 
         /// <summary>
         /// Sets the priority of the currently executing process
         /// SetPriority num
         /// SetPriority r1
         /// </summary>
-        SetPriority = 25,
+        SetPriority,
 
         /// <summary>
         /// Alllocates memory to the processor memory manager and places the allocated memory handle in the designated register r1
         /// AllocateMemory r1, num
         /// </summary>
-        AllocateMemory = 26,
+        AllocateMemory,
 
         /// <summary>
         /// Frees previously allocated memory as designated by the handle in r1
         /// FreeMemory r1
         /// </summary>
-        FreeMemory = 27,
+        FreeMemory,
 
         /// <summary>
         /// Waits for an event designated by the event handle in r1
         /// WaitOnEvent r1
         /// </summary>
-        WaitOnEvent = 28,
+        WaitOnEvent,
 
         /// <summary>
         /// Fires the event in r1
         /// FireEvent r1
         /// </summary>
-        FireEvent = 29,
+        FireEvent,
 
         /// <summary>
         /// Clears the memory starting at the address in r1 for number of bytes in r2
         /// MemoryClear r1, r2
         /// </summary>
-        MemoryClear = 30,
+        MemoryClear,
 
         /// <summary>
         /// Terminates the currently running process where r1 contains an exit code for the process which will be returned to the OS Kernel
         /// Terminate r1
         /// </summary>
-        Terminate = 31,
+        Terminate,
 
         /// <summary>
         /// Starts an atomic block (this block will not be interupted by taks switching) and returns an AtomicBlock handle in r1
@@ -255,12 +280,19 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// appropriate AtomicBlockHandle
         /// BeginAtomicBlock r1
         /// </summary>
-        BeginAtomicBlock = 32,
+        BeginAtomicBlock,
 
         /// <summary>
         /// Ends an AtomicBlock started with BeginAtomicBlock.  r1 must contain the atomic block number that is ending
         /// EndAtomicBlock r1
         /// </summary>
-        EndAtomicBlock = 33
+        EndAtomicBlock,
+
+
+        /// <summary>
+        /// Starts multi tasking.
+        /// EnterMultitaskingMode
+        /// </summary>
+        EnterMultitaskingMode,
     }
 }
