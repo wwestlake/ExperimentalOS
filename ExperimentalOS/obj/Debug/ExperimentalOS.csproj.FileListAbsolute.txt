@@ -1,7 +1,6 @@
-C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.pdb
-C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\obj\Debug\LagDaemon.ExperimentalOS.pdb
-C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.XML
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.dll.config
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.XML
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.pdb
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\obj\Debug\LagDaemon.ExperimentalOS.dll
-C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\obj\Debug\ExperimentalOS.csprojResolveAssemblyReference.cache
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOS\obj\Debug\LagDaemon.ExperimentalOS.pdb
