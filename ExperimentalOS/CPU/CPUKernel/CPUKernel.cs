@@ -53,6 +53,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         }
 
         internal void Load(Instruction inst) { throw new NotImplementedException(); }
+        internal void Store(Instruction inst) { throw new NotImplementedException(); }
         internal void Move(Instruction inst) { throw new NotImplementedException(); }
         internal void Pop(Instruction inst) { throw new NotImplementedException(); }
         internal void Push(Instruction inst) { throw new NotImplementedException(); }
@@ -104,6 +105,130 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         internal void BeginAtomicBlock(Instruction inst) { throw new NotImplementedException(); }
         internal void EndAtomicBlock(Instruction inst) { throw new NotImplementedException(); }
         internal void EnterMultitaskingMode(Instruction inst) { throw new NotImplementedException(); }
+
+        internal Instruction Connect(Instruction inst)
+        {
+            switch (inst.Code)
+            {
+                case InstructionCodes.Add:
+                    inst.Execute = Add;
+                    break;
+                case InstructionCodes.AllocateMemory:
+                    inst.Execute = AllocateMemory;
+                    break;
+                case InstructionCodes.BeginAtomicBlock:
+                    inst.Execute = BeginAtomicBlock;
+                    break;
+                case InstructionCodes.Call:
+                    inst.Execute = Call;
+                    break;
+                case InstructionCodes.ClearCompare:
+                    inst.Execute = ClearCompare;
+                    break;
+                case InstructionCodes.Compare:
+                    inst.Execute = Compare;
+                    break;
+                case InstructionCodes.Dec:
+                    inst.Execute = Dec;
+                    break;
+                case InstructionCodes.Div:
+                    inst.Execute = Div;
+                    break;
+                case InstructionCodes.EndAtomicBlock:
+                    inst.Execute = EndAtomicBlock;
+                    break;
+                case InstructionCodes.EnterMultitaskingMode:
+                    inst.Execute = EnterMultitaskingMode;
+                    break;
+                case InstructionCodes.FireEvent:
+                    inst.Execute = FireEvent;
+                    break;
+                case InstructionCodes.FreeMemory:
+                    inst.Execute = FreeMemory;
+                    break;
+                case InstructionCodes.In:
+                    inst.Execute = In;
+                    break;
+                case InstructionCodes.Inc:
+                    inst.Execute = Inc;
+                    break;
+                case InstructionCodes.JE:
+                    inst.Execute = JE;
+                    break;
+                case InstructionCodes.JGT:
+                    inst.Execute = JGT;
+                    break;
+                case InstructionCodes.JLT:
+                    inst.Execute = JLT;
+                    break;
+                case InstructionCodes.JNE:
+                    inst.Execute = JNE;
+                    break;
+                case InstructionCodes.JNZ:
+                    inst.Execute = JNZ;
+                    break;
+                case InstructionCodes.Jump:
+                    inst.Execute = Jump;
+                    break;
+                case InstructionCodes.JZ:
+                    inst.Execute = JZ;
+                    break;
+                case InstructionCodes.Load:
+                    inst.Execute = Load;
+                    break;
+                case InstructionCodes.Lock:
+                    inst.Execute = Lock;
+                    break;
+                case InstructionCodes.MemoryClear:
+                    inst.Execute = MemoryClear;
+                    break;
+                case InstructionCodes.Move:
+                    inst.Execute = Move;
+                    break;
+                case InstructionCodes.Mul:
+                    inst.Execute = Mul;
+                    break;
+                case InstructionCodes.NOP:
+                    inst.Execute = Nop;
+                    break;
+                case InstructionCodes.Out:
+                    inst.Execute = Out;
+                    break;
+                case InstructionCodes.Pop:
+                    inst.Execute = Pop;
+                    break;
+                case InstructionCodes.Push:
+                    inst.Execute = Push;
+                    break;
+                case InstructionCodes.Return:
+                    inst.Execute = Return;
+                    break;
+                case InstructionCodes.SetPriority:
+                    inst.Execute = SetPriority;
+                    break;
+                case InstructionCodes.Sleep:
+                    inst.Execute = Sleep;
+                    break;
+                case InstructionCodes.Store:
+                    inst.Execute = Store;
+                    break;
+                case InstructionCodes.Sub:
+                    inst.Execute = Sub;
+                    break;
+                case InstructionCodes.Terminate:
+                    inst.Execute = Terminate;
+                    break;
+                case InstructionCodes.Unlock:
+                    inst.Execute = Unlock;
+                    break;
+                case InstructionCodes.WaitOnEvent:
+                    inst.Execute = WaitOnEvent;
+                    break;
+
+            }
+            return inst;
+
+        }
 
 
         internal Hardware.CPU Processor { get; set; }

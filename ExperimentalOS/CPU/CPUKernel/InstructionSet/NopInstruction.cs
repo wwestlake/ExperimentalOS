@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Text.RegularExpressions;
 
@@ -54,13 +55,13 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// </summary>
         /// <param name="assemblyLine">Assembly line representing a NOP</param>
         /// <returns>The instruction</returns>
-        protected override Instruction Assemble(string assemblyLine)
+        protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
             string line = PreProcess(assemblyLine);
             Match m = CreateMatch(line, @"\s*;(?<comment>[\s\S]*)");
             if (line.StartsWith(Code.ToString().ToLower()))
             {
-                return new NopInstruction(m.Groups["comment"].Value);
+                return NewInstruction(factory, m.Groups["comment"].Value);
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
         }
@@ -94,10 +95,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="offset">Position in the buffer to start reading</param>
         /// <returns>The Instruction created</returns>
         /// <exception>Application Exception if bytes are incorrect</exception>
-        protected override Instruction CreateFromBytes(byte[] buffer, int offset)
+        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
         {
-            if (buffer[offset] == Convert.ToByte(Code)) return this;
+            if (buffer[offset] == Convert.ToByte(Code)) return NewInstruction(factory, string.Empty);
             throw new ApplicationException("Byte stream does not contain NOP at designated offset.");
         }
+
+        protected Instruction NewInstruction(IInstructionFactory factory, string comment)
+        {
+            return factory.Nop();
+        }
+
     }
 }

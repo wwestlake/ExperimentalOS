@@ -19,6 +19,7 @@
 */
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System.Text.RegularExpressions;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
@@ -69,9 +70,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// </summary>
         /// <param name="assemblyLine">The assembly line to use</param>
         /// <returns>An instruction object</returns>
-        public Instruction CreateInstruction(string assemblyLine)
+        public Instruction CreateInstruction(IInstructionFactory factory, string assemblyLine)
         {
-            return Assemble(assemblyLine);
+            return Assemble(factory, assemblyLine);
         }
 
         /// <summary>
@@ -80,9 +81,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// <param name="buffer">The buffer to read from</param>
         /// <param name="offset">The offset into the buffer to start reading at</param>
         /// <returns>An Instruction</returns>
-        public Instruction Read(byte[] buffer, int offset)
+        public Instruction Read(IInstructionFactory factory, byte[] buffer, int offset)
         {
-            return CreateFromBytes(buffer, offset);
+            return CreateFromBytes(factory, buffer, offset);
         }
 
 
@@ -103,7 +104,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// <param name="assemblyLine">The line of assembly to create the instruction from</param>
         /// <returns>An Instruction object</returns>
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
-        protected abstract Instruction Assemble(string assemblyLine);
+        protected abstract Instruction Assemble(IInstructionFactory factory, string assemblyLine);
 
         /// <summary>
         /// When implemented produces a string representation of the instructiuon as assembly language
@@ -126,8 +127,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// <param name="offset">Position in the buffer to start reading</param>
         /// <returns>The Instruction created</returns>
         /// <exception>Application Exception if bytes are incorrect</exception>
-        protected abstract Instruction CreateFromBytes(byte[] buffer, int offset);
+        protected abstract Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset);
 
+        
 
         /// <summary>
         /// Converts this to a disassembled string

@@ -79,6 +79,8 @@
     <Compile Include="CPU\CPUKernel\ByteCodeWriter.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernel.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernelException.cs" />
+    <Compile Include="CPU\CPUKernel\CPUKernelFactory.cs" />
+    <Compile Include="CPU\CPUKernel\CPUModes.cs" />
     <Compile Include="CPU\CPUKernel\Flags.cs" />
     <Compile Include="CPU\CPUKernel\Instruction.cs" />
     <Compile Include="CPU\CPUKernel\InstructionCodes.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="CPU\CPUKernel\SingleTaskCPUKernel.cs" />
     <Compile Include="CPU\CPUKernel\SymbolCache.cs" />
     <Compile Include="CPU\CPUKernel\SymbolTable.cs" />
+    <Compile Include="CPU\Interfaces\ICPUKernelFactory.cs" />
+    <Compile Include="CPU\Interfaces\IInstructionFactory.cs" />
     <Compile Include="CPU\Interfaces\IStartable.cs" />
     <Compile Include="OS\Utilities\MacroExpander.cs" />
     <Compile Include="OS\Utilities\MacroSubstitutor.cs" />
@@ -111,7 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ExperimentalOSKeys.pfx" />
-    <None Include="PrivateKey.ppk" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="OS\Kernel\" />
@@ -136,7 +139,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CPU\LICENSE.txt" />
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

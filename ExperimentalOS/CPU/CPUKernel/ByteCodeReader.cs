@@ -19,6 +19,7 @@
 */
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,12 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
     internal class ByteCodeReader
     {
         private CPUKernel kernel;
+        private IInstructionFactory factory;
 
         internal ByteCodeReader(CPUKernel kernel) 
         {
             this.kernel = kernel;
+            factory = new InstructionFactory(kernel);
         }
 
         internal IEnumerable<Instruction> Read(byte[] buffer, int offset, int count)
@@ -52,8 +55,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.BeginAtomicBlock:
                         break;
                     case InstructionCodes.Call:
-                        result = InstructionFactory.Call(0, 0).Read(buffer, index);
-                        result.Execute = kernel.Call;
+                        result = factory.Call(0, 0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Compare:
                         break;
@@ -68,8 +70,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.FreeMemory:
                         break;
                     case InstructionCodes.In:
-                        result = InstructionFactory.In(0, 0).Read(buffer, index);
-                        result.Execute = kernel.In;
+                        result = factory.In(0, 0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Inc:
                         break;
@@ -82,38 +83,31 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.JNE:
                         break;
                     case InstructionCodes.Jump:
-                        result = InstructionFactory.Jump(0, 0).Read(buffer, index);
-                        result.Execute = kernel.Jump;
+                        result = factory.Jump(0, 0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Load:
-                        result = InstructionFactory.Load(0, 0, 0, 0).Read(buffer, index);
-                        result.Execute = kernel.Load;
+                        result = factory.Load(0, 0, 0, 0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Lock:
                         break;
                     case InstructionCodes.MemoryClear:
                         break;
                     case InstructionCodes.Move:
-                        result = InstructionFactory.Move(0, 0).Read(buffer, index);
-                        result.Execute = kernel.Move;
+                        result = factory.Move(0, 0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Mul:
                         break;
                     case InstructionCodes.NOP:
-                        result = InstructionFactory.Nop().Read(buffer, index);
-                        result.Execute = kernel.Nop;
+                        result = factory.Nop().Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Out:
-                        result = InstructionFactory.Out(0, 0).Read(buffer, index);
-                        result.Execute = kernel.Out;
+                        result = factory.Out(0, 0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Pop:
-                        result = InstructionFactory.Pop(0).Read(buffer, index);
-                        result.Execute = kernel.Pop;
+                        result = factory.Pop(0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Push:
-                        result = InstructionFactory.Push(0).Read(buffer, index);
-                        result.Execute = kernel.Push;
+                        result = factory.Push(0).Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Return:
                         break;
@@ -126,8 +120,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                     case InstructionCodes.Sub:
                         break;
                     case InstructionCodes.Terminate:
-                        result = InstructionFactory.Terminate().Read(buffer, index);
-                        result.Execute = kernel.Terminate;
+                        result = factory.Terminate().Read(factory, buffer, index);
                         break;
                     case InstructionCodes.Unlock:
                         break;

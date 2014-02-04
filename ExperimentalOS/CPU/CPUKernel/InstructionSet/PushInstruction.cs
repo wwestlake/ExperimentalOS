@@ -1,4 +1,5 @@
-﻿/*
+﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
      
@@ -46,7 +47,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r1">register</param>
         internal PushInstruction(int r1) : this(r1, string.Empty) { }
 
-        protected override Instruction Assemble(string assemblyLine)
+        protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
             string line = PreProcess(assemblyLine);
             Match m = CreateMatch(line, @"\s+r(?<r1>\d+)\s*[;]*(?<comment>[\s\S]*)");
@@ -54,7 +55,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 if (m.Success)
                 {
-                    return new PushInstruction(int.Parse(m.Groups["r1"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m.Groups["r1"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
                 }
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
@@ -93,12 +94,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="buffer">buffer where bytes are stored</param>
         /// <param name="offset">offset into buffer</param>
         /// <returns>An Instruciton</returns>
-        protected override Instruction CreateFromBytes(byte[] buffer, int offset)
+        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
         {
             int index = offset;
             InstructionCodes code = (InstructionCodes)buffer[index++];
             int r1 = (int)buffer[index++];
-            return new PushInstruction(r1);
+            return NewInstruction(factory, r1, string.Empty);
         }
+
+        protected Instruction NewInstruction(IInstructionFactory factory, int r1, string comment)
+        {
+            return factory.Push(r1, comment);
+        }
+
     }
 }

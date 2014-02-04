@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -22,7 +23,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 
         internal InInstruction(int r1, int port) : this(r1, port, string.Empty) { }
 
-        protected override Instruction Assemble(string assemblyLine)
+        protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
 
             string line = PreProcess(assemblyLine);
@@ -31,7 +32,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 if (m.Success)
                 {
-                    return new InInstruction(int.Parse(m.Groups["r1"].Value),int.Parse(m.Groups["port"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m.Groups["r1"].Value),int.Parse(m.Groups["port"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
                 }
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
@@ -55,13 +56,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             return 2;
         }
 
-        protected override Instruction CreateFromBytes(byte[] buffer, int offset)
+        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
         {
             int index = offset;
             InstructionCodes code = (InstructionCodes)buffer[index++];
             int r1 = (int)buffer[index++];
             int port = BitConverter.ToInt32(buffer, index);
-            return new InInstruction(r1, port);
+            return NewInstruction(factory, r1, port, string.Empty);
+        }
+
+        protected Instruction NewInstruction(IInstructionFactory factory, int r1, int port, string comment)
+        {
+            return factory.In(r1, port, comment);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 
 
 
-        protected override Instruction NewInstruction(int r1, uint address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, uint address, string comment)
         {
-            return new CallInstruction(r1, address, comment);
+            return factory.Call(r1, address, comment);
         }
     }
 }

@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="assemblyLine">The line of assembly to create the instruction from</param>
         /// <returns>An Instruction object</returns>
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
-        protected override Instruction Assemble(string assemblyLine)
+        protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
             string line = PreProcess(assemblyLine);
             Match m1 = CreateMatch(line,  @"\s+r(?<r1>\d+)\s*,\s*\$(?<address>\d+)\s*[;]*(?<comment>[\s\S]*)");
@@ -70,21 +71,21 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 if (m1.Success)
                 {
-                    return NewInstruction(int.Parse(m1.Groups["r1"].Value), uint.Parse(m1.Groups["address"].Value), m1.Groups["comment"] != null ? m1.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m1.Groups["r1"].Value), uint.Parse(m1.Groups["address"].Value), m1.Groups["comment"] != null ? m1.Groups["comment"].Value : string.Empty);
                 }
                 if (m2.Success)
                 {
-                    return NewInstruction(int.Parse(m2.Groups["r1"].Value), (uint)Symbols.NullAddress, m2.Groups["comment"] != null ? m2.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m2.Groups["r1"].Value), (uint)Symbols.NullAddress, m2.Groups["comment"] != null ? m2.Groups["comment"].Value : string.Empty);
                 }
                 if (m3.Success)
                 {
-                    return NewInstruction(int.Parse(m3.Groups["r1"].Value), uint.Parse(m3.Groups["address"].Value), m3.Groups["comment"] != null ? m3.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m3.Groups["r1"].Value), uint.Parse(m3.Groups["address"].Value), m3.Groups["comment"] != null ? m3.Groups["comment"].Value : string.Empty);
                 }
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
         }
 
-        protected abstract Instruction NewInstruction(int r1, uint address, string comment);
+        
 
 
         /// <summary>
@@ -156,7 +157,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="offset">Position in the buffer to start reading</param>
         /// <returns>The Instruction created</returns>
         /// <exception>Application Exception if bytes are incorrect</exception>
-        protected override Instruction CreateFromBytes(byte[] buffer, int offset)
+        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
         {
             AddressingMode extInstCode = 0;
             int index = offset;
@@ -176,9 +177,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
                     address = BitConverter.ToUInt32(buffer, index++);
                     break;
             }
-            return NewInstruction(r1, address, string.Empty);
+            return NewInstruction(factory, r1, address, string.Empty);
         }
 
-
+        protected abstract Instruction NewInstruction(IInstructionFactory factory, int r1, uint address, string comment);
     }
 }

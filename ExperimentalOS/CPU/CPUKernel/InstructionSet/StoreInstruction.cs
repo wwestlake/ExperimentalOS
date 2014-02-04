@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,9 +54,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             : base(InstructionCodes.Store, r1, r2, value, address) {}
 
 
-        protected override Instruction NewInstruction(int r1, int r2, int value, uint address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, int value, uint address, string comment)
         {
-            return new StoreInstruction(r1, r2, value, address, comment);
+            return factory.Store(r1, r2, value, address, comment);
         }
     }
 }

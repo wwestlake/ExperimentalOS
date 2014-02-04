@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Text.RegularExpressions;
 
@@ -70,13 +71,13 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="assemblyLine"></param>
         /// <returns></returns>
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
-        protected override Instruction Assemble(string assemblyLine)
+        protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
             string line = PreProcess(assemblyLine);
             Match m = CreateMatch(line, @"\s+r(?<r1>\d+)\s*,\s*r(?<r2>\d+)\s*[;]*(?<comment>[\s\S]*)");
             if (line.StartsWith(Code.ToString().ToLower()))
             {
-                return new MoveInstruction(int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
+                return NewInstruction(factory, int.Parse(m.Groups["r1"].Value), int.Parse(m.Groups["r2"].Value), m.Groups["comment"] != null ? m.Groups["comment"].Value : string.Empty);
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
         }
@@ -113,14 +114,19 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="offset">Position in the buffer to start reading</param>
         /// <returns>The Instruction created</returns>
         /// <exception>Application Exception if bytes are incorrect</exception>
-        protected override Instruction CreateFromBytes(byte[] buffer, int offset)
+        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
         {
             int index = offset;
             InstructionCodes code = (InstructionCodes)buffer[index++];
             if (code != InstructionCodes.Move) throw new InvalidOperationException(string.Format("Expected Move Instruction but encountered: {0} instruction", code));
             int r1 = (int)buffer[index++];
             int r2 = (int)buffer[index++];
-            return new MoveInstruction(r1, r2);
+            return NewInstruction(factory, r1, r2, string.Empty);
+        }
+ 
+        protected Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, string comment)
+        {
+            return factory.Move(r1, r2, comment);
         }
     }
 }

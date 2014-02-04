@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 
         internal JumpInstruction(int r1, uint address) : base(InstructionCodes.Jump, r1, address) { }
 
-        protected override Instruction NewInstruction(int r1, uint address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, uint address, string comment)
         {
-            return new JumpInstruction(r1, address, comment);
+            return factory.Jump(r1, address, comment);
         }
     }
 }

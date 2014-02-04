@@ -216,14 +216,14 @@
             <param name="code">The InstructionCode</param>
             <param name="comment">The Comment</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateInstruction(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateInstruction(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             Creates an instruction from an assembly line
             </summary>
             <param name="assemblyLine">The assembly line to use</param>
             <returns>An instruction object</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Read(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Read(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Reads bytes from a buffer to produce an Instruction
             </summary>
@@ -239,7 +239,7 @@
             <param name="offset">The offset in the buffer to write at</param>
             <returns>The number of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Assemble(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             When implemented assembles a string into this op code
             </summary>
@@ -261,7 +261,7 @@
             <param name="offset">The offiset within the buffer to write to</param>
             <returns>The number of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates an instruction from the bytes in the buffer
             </summary>
@@ -578,7 +578,7 @@
             EnterMultitaskingMode
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Assemble(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             When implemented assembles a string into this op code
             </summary>
@@ -600,7 +600,7 @@
             <param name="offset">The offiset within the buffer to write to</param>
             <returns>The number of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates an instruction from the bytes in the buffer
             </summary>
@@ -625,6 +625,189 @@
             <summary>
             Factory methods for creating instructions
             </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nop">
+            <summary>
+            Create a Nop Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nop(System.String)">
+            <summary>
+            Create a Nop instruction with comment
+            </summary>
+            <param name="comment">A Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Move(System.Int32,System.Int32)">
+            <summary>
+            Create a Move instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Move(System.Int32,System.Int32,System.String)">
+            <summary>
+            Create a Move isntruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+            <summary>
+            Create a Load Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            Create a Load Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+            <summary>
+            Create a Store Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            Create a Store Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Push(System.Int32,System.String)">
+            <summary>
+            Create a Push Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Push(System.Int32)">
+            <summary>
+            Create a Push Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Pop(System.Int32,System.String)">
+            <summary>
+            Create a Pop Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Pop(System.Int32)">
+            <summary>
+            Create a Pop Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <returns></returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.In(System.Int32,System.Int32,System.String)">
+            <summary>
+            Create a In Instruction with comment
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="port">The port to read from</param>
+            <param name="comment">Comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.In(System.Int32,System.Int32)">
+            <summary>
+            Create a Pop Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="port">The port to read from</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Out(System.Int32,System.Int32)">
+            <summary>
+            Creates an Out Instruction
+            </summary>
+            <param name="r1">Register to send to port</param>
+            <param name="port">Port to write to</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Out(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates an Out Instruction with comment
+            </summary>
+            <param name="r1">Register to send to port</param>
+            <param name="port">The port to write to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Jump(System.Int32,System.UInt32)">
+            <summary>
+            Creates an Jump Instruction
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to jump to</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Jump(System.Int32,System.UInt32,System.String)">
+            <summary>
+            Creates an Jump Instruction with comment
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to jump to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Call(System.Int32,System.UInt32)">
+            <summary>
+            Creates a Call Instruction
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to call to</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Call(System.Int32,System.UInt32,System.String)">
+            <summary>
+            Creates a Call Instruction with comment
+            </summary>
+            <param name="r1">Index modifier to address or address</param>
+            <param name="address">Address to call to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Terminate">
+            <summary>
+            Creates a Terminate Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Terminate(System.String)">
+            <summary>
+            Creates a Terminate Instruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nop">
             <summary>
@@ -656,6 +839,16 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            Create a Load Instruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="value">Imediate value</param>
+            <param name="address">Address</param>
+            <returns>Instruction</returns>
+        </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
             <summary>
             Create a Load Instruction with comment
@@ -665,16 +858,6 @@
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
             <param name="comment">Comment</param>
-            <returns>Instruction</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
-            <summary>
-            Create a Load Instruction
-            </summary>
-            <param name="r1">Register 1</param>
-            <param name="r2">Register 2</param>
-            <param name="value">Imediate value</param>
-            <param name="address">Address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
@@ -839,7 +1022,7 @@
             <param name="address">An address</param>
             <param name="comment">A comment</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.Assemble(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             When implemented assembles a string into this op code
             </summary>
@@ -861,7 +1044,7 @@
             <param name="offset">The offiset within the buffer to write to</param>
             <returns>The number of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates an instruction from the bytes in the buffer
             </summary>
@@ -949,7 +1132,7 @@
             </summary>
             <param name="inst">The instruction to copy</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.Assemble(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             When implemented assembles a string into this op code
             </summary>
@@ -971,7 +1154,7 @@
             <param name="offset">The offiset within the buffer to write to</param>
             <returns>The number of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates an MoveInstruction from the bytes in the buffer
             </summary>
@@ -1002,7 +1185,7 @@
             </summary>
             <param name="inst">The NopInstruction to copy</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.Assemble(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             Assembly a Nop Instruction
             </summary>
@@ -1023,7 +1206,7 @@
             <param name="offset"></param>
             <returns></returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates an NopInstruction from the bytes in the buffer
             </summary>
@@ -1064,7 +1247,7 @@
             <param name="offset">offset in buffer</param>
             <returns>count of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates a push instruction from byte code
             </summary>
@@ -1104,7 +1287,7 @@
             <param name="offset">offset in buffer</param>
             <returns>count of bytes written</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.CreateFromBytes(System.Byte[],System.Int32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
             <summary>
             Creates a push instruction from byte code
             </summary>

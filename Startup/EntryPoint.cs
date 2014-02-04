@@ -17,17 +17,15 @@ namespace LagDaemon.ExperimentalOS.Startup
             IList<Instruction> program = new List<Instruction>();
 
             // boot loader will go here
-            program.Add(InstructionFactory.Nop());
-            program.Add(InstructionFactory.Nop());
-            program.Add(InstructionFactory.Nop());
-            program.Add(InstructionFactory.Nop());
-            program.Add(InstructionFactory.Nop());
-            program.Add(InstructionFactory.Terminate());
+            string assyProgram = @"
+                NOP
+                Load r33, 435 ; load some data
+                Move r25, r33
+                Terminate
+            ";
+
 
             byte[] buffer = new byte[512];
-
-            ByteCodeWriter writer = new ByteCodeWriter();
-            writer.Write(buffer, 0, program);
 
 
             IStartable cpu = CPUFactory.Factory(new HardwareConfiguration(128)).CreateSingleTaskCPU(buffer);
