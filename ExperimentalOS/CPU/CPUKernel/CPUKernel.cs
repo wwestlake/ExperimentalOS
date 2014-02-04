@@ -20,7 +20,6 @@
 using LagDaemon.ExperimentalOS.CPU.CPUHardware;
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
 using System;
-using System.Collections.Generic;
 using Hardware = LagDaemon.ExperimentalOS.CPU.CPUHardware;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel

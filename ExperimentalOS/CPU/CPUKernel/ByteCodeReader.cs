@@ -20,11 +20,7 @@
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
 using LagDaemon.ExperimentalOS.CPU.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {

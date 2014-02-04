@@ -54,10 +54,19 @@
     <None Include="ExperimentalOSKeys.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExperimentalOSAssembler\ExperimentalOSAssembler.csproj">
+      <Project>{3be21677-9958-4427-847b-c688d75380cf}</Project>
+      <Name>ExperimentalOSAssembler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExperimentalOS\ExperimentalOS.csproj">
       <Project>{9236f517-3c1b-4fff-9343-27a9504e5fec}</Project>
       <Name>ExperimentalOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BootLoader.asm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
