@@ -1,0 +1,5 @@
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\bin\Debug\LagDaemon.ExperimentalOS.Assembler.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\bin\Debug\LagDaemon.ExperimentalOS.Assembler.pdb
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\obj\Debug\ExperimentalOSAssembler.csprojResolveAssemblyReference.cache
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\obj\Debug\LagDaemon.ExperimentalOS.Assembler.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\obj\Debug\LagDaemon.ExperimentalOS.Assembler.pdb
