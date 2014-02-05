@@ -17,30 +17,32 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+using NUnit.Framework;
 using LagDaemon.ExperimentalOS.Assembler;
-using LagDaemon.ExperimentalOS.CPU.CPUKernel;
-using System;
 using System.Collections.Generic;
-using System.IO;
 
-
-namespace LagDaemon.ExperimentalOS.Startup
+namespace ExperimentalOSTestSuite
 {
-    class EntryPoint
+    [TestFixture(Category = "Assembler Tests",
+    Description = "Test the operation of the assembler")]
+    public class AssemblerTests
     {
-        static void Main(string[] args)
+
+        [SetUp]
+        public void SetUp()
         {
-
-
-
-            //byte[] buffer = new byte[512];
-
-
-            //IStartable cpu = CPUFactory.Factory(new HardwareConfiguration(128)).CreateSingleTaskCPU(buffer);
-
-            //cpu.Start();
-
-            Console.ReadKey();
         }
+
+        [Test]
+        public void AssemblerFileReaderLoadsFile()
+        {
+            AssemblerFileReader fileReader;
+            fileReader = new AssemblerFileReader("TestFile.asm");
+            int i = 0;
+            foreach (string line in fileReader.Lines) i++;
+            Assert.That(i > 0);
+        }
+
+
     }
 }

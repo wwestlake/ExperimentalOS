@@ -28,8 +28,8 @@ namespace LagDaemon.ExperimentalOS.Assembler
 {
     public class AssemblerFileReader
     {
-        string contents;
-        List<string> programLines = new List<string>();
+        private string contents;
+        protected List<string> programLines = new List<string>();
 
         public AssemblerFileReader(FileStream file)
         {
@@ -44,6 +44,7 @@ namespace LagDaemon.ExperimentalOS.Assembler
             Init();
         }
 
+
         private void Init()
         {
             string[] lines = contents.Split(new char[] { '\n' });
@@ -55,15 +56,19 @@ namespace LagDaemon.ExperimentalOS.Assembler
             }
         }
 
-
-
-
-
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            foreach (string line in programLines) { builder.Append(line); builder.Append("\n"); }
+            foreach (string line in Lines) { builder.Append(line); builder.Append("\n"); }
             return builder.ToString();
+        }
+
+        public IEnumerable<string> Lines 
+        { 
+            get 
+            {
+                foreach (string line in programLines) yield return line;
+            } 
         }
 
 

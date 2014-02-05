@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="true">
   <TopNode>[0-1000]C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit</TopNode>
-  <SelectedNode>[0-1000]C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit</SelectedNode>
+  <SelectedNode>[1-1000]ExperimentalOSTestSuite.InstructionSetTests</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit" Expanded="true" />

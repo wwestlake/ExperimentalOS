@@ -55,6 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AssemblerTests.cs" />
     <Compile Include="InstructionSetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,10 +64,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExperimentalOSAssembler\ExperimentalOSAssembler.csproj">
+      <Project>{3be21677-9958-4427-847b-c688d75380cf}</Project>
+      <Name>ExperimentalOSAssembler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExperimentalOS\ExperimentalOS.csproj">
       <Project>{9236f517-3c1b-4fff-9343-27a9504e5fec}</Project>
       <Name>ExperimentalOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestFile.asm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -45,11 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assembler.cs" />
     <Compile Include="AssemblerFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExperimentalOSKeys.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExperimentalOS\ExperimentalOS.csproj">
+      <Project>{9236f517-3c1b-4fff-9343-27a9504e5fec}</Project>
+      <Name>ExperimentalOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

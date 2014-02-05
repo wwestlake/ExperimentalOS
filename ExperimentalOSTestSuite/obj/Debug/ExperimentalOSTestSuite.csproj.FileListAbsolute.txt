@@ -8,3 +8,6 @@ C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Experime
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\obj\Debug\ExperimentalOSTestSuite.csprojResolveAssemblyReference.cache
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\obj\Debug\ExperimentalOSTestSuite.dll
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\obj\Debug\ExperimentalOSTestSuite.pdb
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\TestFile.asm
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\LagDaemon.ExperimentalOS.Assembler.dll
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\bin\Debug\LagDaemon.ExperimentalOS.Assembler.pdb
