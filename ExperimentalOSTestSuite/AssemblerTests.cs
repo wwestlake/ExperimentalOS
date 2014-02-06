@@ -19,7 +19,9 @@
 */
 using NUnit.Framework;
 using LagDaemon.ExperimentalOS.Assembler;
+using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ExperimentalOSTestSuite
 {
@@ -27,22 +29,32 @@ namespace ExperimentalOSTestSuite
     Description = "Test the operation of the assembler")]
     public class AssemblerTests
     {
+        FileStream file;
+        AssemblerFileReader fileReader;
+
 
         [SetUp]
         public void SetUp()
         {
+            file = new FileStream("TestFile.asm", FileMode.Open, FileAccess.Read);
+            fileReader = new AssemblerFileReader(file);
         }
 
-        [Test]
+        [Test(Description="Ensure that the AssemblerFileRead reads in the supplied text.  There must be at least one non blank line in the file.")]
         public void AssemblerFileReaderLoadsFile()
         {
-            AssemblerFileReader fileReader;
-            fileReader = new AssemblerFileReader("TestFile.asm");
             int i = 0;
             foreach (string line in fileReader.Lines) i++;
             Assert.That(i > 0);
         }
 
-
+        [Test(Description = "AssemblerFactory loads the correct assember")]
+        public void AssemblerFactoryLoadsCorrectAssembler()
+        {
+            file = new FileStream("TestFile.asm", FileMode.Open, FileAccess.Read);
+            foreach (Instruction inst in AssemblerFactory.Factory.Mode(CPUModes.SingleTasking).CreateAssembler(file).Program)
+            {
+            }
+        }
     }
 }

@@ -9,3 +9,4 @@ C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\LagDaemon.ExperimentalOS.xml
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\obj\Debug\LagDaemon.ExperimentalOS.Startup.pdb
 C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\BootLoader.asm
+C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\Startup\bin\Debug\TestFile.asm

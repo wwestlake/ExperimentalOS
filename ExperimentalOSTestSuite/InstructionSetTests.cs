@@ -33,7 +33,7 @@ namespace ExperimentalOSTestSuite
         [SetUp]
         public void SetUp()
         {
-            instFactory = CPUKernelFactory.KernelFactory.Mode(CPUModes.SingleTasking).InstrucitnoFactory;
+            instFactory = CPUKernelFactory.Factory.Mode(CPUModes.SingleTasking).InstrucitnoFactory;
         }
 
 

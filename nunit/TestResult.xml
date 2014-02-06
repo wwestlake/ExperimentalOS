@@ -1,40 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit" total="34" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-02-04" time="21:30:22">
+<test-results name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit" total="35" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-02-05" time="20:58:23">
   <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5472" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.3\bin" machine-name="WWESTLAKE-HP" user="wwestlake" user-domain="wwestlake-HP" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Test Project" name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit" executed="True" result="Success" success="True" time="1.251" asserts="0">
+  <test-suite type="Test Project" name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\ExperimentalOS.nunit" executed="True" result="Failure" success="False" time="0.921" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\..\ExperimentalOS\bin\Debug\LagDaemon.ExperimentalOS.dll" executed="True" result="Inconclusive" success="False" time="0.021" asserts="0" />
-      <test-suite type="Assembly" name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\..\ExperimentalOSTestSuite\bin\Debug\ExperimentalOSTestSuite.dll" executed="True" result="Success" success="True" time="0.554" asserts="0">
+      <test-suite type="Assembly" name="C:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\nunit\..\ExperimentalOSTestSuite\bin\Debug\ExperimentalOSTestSuite.dll" executed="True" result="Failure" success="False" time="0.573" asserts="0">
         <results>
-          <test-suite type="Namespace" name="ExperimentalOSTestSuite" executed="True" result="Success" success="True" time="0.536" asserts="0">
+          <test-suite type="Namespace" name="ExperimentalOSTestSuite" executed="True" result="Failure" success="False" time="0.556" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="AssemblerTests" description="Test the operation of the assembler" executed="True" result="Success" success="True" time="0.059" asserts="0">
+              <test-suite type="TestFixture" name="AssemblerTests" description="Test the operation of the assembler" executed="True" result="Failure" success="False" time="0.137" asserts="0">
                 <categories>
                   <category name="Assembler Tests" />
                 </categories>
                 <results>
-                  <test-case name="ExperimentalOSTestSuite.AssemblerTests.AssemblerFileReaderLoadsFile" executed="True" result="Success" success="True" time="0.047" asserts="1" />
+                  <test-case name="ExperimentalOSTestSuite.AssemblerTests.AssemblerFactoryLoadsCorrectAssembler" description="AssemblerFactory loads the correct assember" executed="True" result="Error" success="False" time="0.108" asserts="0">
+                    <failure>
+                      <message><![CDATA[System.NotImplementedException : The method or operation is not implemented.]]></message>
+                      <stack-trace><![CDATA[at LagDaemon.ExperimentalOS.Assembler.SingleTaskingAssembler.Assemble(String line) in c:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\SingleTaskingAssembler.cs:line 38
+at LagDaemon.ExperimentalOS.Assembler.Assembler.<get_Program>d__0.MoveNext() in c:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSAssembler\Assembler.cs:line 45
+at ExperimentalOSTestSuite.AssemblerTests.AssemblerFactoryLoadsCorrectAssembler() in c:\Users\wwestlake\Documents\Visual Studio 2013\Projects\ExperimentalOS\ExperimentalOSTestSuite\AssemblerTests.cs:line 55
+]]></stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case name="ExperimentalOSTestSuite.AssemblerTests.AssemblerFileReaderLoadsFile" description="Ensure that the AssemblerFileRead reads in the supplied text.  There must be at least one non blank line in the file." executed="True" result="Success" success="True" time="0.003" asserts="1" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="InstructionSetTests" description="Basic Instruction Object Tests not executing instructions in CPUKernel" executed="True" result="Success" success="True" time="0.471" asserts="0">
+              <test-suite type="TestFixture" name="InstructionSetTests" description="Basic Instruction Object Tests not executing instructions in CPUKernel" executed="True" result="Success" success="True" time="0.415" asserts="0">
                 <categories>
                   <category name="Kernel Tests" />
                 </categories>
                 <results>
-                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.CallInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.040" asserts="1" />
+                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.CallInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.016" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.CallInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.CallInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.222" asserts="3" />
+                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.CallInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.209" asserts="3" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.InInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.002" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.InInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.InInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.016" asserts="3" />
+                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.InInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.015" asserts="3" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.JumpInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.001" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.JumpInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.JumpInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.002" asserts="3" />
-                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.LoadInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.LoadInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.003" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.LoadInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.LoadInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.052" asserts="3" />
+                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.LoadInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.049" asserts="3" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.MoveInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.002" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.MoveInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.MoveInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.002" asserts="3" />
@@ -49,7 +57,7 @@
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.PopInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.002" asserts="3" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.PushInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.002" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.PushInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.PushInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.002" asserts="3" />
+                  <test-case name="ExperimentalOSTestSuite.InstructionSetTests.PushInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.001" asserts="3" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.StoreInstructionEmitsByteCodeAndLoadsFromByteCode" executed="True" result="Success" success="True" time="0.001" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.StoreInstructionIsCreated" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                   <test-case name="ExperimentalOSTestSuite.InstructionSetTests.StoreInstructionsLoadsFromAssemblyLanguage" executed="True" result="Success" success="True" time="0.001" asserts="3" />

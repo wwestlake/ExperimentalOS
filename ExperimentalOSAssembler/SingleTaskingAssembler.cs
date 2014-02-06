@@ -17,22 +17,28 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-using LagDaemon.ExperimentalOS.Assembler;
 using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
-
-namespace LagDaemon.ExperimentalOS.Startup
+namespace LagDaemon.ExperimentalOS.Assembler
 {
-    class EntryPoint
+    internal class SingleTaskingAssembler : Assembler 
     {
-        static void Main(string[] args)
-        {
+        internal SingleTaskingAssembler(AssemblerFileReader reader, CPUKernel kernel) : base(reader, kernel) { }
 
-            Console.WriteLine("Press Any Key to Continue");
-            Console.ReadKey();
+        /// <summary>
+        /// Analyze each line of code and determine if it is an instruction code line, 
+        /// a symbol declaration, or has a symbol embeded in it.
+        /// </summary>
+        /// <param name="line">A line of assembly code</param>
+        /// <returns>An instruction object</returns>
+        protected override CPU.CPUKernel.Instruction Assemble(string line)
+        {
+            
+            throw new NotImplementedException();
         }
+
+
+
     }
 }

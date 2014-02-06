@@ -17,22 +17,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-using LagDaemon.ExperimentalOS.Assembler;
 using LagDaemon.ExperimentalOS.CPU.CPUKernel;
-using System;
 using System.Collections.Generic;
-using System.IO;
 
-
-namespace LagDaemon.ExperimentalOS.Startup
+namespace LagDaemon.ExperimentalOS.Assembler.Interfaces
 {
-    class EntryPoint
+    public interface IAssembler
     {
-        static void Main(string[] args)
-        {
-
-            Console.WriteLine("Press Any Key to Continue");
-            Console.ReadKey();
-        }
+        IEnumerable<Instruction> Program { get; }
     }
 }

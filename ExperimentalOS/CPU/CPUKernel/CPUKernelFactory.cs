@@ -53,11 +53,11 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         {
             get
             {
-                return new InstructionFactory(KernelFactory.CreateKernel(null));
+                return new InstructionFactory(Factory.CreateKernel(null));
             }
         }
 
-        public static ICPUKernelFactory KernelFactory  
+        public static ICPUKernelFactory Factory  
         {
             get
             {
