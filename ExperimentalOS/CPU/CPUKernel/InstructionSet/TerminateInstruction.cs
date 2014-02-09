@@ -1,13 +1,32 @@
-﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+﻿/*
+    ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
+    wwestlake@lagdaemon.com
+    
+    source code: https://github.com/wwestlake/ExperimentalOS.git 
+  
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
+    /// <summary>
+    /// Class representing a Teminatate Instruction
+    /// </summary>
+    [Serializable]
     public class TerminateInstruction : Instruction
     {
 
@@ -22,7 +41,12 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="comment">Comment</param>
         internal TerminateInstruction(string comment) : base(InstructionCodes.Terminate, comment) { this.Size = 1; }
 
-
+        /// <summary>
+        /// Assembles a Terminate Instruction
+        /// </summary>
+        /// <param name="factory">The instruction factory</param>
+        /// <param name="assemblyLine">The line of assembly code</param>
+        /// <returns>Terminate Instruction</returns>
         protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
             string line = PreProcess(assemblyLine);
@@ -34,23 +58,21 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
         }
 
+        /// <summary>
+        /// Disassemble an instruction to assembly code
+        /// </summary>
+        /// <returns>The assembly code</returns>
         protected override string DisAssemble()
         {
             return string.Format("{0}  ; Terminate Program", Code);
         }
 
-        protected override int Emit(byte[] buffer, int offset)
-        {
-            buffer[offset] = Convert.ToByte(Code);
-            return 1;
-        }
-
-        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            if (buffer[offset] == Convert.ToByte(Code)) return NewInstruction(factory, string.Empty);
-            throw new ApplicationException("Byte stream does not contain NOP at designated offset.");
-        }
-
+        /// <summary>
+        /// Create a new instruction from the factory
+        /// </summary>
+        /// <param name="factory">The factory to use</param>
+        /// <param name="comment">Any comments for the instruction</param>
+        /// <returns>Terminate Instruction</returns>
         protected Instruction NewInstruction(IInstructionFactory factory, string comment)
         {
             return factory.Terminate(comment);

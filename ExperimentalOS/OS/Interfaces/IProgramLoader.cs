@@ -1,9 +1,9 @@
 ﻿/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
-    
+     
     source code: https://github.com/wwestlake/ExperimentalOS.git 
-  
+ 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,26 +18,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace LagDaemon.ExperimentalOS.OS.Interfaces
 {
     /// <summary>
-    /// Represents the configuration of the hardware simulation
+    /// Represents a program loader
     /// </summary>
-    public class HardwareConfiguration
+    public interface IProgramLoader
     {
         /// <summary>
-        /// Consructs a HardwareConfiguration
+        /// Load a program from a stream using the serialization mode
         /// </summary>
-        /// <param name="registers">number of registers for the CPU</param>
-        public HardwareConfiguration(int registers)
-        {
-            this.Registers = registers;
-        }
+        /// <param name="stream">The stream to load from</param>
+        /// <returns>A program from the stream</returns>
+        Program LoadProgram(FileStream stream);
 
         /// <summary>
-        /// Gets or sets the number of registers for this CPU
+        /// Saves a program to the stream using the specified serialization mode
         /// </summary>
-        public int Registers { get; internal set; }
+        /// <param name="program">The program to save</param>
+        /// <param name="stream">The stream to save to</param>
+        void SaveProgram(Program program, FileStream stream);
+
+        /// <summary>
+        /// The serialization mode to use
+        /// </summary>
+        /// <param name="mode">The serialization mode</param>
+        /// <returns>IProgramLoader interface</returns>
+        IProgramLoader Mode(SerializationModes mode);
 
     }
 }

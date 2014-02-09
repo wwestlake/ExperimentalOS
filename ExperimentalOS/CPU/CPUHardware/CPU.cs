@@ -20,7 +20,6 @@
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 using LagDaemon.ExperimentalOS.CPU.Interfaces;
-using LagDaemon.ExperimentalOS.OS.Utilities;
 using System.Collections.Generic;
 
 
@@ -36,6 +35,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
         /// Constructis a CPU
         /// </summary>
         /// <param name="cpuKernel">The Kernel for this CPU</param>
+        /// <param name="config">The configuration object for this CPU</param>
         internal CPU(HardwareConfiguration config, CPUKernel.CPUKernel cpuKernel)
         {
             this.Configuration = config;

@@ -20,8 +20,14 @@
 
 namespace LagDaemon.ExperimentalOS.CPU.Interfaces
 {
+    /// <summary>
+    /// represents a startable process in the CPU
+    /// </summary>
     public interface IStartable
     {
+        /// <summary>
+        /// Start a virtual CPU process
+        /// </summary>
         void Start();
     }
 }

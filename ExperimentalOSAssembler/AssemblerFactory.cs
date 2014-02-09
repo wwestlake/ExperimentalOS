@@ -70,7 +70,6 @@ namespace LagDaemon.ExperimentalOS.Assembler
         public IAssembler CreateAssembler(FileStream file)
         {
             AssemblerFileReader reader = new AssemblerFileReader(file);
-            Console.WriteLine(reader);
             return CreateAssembler(reader.ToString());
         }
 

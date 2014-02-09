@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
 using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System.Text.RegularExpressions;
@@ -27,6 +28,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
     /// <summary>
     /// Represents a single atomic CPU instruction.
     /// </summary>
+    [Serializable]
     public abstract class Instruction
     {
         
@@ -69,39 +71,21 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Creates an instruction from an assembly line
         /// </summary>
         /// <param name="assemblyLine">The assembly line to use</param>
+        /// <param name="factory">The instruction factory for this kernel</param>
         /// <returns>An instruction object</returns>
         public Instruction CreateInstruction(IInstructionFactory factory, string assemblyLine)
         {
             return Assemble(factory, assemblyLine);
         }
 
-        /// <summary>
-        /// Reads bytes from a buffer to produce an Instruction
-        /// </summary>
-        /// <param name="buffer">The buffer to read from</param>
-        /// <param name="offset">The offset into the buffer to start reading at</param>
-        /// <returns>An Instruction</returns>
-        public Instruction Read(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            return CreateFromBytes(factory, buffer, offset);
-        }
 
 
-        /// <summary>
-        /// Writes the instruction to the buffer starting at offset
-        /// </summary>
-        /// <param name="buffer">The buffer to write to</param>
-        /// <param name="offset">The offset in the buffer to write at</param>
-        /// <returns>The number of bytes written</returns>
-        public int Write(byte[] buffer, int offset)
-        {
-            return Emit(buffer, offset);
-        }
 
         /// <summary>
         /// When implemented assembles a string into this op code
         /// </summary>
         /// <param name="assemblyLine">The line of assembly to create the instruction from</param>
+        /// <param name="factory">the instruction factory for this kernel</param>
         /// <returns>An Instruction object</returns>
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         protected abstract Instruction Assemble(IInstructionFactory factory, string assemblyLine);
@@ -111,25 +95,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// </summary>
         /// <returns>The assembly language code as a string</returns>
         protected abstract string DisAssemble();
-
-        /// <summary>
-        /// When implemented Writes the op codes into buffer
-        /// </summary>
-        /// <param name="buffer">The buffer to write to</param>
-        /// <param name="offset">The offiset within the buffer to write to</param>
-        /// <returns>The number of bytes written</returns>
-        protected abstract int Emit(byte[] buffer, int offset);
-
-        /// <summary>
-        /// Creates an instruction from the bytes in the buffer
-        /// </summary>
-        /// <param name="buffer">Bytes that hold the instruction</param>
-        /// <param name="offset">Position in the buffer to start reading</param>
-        /// <returns>The Instruction created</returns>
-        /// <exception>Application Exception if bytes are incorrect</exception>
-        protected abstract Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset);
-
-        
+       
 
         /// <summary>
         /// Converts this to a disassembled string

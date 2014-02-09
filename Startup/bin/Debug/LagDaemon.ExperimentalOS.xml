@@ -9,11 +9,22 @@
             Emulates a CPU with task switching, memory management, registers and instruction codes.
             </summary>
         </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.Interfaces.IStartable">
+            <summary>
+            represents a startable process in the CPU
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IStartable.Start">
+            <summary>
+            Start a virtual CPU process
+            </summary>
+        </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.#ctor(LagDaemon.ExperimentalOS.CPU.CPUHardware.HardwareConfiguration,LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel)">
             <summary>
             Constructis a CPU
             </summary>
             <param name="cpuKernel">The Kernel for this CPU</param>
+            <param name="config">The configuration object for this CPU</param>
         </member>
         <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPU.RegisterCount">
             <summary>
@@ -98,24 +109,28 @@
             </summary>
             <returns>IStartable</returns>
         </member>
-        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ByteCodeWriter">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.CPUFactory.Factory(LagDaemon.ExperimentalOS.CPU.CPUHardware.HardwareConfiguration)">
             <summary>
-            Writes out raw byte code
+            Produces a CPU factory
+            </summary>
+            <param name="config">The configuaration of this CPU</param>
+            <returns>A CPUFactory</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUHardware.HardwareConfiguration">
+            <summary>
+            Represents the configuration of the hardware simulation
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.ByteCodeWriter.#ctor">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUHardware.HardwareConfiguration.#ctor(System.Int32)">
             <summary>
-            Constructs a ByteCodeReader
+            Consructs a HardwareConfiguration
             </summary>
+            <param name="registers">number of registers for the CPU</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.ByteCodeWriter.Write(System.Byte[],System.Int32,System.Collections.Generic.IEnumerable{LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction})">
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUHardware.HardwareConfiguration.Registers">
             <summary>
-            Write the byte code to the buffer
+            Gets or sets the number of registers for this CPU
             </summary>
-            <param name="buffer">Buffer to write to</param>
-            <param name="offset">Index into buffer to start writing</param>
-            <param name="program">The program to write</param>
-            <returns>count of bytes written</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernel">
             <summary>
@@ -146,6 +161,79 @@
             </summary>
             <param name="format">Format String</param>
             <param name="args">Arguments</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelFactory">
+            <summary>
+            A factory for creating CPUKernels
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.Interfaces.ICPUKernelFactory">
+            <summary>
+            Represents a CPUKernel
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.ICPUKernelFactory.Mode(LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUModes)">
+            <summary>
+            CPUKernel Mode
+            </summary>
+            <param name="mode">The Mode</param>
+            <returns>ICPUKernelFactory</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.ICPUKernelFactory.CreateKernel(System.Collections.Generic.IList{LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction})">
+            <summary>
+            Creates the Kernel for this CPU
+            </summary>
+            <param name="program">A List of instructions to load</param>
+            <returns>A CPUKernel</returns>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.Interfaces.ICPUKernelFactory.InstrucitnoFactory">
+            <summary>
+            Gets the InstructionFactory for this CPUKernel
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelFactory.#ctor">
+            <summary>
+            Constructs a CPUKernel Factory
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelFactory.Mode(LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUModes)">
+            <summary>
+            Sets the mode of thie CPUKernelFactory
+            </summary>
+            <param name="mode">Mode may be any CPUModes</param>
+            <returns>The CPUKernelFactory</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelFactory.CreateKernel(System.Collections.Generic.IList{LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction})">
+            <summary>
+            Creates a Kernel for this CPU
+            </summary>
+            <param name="program">A list of instructions to load into the CPU</param>
+            <returns>A CPUKernel</returns>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelFactory.InstrucitnoFactory">
+            <summary>
+            Gets the instruction factory for this Kernel
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUKernelFactory.Factory">
+            <summary>
+            Gets the Kernel factory for this kernel
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUModes">
+            <summary>
+            Represents the modes that the CPU can be set to
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUModes.SingleTasking">
+            <summary>
+            Runs one task at one time
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.CPUModes.MultiTasking">
+            <summary>
+            Runs multiple tasks through multitasking
+            </summary>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ComparisonFlags">
             <summary>
@@ -221,29 +309,15 @@
             Creates an instruction from an assembly line
             </summary>
             <param name="assemblyLine">The assembly line to use</param>
+            <param name="factory">The instruction factory for this kernel</param>
             <returns>An instruction object</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Read(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Reads bytes from a buffer to produce an Instruction
-            </summary>
-            <param name="buffer">The buffer to read from</param>
-            <param name="offset">The offset into the buffer to start reading at</param>
-            <returns>An Instruction</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Write(System.Byte[],System.Int32)">
-            <summary>
-            Writes the instruction to the buffer starting at offset
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offset in the buffer to write at</param>
-            <returns>The number of bytes written</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
             <summary>
             When implemented assembles a string into this op code
             </summary>
             <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <param name="factory">the instruction factory for this kernel</param>
             <returns>An Instruction object</returns>
             <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         </member>
@@ -252,23 +326,6 @@
             When implemented produces a string representation of the instructiuon as assembly language
             </summary>
             <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates an instruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.Instruction.ToString">
             <summary>
@@ -583,6 +640,7 @@
             When implemented assembles a string into this op code
             </summary>
             <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <param name="factory">The instruction factory for this kernel</param>
             <returns>An Instruction object</returns>
             <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         </member>
@@ -591,23 +649,6 @@
             When implemented produces a string representation of the instructiuon as assembly language
             </summary>
             <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates an instruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.ExecuteInstruction">
             <summary>
@@ -625,6 +666,18 @@
             <summary>
             Factory methods for creating instructions
             </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory">
+            <summary>
+            InstructionFactory interface
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.FromCode(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes)">
+            <summary>
+            Create a new instruction from a Code
+            </summary>
+            <param name="code">The Instruction Code</param>
+            <returns>An Instruction Prototype not configured</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nop">
             <summary>
@@ -1027,6 +1080,7 @@
             When implemented assembles a string into this op code
             </summary>
             <param name="assemblyLine">The line of assembly to create the instruction from</param>
+            <param name="factory">the instruction factory for this kernel</param>
             <returns>An Instruction object</returns>
             <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         </member>
@@ -1035,23 +1089,6 @@
             When implemented produces a string representation of the instructiuon as assembly language
             </summary>
             <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates an instruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction">
             <summary>
@@ -1137,6 +1174,7 @@
             When implemented assembles a string into this op code
             </summary>
             <param name="assemblyLine"></param>
+            <param name="factory">The instruction factory for this kernel</param>
             <returns></returns>
             <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         </member>
@@ -1145,23 +1183,6 @@
             When implemented produces a string representation of the instructiuon as assembly language
             </summary>
             <returns>The assembly language code as a string</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            When implemented Writes the op codes into buffer
-            </summary>
-            <param name="buffer">The buffer to write to</param>
-            <param name="offset">The offiset within the buffer to write to</param>
-            <returns>The number of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MoveInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates an MoveInstruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction">
             <summary>
@@ -1190,6 +1211,7 @@
             Assembly a Nop Instruction
             </summary>
             <param name="assemblyLine">Assembly line representing a NOP</param>
+            <param name="factory">The instruction factory for this kernel</param>
             <returns>The instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.DisAssemble">
@@ -1197,23 +1219,6 @@
             Generates Assembly code for a Nop instruction
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            Emit a NOP instuction code into the buffer
-            </summary>
-            <param name="buffer"></param>
-            <param name="offset"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates an NopInstruction from the bytes in the buffer
-            </summary>
-            <param name="buffer">Bytes that hold the instruction</param>
-            <param name="offset">Position in the buffer to start reading</param>
-            <returns>The Instruction created</returns>
-            <exception>Application Exception if bytes are incorrect</exception>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction">
             <summary>
@@ -1239,22 +1244,6 @@
             </summary>
             <returns>String assembly language representation</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            Emits byte code representation of Push instruction
-            </summary>
-            <param name="buffer">buffer to write to</param>
-            <param name="offset">offset in buffer</param>
-            <returns>count of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates a push instruction from byte code
-            </summary>
-            <param name="buffer">buffer where bytes are stored</param>
-            <param name="offset">offset into buffer</param>
-            <returns>An Instruciton</returns>
-        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction">
             <summary>
             Represents a single atomic Push instruction.
@@ -1278,22 +1267,6 @@
             Converts instruction to assembly language representation
             </summary>
             <returns>String assembly language representation</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.Emit(System.Byte[],System.Int32)">
-            <summary>
-            Emits byte code representation of Push instruction
-            </summary>
-            <param name="buffer">buffer to write to</param>
-            <param name="offset">offset in buffer</param>
-            <returns>count of bytes written</returns>
-        </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PushInstruction.CreateFromBytes(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.Byte[],System.Int32)">
-            <summary>
-            Creates a push instruction from byte code
-            </summary>
-            <param name="buffer">buffer where bytes are stored</param>
-            <param name="offset">offset into buffer</param>
-            <returns>An Instruciton</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction">
             <summary>
@@ -1330,6 +1303,11 @@
             Designates that no register is specified.  In some instances this may result in the CPUKernel or OSKernal selecting an unused register.
             </summary>
         </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction">
+            <summary>
+            Class representing a Teminatate Instruction
+            </summary>
+        </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction.#ctor">
             <summary>
             Construciton a Terminate Instruciton
@@ -1340,6 +1318,28 @@
             Constructs a Terminate instruction
             </summary>
             <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
+            <summary>
+            Assembles a Terminate Instruction
+            </summary>
+            <param name="factory">The instruction factory</param>
+            <param name="assemblyLine">The line of assembly code</param>
+            <returns>Terminate Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction.DisAssemble">
+            <summary>
+            Disassemble an instruction to assembly code
+            </summary>
+            <returns>The assembly code</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.TerminateInstruction.NewInstruction(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
+            <summary>
+            Create a new instruction from the factory
+            </summary>
+            <param name="factory">The factory to use</param>
+            <param name="comment">Any comments for the instruction</param>
+            <returns>Terminate Instruction</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache">
             <summary>
@@ -1354,7 +1354,7 @@
             </summary>
             <param name="scope">The scope of this SymbolCacne</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache.Add(System.String,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache.Add(System.String,System.Int32)">
             <summary>
             Adds a Symbol and address to the Cache creating the list of addresses 
             if this this the first time the symbol is added. 
@@ -1386,7 +1386,7 @@
             </summary>
             <param name="scope">The Scope of this SymbolTable</param>
         </member>
-        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable.Item(System.UInt32)">
+        <member name="P:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolTable.Item(System.Int32)">
             <summary>
             Produces the Symbol for the specified address (reverse lookup)
             </summary>
@@ -1405,19 +1405,250 @@
             The Scope of this SymbolTable
             </summary>
         </member>
-        <member name="T:LagDaemon.ExperimentalOS.OS.Utilities.MacroExpander">
+        <member name="T:LagDaemon.ExperimentalOS.OS.BinarySerializer">
+            <summary>
+            A class for Binary Serialization
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.Serializer">
+            <summary>
+            Abstract class representing a Serializert
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.Interfaces.ISerializer">
+            <summary>
+            Represents a Serializer
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Interfaces.ISerializer.Serialize``1(``0)">
+            <summary>
+            Serialize to the stream based on serialization mode
+            </summary>
+            <typeparam name="T">The type of object ot serialize</typeparam>
+            <param name="obj">The object to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Interfaces.ISerializer.Deserialize``1">
+            <summary>
+            Deserialize from the stream
+            </summary>
+            <typeparam name="T">The type of object to deserialize</typeparam>
+            <returns>The desierialized object</returns>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.OS.Serializer.stream">
+            <summary>
+            The serialization stream
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Serializer.#ctor(System.IO.Stream)">
+            <summary>
+            Constructs a serializer for this stream
+            </summary>
+            <param name="stream">The stream to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Serializer.Serialize``1(``0)">
+            <summary>
+            Serialize to the stream based on serialization mode
+            </summary>
+            <typeparam name="T">The type of object ot serialize</typeparam>
+            <param name="obj">The object to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Serializer.Deserialize``1">
+            <summary>
+            Deserialize from the stream
+            </summary>
+            <typeparam name="T">The type of object to deserialize</typeparam>
+            <returns>The desierialized object</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.BinarySerializer.#ctor(System.IO.Stream)">
+            <summary>
+            Constructs a Binary Serializer
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.BinarySerializer.Serialize``1(``0)">
+            <summary>
+            Serialize an object of type T
+            </summary>
+            <typeparam name="T">The type of object to serialize</typeparam>
+            <param name="obj">The object to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.BinarySerializer.Deserialize``1">
+            <summary>
+            Deserialize an object of type T from the stream
+            </summary>
+            <typeparam name="T">The type of object to deserialize</typeparam>
+            <returns>The deserialized object</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.Interfaces.IProgramLoader">
+            <summary>
+            Represents a program loader
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Interfaces.IProgramLoader.LoadProgram(System.IO.FileStream)">
+            <summary>
+            Load a program from a stream using the serialization mode
+            </summary>
+            <param name="stream">The stream to load from</param>
+            <returns>A program from the stream</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Interfaces.IProgramLoader.SaveProgram(LagDaemon.ExperimentalOS.OS.Program,System.IO.FileStream)">
+            <summary>
+            Saves a program to the stream using the specified serialization mode
+            </summary>
+            <param name="program">The program to save</param>
+            <param name="stream">The stream to save to</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Interfaces.IProgramLoader.Mode(LagDaemon.ExperimentalOS.OS.SerializationModes)">
+            <summary>
+            The serialization mode to use
+            </summary>
+            <param name="mode">The serialization mode</param>
+            <returns>IProgramLoader interface</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.Program">
+            <summary>
+            Represents an executable program with meta data describing the program
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.Program.#ctor(System.String)">
+            <summary>
+            Constructs a program
+            </summary>
+            <param name="name">The name of the program</param>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Name">
+            <summary>
+            Gets or Sets the program Name
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Mode">
+            <summary>
+            Gets or Sets the program Mode
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Code">
+            <summary>
+            Gets or sets the Code for this program
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Symbols">
+            <summary>
+            Gets or sets the Symbols for this program
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.SymbolCache">
+            <summary>
+            Gets or sets the Symbol Cache for this program
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Author">
+            <summary>
+            Gets or sets the Author of this program
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Copyright">
+            <summary>
+            Gets or sets the Copyright for this program
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.Program.Version">
+            <summary>
+            Gets or sets the Version of this program
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.ProgramLoaderFactory">
+            <summary>
+            Produces a program loader singleton
+            </summary>
+        </member>
+        <member name="P:LagDaemon.ExperimentalOS.OS.ProgramLoaderFactory.Loader">
+            <summary>
+            Gets the ProgramLoader singleton
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.SerializationModes">
+            <summary>
+            Represents the serialization modes of the serializers
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.OS.SerializationModes.Binary">
+            <summary>
+            Serializer to binary file
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.OS.SerializationModes.XML">
+            <summary>
+            Serialize to XML
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.OS.SerializationModes.Soap">
+            <summary>
+            Serialize to SOAP
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.SoapSerializer">
+            <summary>
+            Class representing a Soap Serializer
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.SoapSerializer.#ctor(System.IO.Stream)">
+            <summary>
+            Constructs a SoapSerializer
+            </summary>
+            <param name="stream">The stream to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.SoapSerializer.Serialize``1(``0)">
+            <summary>
+            Serialize an object to the stream
+            </summary>
+            <typeparam name="T">The type of object to serialize</typeparam>
+            <param name="obj">The object to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.SoapSerializer.Deserialize``1">
+            <summary>
+            Deserialize an object from the stream
+            </summary>
+            <typeparam name="T">The type of object to deserialize</typeparam>
+            <returns>The deserialized object</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.OS.XMLSerializer">
+            <summary>
+            Represents an XMLSerializer
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.XMLSerializer.#ctor(System.IO.Stream)">
+            <summary>
+            Constructs an XMLSerializer
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.XMLSerializer.Serialize``1(``0)">
+            <summary>
+            Serialize an object of type T
+            </summary>
+            <typeparam name="T">The Type of object to serialize</typeparam>
+            <param name="obj">The object to serialize</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.OS.XMLSerializer.Deserialize``1">
+            <summary>
+            Deserialize an object of type T
+            </summary>
+            <typeparam name="T">The type of object to deserialize</typeparam>
+            <returns>The deserialized object</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.Utilities.MacroExpander">
             <summary>
             Expands Macros used in Assembly Files
             <remarks>This routine is experimental and may not be implemented in release</remarks>
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.OS.Utilities.MacroExpander.#ctor">
+        <member name="M:LagDaemon.ExperimentalOS.Utilities.MacroExpander.#ctor">
             <summary>
             Parses and expands a macro that had a definition of the for define MyMacro(args) = now is the {0} for all good {1} to come to the aid of their {2}
             such that MyMacro(time, men, country) expands to "now is the time for all good men to come to the aid of their country
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.OS.Utilities.MacroExpander.AddMacro(System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.Utilities.MacroExpander.AddMacro(System.String)">
             <summary>
             Add a Macro to the expander
             </summary>

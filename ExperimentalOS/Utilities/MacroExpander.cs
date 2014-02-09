@@ -25,7 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace LagDaemon.ExperimentalOS.OS.Utilities
+namespace LagDaemon.ExperimentalOS.Utilities
 {
     /// <summary>
     /// Expands Macros used in Assembly Files

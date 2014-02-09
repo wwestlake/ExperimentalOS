@@ -1,9 +1,9 @@
 ﻿/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
-    
+     
     source code: https://github.com/wwestlake/ExperimentalOS.git 
-  
+ 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -17,35 +17,29 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+using System;
 using System.Collections.Generic;
 
-namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
+namespace LagDaemon.ExperimentalOS.OS.Interfaces
 {
     /// <summary>
-    /// Writes out raw byte code
+    /// Represents a Serializer
     /// </summary>
-    public class ByteCodeWriter
+    public interface ISerializer
     {
+        /// <summary>
+        /// Serialize to the stream based on serialization mode
+        /// </summary>
+        /// <typeparam name="T">The type of object ot serialize</typeparam>
+        /// <param name="obj">The object to serialize</param>
+        void Serialize<T>(T obj);
 
         /// <summary>
-        /// Constructs a ByteCodeReader
+        /// Deserialize from the stream
         /// </summary>
-        public ByteCodeWriter() { }
-
-
-        /// <summary>
-        /// Write the byte code to the buffer
-        /// </summary>
-        /// <param name="buffer">Buffer to write to</param>
-        /// <param name="offset">Index into buffer to start writing</param>
-        /// <param name="program">The program to write</param>
-        /// <returns>count of bytes written</returns>
-        public int Write(byte[] buffer, int offset, IEnumerable<Instruction> program)
-        {
-            int index = 0;
-            foreach (Instruction inst in program)
-                index += inst.Write(buffer, index);
-            return index;
-        }
+        /// <typeparam name="T">The type of object to deserialize</typeparam>
+        /// <returns>The desierialized object</returns>
+        T Deserialize<T>();
     }
 }

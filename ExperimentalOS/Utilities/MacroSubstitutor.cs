@@ -15,7 +15,7 @@ using System.IO;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace LagDaemon.ExperimentalOS.OS
+namespace LagDaemon.ExperimentalOS.Utilities
 {
 
     internal class MacroEntry

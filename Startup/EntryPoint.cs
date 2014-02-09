@@ -28,8 +28,15 @@ namespace LagDaemon.ExperimentalOS.Startup
 {
     class EntryPoint
     {
+        static FileStream file;
+        static AssemblerFileReader fileReader;
+
         static void Main(string[] args)
         {
+            file = new FileStream("TestFile.asm", FileMode.Open, FileAccess.Read);
+            foreach (Instruction inst in AssemblerFactory.Factory.Mode(CPUModes.SingleTasking).CreateAssembler(file).Program)
+            {
+            }
 
             Console.WriteLine("Press Any Key to Continue");
             Console.ReadKey();

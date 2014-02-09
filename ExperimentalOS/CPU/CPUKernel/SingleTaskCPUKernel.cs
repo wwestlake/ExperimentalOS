@@ -31,16 +31,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
             this.program = program;
         }
 
-        internal SingleTaskCPUKernel(byte[] objectCode)
-        {
-            IList<Instruction> program = new List<Instruction>();
-            ByteCodeReader reader = new ByteCodeReader(this);
-            foreach (Instruction inst in reader.Read(objectCode, 0, objectCode.Length))
-            {
-                program.Add(inst);
-            }
-            this.program = program;
-        }
 
         internal override void Fetch()
         {
@@ -48,7 +38,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
             {
                 Processor.CurrentInstruction = program[Processor.IP++];
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
                 Processor.ProcessorMode = ProcessorModes.Stopped;
             }

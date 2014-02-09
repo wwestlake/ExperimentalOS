@@ -20,6 +20,7 @@
 
 
 using LagDaemon.ExperimentalOS.CPU.Interfaces;
+using System;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
@@ -225,6 +226,92 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <returns>Instruction</returns>
         public Instruction Terminate(string comment) { return _kernel.Connect( new TerminateInstruction(comment) ); }
 
-    
+
+
+        public Instruction FromCode(InstructionCodes code)
+        {
+            switch (code)
+            {
+                case InstructionCodes.Add:
+                    break;
+                case InstructionCodes.AllocateMemory:
+                    break;
+                case InstructionCodes.BeginAtomicBlock:
+                    break;
+                case InstructionCodes.Call:
+                    return Call(0, 0);
+                    
+                case InstructionCodes.Compare:
+                    break;
+                case InstructionCodes.Dec:
+                    break;
+                case InstructionCodes.Div:
+                    break;
+                case InstructionCodes.EndAtomicBlock:
+                    break;
+                case InstructionCodes.FireEvent:
+                    break;
+                case InstructionCodes.FreeMemory:
+                    break;
+                case InstructionCodes.In:
+                    return In(0, 0);
+                    
+                case InstructionCodes.Inc:
+                    break;
+                case InstructionCodes.JE:
+                    break;
+                case InstructionCodes.JGT:
+                    break;
+                case InstructionCodes.JLT:
+                    break;
+                case InstructionCodes.JNE:
+                    break;
+                case InstructionCodes.Jump:
+                    return Jump(0, 0);
+                    
+                case InstructionCodes.Load:
+                    return Load(0, 0, 0, 0);
+                    
+                case InstructionCodes.Lock:
+                    break;
+                case InstructionCodes.MemoryClear:
+                    break;
+                case InstructionCodes.Move:
+                    return Move(0, 0);
+                    
+                case InstructionCodes.Mul:
+                    break;
+                case InstructionCodes.NOP:
+                    return Nop();
+                    
+                case InstructionCodes.Out:
+                    return Out(0, 0);
+                    
+                case InstructionCodes.Pop:
+                    return Pop(0);
+                    
+                case InstructionCodes.Push:
+                    return Push(0);
+                    
+                case InstructionCodes.Return:
+                    break;
+                case InstructionCodes.SetPriority:
+                    break;
+                case InstructionCodes.Sleep:
+                    break;
+                case InstructionCodes.Store:
+                    break;
+                case InstructionCodes.Sub:
+                    break;
+                case InstructionCodes.Terminate:
+                    return Terminate();
+                    
+                case InstructionCodes.Unlock:
+                    break;
+                case InstructionCodes.WaitOnEvent:
+                    break;
+            }
+            throw new NotImplementedException(string.Format("Instruction {0} is not yet implemented",code));
+        }
     }
 }

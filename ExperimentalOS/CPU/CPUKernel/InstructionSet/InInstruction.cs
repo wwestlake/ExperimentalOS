@@ -1,13 +1,30 @@
-﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+﻿/*
+    ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
+    wwestlake@lagdaemon.com
+    
+    source code: https://github.com/wwestlake/ExperimentalOS.git 
+  
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
-
-
-
+    [Serializable]
     internal class InInstruction : Instruction
     {
         internal int r1;
@@ -45,25 +62,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             return builder.ToString();
         }
 
-        protected override int Emit(byte[] buffer, int offset)
-        {
-            byte[] portBytes = BitConverter.GetBytes(port);
-            int index = offset;
-            buffer[index++] = (byte)Code;
-            buffer[index++] = (byte)r1;
-            for (int i = 0; i < portBytes.Length; i++)
-                buffer[index++] = portBytes[i];
-            return 2;
-        }
-
-        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            int index = offset;
-            InstructionCodes code = (InstructionCodes)buffer[index++];
-            int r1 = (int)buffer[index++];
-            int port = BitConverter.ToInt32(buffer, index);
-            return NewInstruction(factory, r1, port, string.Empty);
-        }
 
         protected Instruction NewInstruction(IInstructionFactory factory, int r1, int port, string comment)
         {

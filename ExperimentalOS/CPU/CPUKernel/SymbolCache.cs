@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
@@ -27,11 +28,12 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
     /// needs to be place, but prior to the symbol being defined.  Once the symbol is defined the
     /// SymbolCache is checked to find all location where the address needs to be placed.
     /// </summary>
+    [Serializable]
     public class SymbolCache
     {
 
         
-        private Dictionary<string, List<uint>> symbolCache = new Dictionary<string, List<uint>>();
+        private Dictionary<string, List<int>> symbolCache = new Dictionary<string, List<int>>();
 
         /// <summary>
         /// Construct a SymbolCache for the specified scope
@@ -48,11 +50,11 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// </summary>
         /// <param name="symbol">The symbol to add and address for</param>
         /// <param name="address">The address where the symbol resides</param>
-        public void Add(string symbol, uint address)
+        public void Add(string symbol, int address)
         {
             if (! symbolCache.ContainsKey(symbol))
             {
-                symbolCache.Add(symbol, new List<uint>());
+                symbolCache.Add(symbol, new List<int>());
             }
             symbolCache[symbol].Add(address);
         }
@@ -64,12 +66,12 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// </summary>
         /// <param name="symbol">The symbol for this scope</param>
         /// <returns>An enumeration of all addresses for this symbol</returns>
-        public IEnumerable<uint> this[string symbol]
+        public IEnumerable<int> this[string symbol]
         {
             get
             {
                 if (!symbolCache.ContainsKey(symbol)) throw new CPUKernelException("Symbol not found in SymbolCache: {0} for Scope {1}", symbol, Scope);
-                foreach (uint address in symbolCache[symbol])
+                foreach (int address in symbolCache[symbol])
                 {
                     yield return address;
                 }

@@ -19,6 +19,7 @@
 */
 
 using LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet;
+using System;
 using System.Collections.Generic;
 
 
@@ -27,11 +28,11 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
     /// <summary>
     /// A SymbolTable is a look up table and cross reference for Symbols that have been assigned an address.
     /// </summary>
+    [Serializable]
     public class SymbolTable
     {
-        public static readonly int MaximumSymbolLength = 32;
-        private Dictionary<uint, string> symbolsByAddress = new Dictionary<uint, string>();
-        private Dictionary<string, uint> addressBySymbol = new Dictionary<string, uint>();
+        private Dictionary<int, string> symbolsByAddress = new Dictionary<int, string>();
+        private Dictionary<string, int> addressBySymbol = new Dictionary<string, int>();
 
         /// <summary>
         /// Constructs a SymbolTable for the specified scope
@@ -43,9 +44,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         }
 
 
-        private void Add(string symbol, uint address)
+        private void Add(string symbol, int address)
         {
-            if (symbol.Length > MaximumSymbolLength) throw new CPUKernelException("Symbol length exceeds maximum of {0} bytes: {1}", MaximumSymbolLength, symbol);
             if (!symbolsByAddress.ContainsKey(address)) symbolsByAddress.Add(address, symbol);
             if (!addressBySymbol.ContainsKey(symbol)) addressBySymbol.Add(symbol, address);
         }
@@ -56,7 +56,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// </summary>
         /// <param name="address">The address</param>
         /// <returns>The Symbol</returns>
-        public string this[uint address]
+        public string this[int address]
         {
             get
             {
@@ -78,7 +78,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// </summary>
         /// <param name="symbol">The Symbol</param>
         /// <returns>The address</returns>
-        public uint this[string symbol]
+        public int this[string symbol]
         {
             get
             {
@@ -86,7 +86,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
                 {
                     return addressBySymbol[symbol];
                 }
-                return (uint)Symbols.NullAddress;
+                return (int)Symbols.NullAddress;
             }
             set
             {

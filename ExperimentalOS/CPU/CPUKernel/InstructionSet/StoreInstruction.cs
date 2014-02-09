@@ -20,12 +20,6 @@
 
 using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
@@ -36,6 +30,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// Store r1, r2            ; indirect addressing
     /// Store r1, r2, address   ; indexed indirect addressing  
     /// </summary>
+    [Serializable]
     internal class StoreInstruction : LoadStoreBase
     {
 

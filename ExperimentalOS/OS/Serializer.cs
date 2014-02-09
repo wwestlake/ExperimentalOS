@@ -1,9 +1,9 @@
 ﻿/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
-    
+     
     source code: https://github.com/wwestlake/ExperimentalOS.git 
-  
+ 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,41 +18,41 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using LagDaemon.ExperimentalOS.OS.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
+namespace LagDaemon.ExperimentalOS.OS
 {
     /// <summary>
-    /// Addressing modes supported by instructions that use addresses.
+    /// Abstract class representing a Serializert
     /// </summary>
-    public enum AddressingMode { 
+    public abstract class Serializer : ISerializer
+    {
+        /// <summary>
+        /// The serialization stream
+        /// </summary>
+        protected Stream stream;
 
         /// <summary>
-        /// Direct addressing is where an address appears in memory imediately following the instruction code
+        /// Constructs a serializer for this stream
         /// </summary>
-        Direct = 1, 
+        /// <param name="stream">The stream to serialize</param>
+        public Serializer(Stream stream) { }
 
         /// <summary>
-        /// Indirect addressing is where a register contains the address to use
+        /// Serialize to the stream based on serialization mode
         /// </summary>
-        Indirect = 2, 
+        /// <typeparam name="T">The type of object ot serialize</typeparam>
+        /// <param name="obj">The object to serialize</param>
+        public abstract void Serialize<T>(T obj);
 
         /// <summary>
-        /// Indexed addressing is where an address appears imediately following the instruction code and a register 
-        /// indexes to some point beyond that address.
+        /// Deserialize from the stream
         /// </summary>
-        /// 
-        Indexed = 3,
-
-        /// <summary>
-        /// This is where two registers are used to compute the final address, one contains the address the other indexes into
-        /// memory.
-        /// </summary>
-        IndexedInderect = 4,
-
-        /// <summary>
-        /// Imediate takes an operand imediately following the op code
-        /// </summary>
-        Imediate = 5
-
+        /// <typeparam name="T">The type of object to deserialize</typeparam>
+        /// <returns>The desierialized object</returns>
+        public abstract T Deserialize<T>();
     }
 }

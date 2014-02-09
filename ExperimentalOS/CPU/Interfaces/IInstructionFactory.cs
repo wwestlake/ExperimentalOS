@@ -21,8 +21,19 @@ using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 
 namespace LagDaemon.ExperimentalOS.CPU.Interfaces
 {
+    /// <summary>
+    /// InstructionFactory interface
+    /// </summary>
     public interface IInstructionFactory
     {
+
+        /// <summary>
+        /// Create a new instruction from a Code
+        /// </summary>
+        /// <param name="code">The Instruction Code</param>
+        /// <returns>An Instruction Prototype not configured</returns>
+        Instruction FromCode(InstructionCodes code);
+
         /// <summary>
         /// Create a Nop Instruction
         /// </summary>

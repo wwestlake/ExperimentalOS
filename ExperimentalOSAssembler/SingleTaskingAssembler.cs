@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 using LagDaemon.ExperimentalOS.CPU.CPUKernel;
+using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
 
 namespace LagDaemon.ExperimentalOS.Assembler
@@ -32,10 +33,13 @@ namespace LagDaemon.ExperimentalOS.Assembler
         /// </summary>
         /// <param name="line">A line of assembly code</param>
         /// <returns>An instruction object</returns>
-        protected override CPU.CPUKernel.Instruction Assemble(string line)
+        protected override CPU.CPUKernel.Instruction Assemble(AssemblerLineDescription line)
         {
-            
-            throw new NotImplementedException();
+            IInstructionFactory factory = CPUKernelFactory.Factory.Mode(CPUModes.SingleTasking).InstrucitnoFactory;
+            Console.WriteLine("{0} {1} {2} {3}",line.lable, line.opcode, line.paramters, line.comment);
+            InstructionCodes code = GetInstructionCode(line.opcode);
+            Console.WriteLine(code);
+            return factory.FromCode(code).CreateInstruction(factory, string.Format("{0} {1}", line.opcode, line.paramters));
         }
 
 

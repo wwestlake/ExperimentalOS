@@ -45,12 +45,12 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
             return new SingleTaskCPU(Configuration, new SingleTaskCPUKernel(program)) as IStartable;
         }
 
-        public IStartable CreateSingleTaskCPU(byte[] objectCode)
-        {
-            return new SingleTaskCPU(Configuration, new SingleTaskCPUKernel(objectCode));
-        }
 
-        
+        /// <summary>
+        /// Produces a CPU factory
+        /// </summary>
+        /// <param name="config">The configuaration of this CPU</param>
+        /// <returns>A CPUFactory</returns>
         public static CPUFactory Factory(HardwareConfiguration config)
         {
             return new CPUFactory(config);

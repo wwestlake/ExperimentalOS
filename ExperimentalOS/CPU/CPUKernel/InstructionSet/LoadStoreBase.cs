@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
+    [Serializable]
     internal abstract class LoadStoreBase : Instruction
     {
         internal int r1, r2;
@@ -75,6 +76,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// When implemented assembles a string into this op code
         /// </summary>
         /// <param name="assemblyLine">The line of assembly to create the instruction from</param>
+        /// <param name="factory">the instruction factory for this kernel</param>
         /// <returns>An Instruction object</returns>
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
@@ -140,93 +142,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             return builder.ToString();
         }
 
-        /// <summary>
-        /// When implemented Writes the op codes into buffer
-        /// </summary>
-        /// <param name="buffer">The buffer to write to</param>
-        /// <param name="offset">The offiset within the buffer to write to</param>
-        /// <returns>The number of bytes written</returns>
-        protected override int Emit(byte[] buffer, int offset)
-        {
-            AddressingMode extInstCode = 0;
-            byte[] addressBytes = BitConverter.GetBytes(address);
-            byte[] valueBytes = BitConverter.GetBytes(value);
-            if (r2 != Symbols.NullRegister && address != (uint)Symbols.NullAddress)
-            {
-                extInstCode = AddressingMode.IndexedInderect;
-            }
-            else if (r2 != Symbols.NullRegister)
-            {
-                extInstCode = AddressingMode.Indirect;
-            }
-            else if (address != (uint)Symbols.NullAddress)
-            {
-                extInstCode = AddressingMode.Direct;
-            }
-            else if (r2 == Symbols.NullRegister && address == (uint)Symbols.NullAddress)
-            {
-                extInstCode = AddressingMode.Imediate;
-            }
-            int index = offset;
-            buffer[index++] = (byte)Code;
-            buffer[index++] = (byte)extInstCode;
-            buffer[index++] = (byte)r1;
-            switch (extInstCode)
-            {
-                case AddressingMode.Direct:
-                    for (int i = 0; i < addressBytes.Length; i++) buffer[index++] = addressBytes[i];
-                    break;
-                case AddressingMode.Indirect:
-                    buffer[index++] = (byte)r2;
-                    break;
-                case AddressingMode.IndexedInderect:
-                    buffer[index++] = (byte)r2;
-                    for (int i = 0; i < addressBytes.Length; i++) buffer[index++] = addressBytes[i];
-                    break;
-                case AddressingMode.Imediate:
-                    for (int i = 0; i < valueBytes.Length; i++) buffer[index++] = valueBytes[i];
-                    break;
-            }
-            return index;
-        }
-
-        /// <summary>
-        /// Creates an instruction from the bytes in the buffer
-        /// </summary>
-        /// <param name="buffer">Bytes that hold the instruction</param>
-        /// <param name="offset">Position in the buffer to start reading</param>
-        /// <returns>The Instruction created</returns>
-        /// <exception>Application Exception if bytes are incorrect</exception>
-        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            AddressingMode extInstCode = 0;
-            int index = offset;
-            InstructionCodes code = (InstructionCodes)buffer[index++];
-            int r1 = Symbols.NullRegister;
-            int r2 = Symbols.NullRegister;
-            uint address = (uint)Symbols.NullAddress;
-            int value = 0;
-            if (code != Code) throw new InvalidOperationException(string.Format("Expected {0} Instruction but encountered: {1} instruction", Code, code));
-            extInstCode = (AddressingMode)buffer[index++];
-            r1 = (int)buffer[index++];
-            switch (extInstCode)
-            {
-                case AddressingMode.Direct:
-                    address = BitConverter.ToUInt32(buffer, index++);
-                    break;
-                case AddressingMode.Indirect:
-                    r2 = (int)buffer[index++];
-                    break;
-                case AddressingMode.IndexedInderect:
-                    r2 = (int)buffer[index++];
-                    address = BitConverter.ToUInt32(buffer, index++);
-                    break;
-                case AddressingMode.Imediate:
-                    value = BitConverter.ToInt32(buffer, index);
-                    break;
-            }
-            return NewInstruction(factory, r1, r2, value, address, string.Empty);
-        }
 
 
     }

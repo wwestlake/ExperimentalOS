@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,8 +76,6 @@
     <Compile Include="CPU\CPUHardware\IOPort.cs" />
     <Compile Include="CPU\CPUHardware\MemoryController.cs" />
     <Compile Include="CPU\CPUHardware\SingleTaskCPU.cs" />
-    <Compile Include="CPU\CPUKernel\ByteCodeReader.cs" />
-    <Compile Include="CPU\CPUKernel\ByteCodeWriter.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernel.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernelException.cs" />
     <Compile Include="CPU\CPUKernel\CPUKernelFactory.cs" />
@@ -108,8 +107,18 @@
     <Compile Include="CPU\Interfaces\ICPUKernelFactory.cs" />
     <Compile Include="CPU\Interfaces\IInstructionFactory.cs" />
     <Compile Include="CPU\Interfaces\IStartable.cs" />
-    <Compile Include="OS\Utilities\MacroExpander.cs" />
-    <Compile Include="OS\Utilities\MacroSubstitutor.cs" />
+    <Compile Include="OS\BinarySerializer.cs" />
+    <Compile Include="OS\Interfaces\IProgramLoader.cs" />
+    <Compile Include="OS\Interfaces\ISerializer.cs" />
+    <Compile Include="OS\Program.cs" />
+    <Compile Include="OS\ProgramLoader.cs" />
+    <Compile Include="OS\ProgramLoaderFactory.cs" />
+    <Compile Include="OS\SerializationModes.cs" />
+    <Compile Include="OS\Serializer.cs" />
+    <Compile Include="OS\SoapSerializer.cs" />
+    <Compile Include="OS\XMLSerializer.cs" />
+    <Compile Include="Utilities\MacroExpander.cs" />
+    <Compile Include="Utilities\MacroSubstitutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

@@ -23,32 +23,51 @@ using System.Collections.Generic;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {
+    /// <summary>
+    /// A factory for creating CPUKernels
+    /// </summary>
     public class CPUKernelFactory : ICPUKernelFactory
     {
         private static ICPUKernelFactory factory = null;
         private CPUModes mode;
 
+        /// <summary>
+        /// Constructs a CPUKernel Factory
+        /// </summary>
         private CPUKernelFactory() 
         {
             this.mode = CPUModes.SingleTasking;
         }
 
+        /// <summary>
+        /// Sets the mode of thie CPUKernelFactory
+        /// </summary>
+        /// <param name="mode">Mode may be any CPUModes</param>
+        /// <returns>The CPUKernelFactory</returns>
         public ICPUKernelFactory Mode(CPUModes mode)
         {
             this.mode = mode;
             return this;
         }
 
+        /// <summary>
+        /// Creates a Kernel for this CPU
+        /// </summary>
+        /// <param name="program">A list of instructions to load into the CPU</param>
+        /// <returns>A CPUKernel</returns>
         public CPUKernel CreateKernel(IList<Instruction> program)
         {
             switch (this.mode)
             {
-                case CPUModes.MultiTasking: return null; break;
+                case CPUModes.MultiTasking: return null; 
                 case CPUModes.SingleTasking: return new SingleTaskCPUKernel(program);
             }
             return null;
         }
 
+        /// <summary>
+        /// Gets the instruction factory for this Kernel
+        /// </summary>
         public IInstructionFactory InstrucitnoFactory
         {
             get
@@ -57,6 +76,9 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
             }
         }
 
+        /// <summary>
+        /// Gets the Kernel factory for this kernel
+        /// </summary>
         public static ICPUKernelFactory Factory  
         {
             get

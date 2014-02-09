@@ -57,16 +57,7 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("NOP"));
         }
 
-        [Test]
-        public void NopInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction nopInstruction = instFactory.Nop();
-            nopInstruction.Write(buffer, 0);
-            Instruction newNopInst = nopInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(nopInstruction.Code, newNopInst.Code);
-        }
-
+ 
         // Move Tests
 
         [Test]
@@ -87,15 +78,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Move r21, r22"));
         }
 
-        [Test]
-        public void MoveInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction MoveInstruction = instFactory.Move(0, 0);
-            MoveInstruction.Write(buffer, 0);
-            Instruction newMoveInst = MoveInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(MoveInstruction.Code, newMoveInst.Code);
-        }
 
         // Load Tests
 
@@ -117,15 +99,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Load r21, r22, $943567"));
         }
 
-        [Test]
-        public void LoadInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction LoadInstruction = instFactory.Load(0, 0, 0, 0);
-            LoadInstruction.Write(buffer, 0);
-            Instruction newLoadInst = LoadInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(LoadInstruction.Code, newLoadInst.Code);
-        }
 
         // Store Tests
 
@@ -147,15 +120,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Store r21, r22, $943567"));
         }
 
-        [Test]
-        public void StoreInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction StoreInstruction = instFactory.Store(0, 0, 0, 0);
-            StoreInstruction.Write(buffer, 0);
-            Instruction newStoreInst = StoreInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(StoreInstruction.Code, newStoreInst.Code);
-        }
 
         // Push Tests
 
@@ -177,15 +141,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Push r21"));
         }
 
-        [Test]
-        public void PushInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction PushInstruction = instFactory.Push(0);
-            PushInstruction.Write(buffer, 0);
-            Instruction newPushInst = PushInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(PushInstruction.Code, newPushInst.Code);
-        }
 
         // Pop Tests
 
@@ -207,15 +162,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Pop r21"));
         }
 
-        [Test]
-        public void PopInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction PopInstruction = instFactory.Pop(0);
-            PopInstruction.Write(buffer, 0);
-            Instruction newPopInst = PopInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(PopInstruction.Code, newPopInst.Code);
-        }
 
 
         // In Tests
@@ -238,15 +184,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("In r21, $44"));
         }
 
-        [Test]
-        public void InInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction InInstruction = instFactory.In(0, 0);
-            InInstruction.Write(buffer, 0);
-            Instruction newInInst = InInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(InInstruction.Code, newInInst.Code);
-        }
 
         // Out Tests
 
@@ -268,15 +205,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Out r21, $44"));
         }
 
-        [Test]
-        public void OutInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction OutInstruction = instFactory.Out(0, 0);
-            OutInstruction.Write(buffer, 0);
-            Instruction newOutInst = OutInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(OutInstruction.Code, newOutInst.Code);
-        }
 
         // Jump Tests
 
@@ -298,15 +226,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Jump r21, $44"));
         }
 
-        [Test]
-        public void JumpInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction JumpInstruction = instFactory.Jump(0, 0);
-            JumpInstruction.Write(buffer, 0);
-            Instruction newJumpInst = JumpInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(JumpInstruction.Code, newJumpInst.Code);
-        }
 
         // Call Tests
 
@@ -328,15 +247,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Call r21, $44"));
         }
 
-        [Test]
-        public void CallInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction CallInstruction = instFactory.Call(0, 0);
-            CallInstruction.Write(buffer, 0);
-            Instruction newCallInst = CallInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(CallInstruction.Code, newCallInst.Code);
-        }
 
         // Terminate Tests
 
@@ -358,15 +268,6 @@ namespace ExperimentalOSTestSuite
             Assert.IsTrue(asmOut.StartsWith("Terminate"));
         }
 
-        [Test]
-        public void TerminateInstructionEmitsByteCodeAndLoadsFromByteCode()
-        {
-            byte[] buffer = new byte[10];
-            Instruction TerminateInstruction = instFactory.Terminate();
-            TerminateInstruction.Write(buffer, 0);
-            Instruction newTerminateInst = TerminateInstruction.Read(instFactory, buffer, 0);
-            Assert.AreEqual(TerminateInstruction.Code, newTerminateInst.Code);
-        }
 
 
 

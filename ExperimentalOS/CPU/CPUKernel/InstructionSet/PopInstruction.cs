@@ -1,4 +1,5 @@
 ﻿using LagDaemon.ExperimentalOS.CPU.Interfaces;
+using System;
 /*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
@@ -26,6 +27,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// <summary>
     /// Represents a single atomic Push instruction.
     /// </summary>
+    [Serializable]
     internal class PopInstruction : Instruction
     {
         internal int r1;
@@ -75,34 +77,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             return builder.ToString();
         }
 
-        /// <summary>
-        /// Emits byte code representation of Push instruction
-        /// </summary>
-        /// <param name="buffer">buffer to write to</param>
-        /// <param name="offset">offset in buffer</param>
-        /// <returns>count of bytes written</returns>
-        protected override int Emit(byte[] buffer, int offset)
-        {
-            int index = offset;
-            buffer[index++] = (byte)Code;
-            buffer[index++] = (byte)r1;
-            return 2;
-        }
-
-
-        /// <summary>
-        /// Creates a push instruction from byte code
-        /// </summary>
-        /// <param name="buffer">buffer where bytes are stored</param>
-        /// <param name="offset">offset into buffer</param>
-        /// <returns>An Instruciton</returns>
-        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            int index = offset;
-            InstructionCodes code = (InstructionCodes)buffer[index++];
-            int r1 = (int)buffer[index++];
-            return NewInstruction(factory, r1, string.Empty);
-        }
 
         protected Instruction NewInstruction(IInstructionFactory factory, int r1, string comment)
         {

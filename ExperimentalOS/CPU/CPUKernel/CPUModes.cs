@@ -20,10 +20,19 @@
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
 {
+    /// <summary>
+    /// Represents the modes that the CPU can be set to
+    /// </summary>
     public enum CPUModes
     {
+        /// <summary>
+        /// Runs one task at one time
+        /// </summary>
         SingleTasking,
 
+        /// <summary>
+        /// Runs multiple tasks through multitasking
+        /// </summary>
         MultiTasking
     }
 }

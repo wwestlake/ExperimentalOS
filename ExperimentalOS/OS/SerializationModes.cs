@@ -1,9 +1,9 @@
 ﻿/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
-    
+     
     source code: https://github.com/wwestlake/ExperimentalOS.git 
-  
+ 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,26 +18,29 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
+using System;
+using System.Collections.Generic;
+
+namespace LagDaemon.ExperimentalOS.OS
 {
     /// <summary>
-    /// Represents the configuration of the hardware simulation
+    /// Represents the serialization modes of the serializers
     /// </summary>
-    public class HardwareConfiguration
+    public enum SerializationModes
     {
         /// <summary>
-        /// Consructs a HardwareConfiguration
+        /// Serializer to binary file
         /// </summary>
-        /// <param name="registers">number of registers for the CPU</param>
-        public HardwareConfiguration(int registers)
-        {
-            this.Registers = registers;
-        }
+        Binary,
 
         /// <summary>
-        /// Gets or sets the number of registers for this CPU
+        /// Serialize to XML
         /// </summary>
-        public int Registers { get; internal set; }
+        XML,
 
+        /// <summary>
+        /// Serialize to SOAP
+        /// </summary>
+        Soap
     }
 }

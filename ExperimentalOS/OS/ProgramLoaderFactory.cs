@@ -1,9 +1,9 @@
 ﻿/*
     ExperimentalOS Copyright (C) 2014  William W. Westlake Jr.
     wwestlake@lagdaemon.com
-    
+     
     source code: https://github.com/wwestlake/ExperimentalOS.git 
-  
+ 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,26 +18,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace LagDaemon.ExperimentalOS.CPU.CPUHardware
+using LagDaemon.ExperimentalOS.OS.Interfaces;
+using System;
+using System.Collections.Generic;
+
+namespace LagDaemon.ExperimentalOS.OS
 {
     /// <summary>
-    /// Represents the configuration of the hardware simulation
+    /// Produces a program loader singleton
     /// </summary>
-    public class HardwareConfiguration
+    public static class ProgramLoaderFactory
     {
+        private static IProgramLoader loader = null;
+
+
         /// <summary>
-        /// Consructs a HardwareConfiguration
+        /// Gets the ProgramLoader singleton
         /// </summary>
-        /// <param name="registers">number of registers for the CPU</param>
-        public HardwareConfiguration(int registers)
+        public static IProgramLoader Loader
         {
-            this.Registers = registers;
+            get
+            {
+                if (null == loader) loader = new ProgramLoader();
+                return loader;
+            }
         }
-
-        /// <summary>
-        /// Gets or sets the number of registers for this CPU
-        /// </summary>
-        public int Registers { get; internal set; }
-
     }
 }

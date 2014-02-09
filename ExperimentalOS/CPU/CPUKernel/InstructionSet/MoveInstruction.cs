@@ -28,6 +28,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// Moves data from register 1 to register 2
     /// Move r1, r2
     /// </summary>
+    [Serializable]
     internal class MoveInstruction : Instruction
     {
         internal int r1, r2;
@@ -69,6 +70,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// When implemented assembles a string into this op code
         /// </summary>
         /// <param name="assemblyLine"></param>
+        /// <param name="factory">The instruction factory for this kernel</param>
         /// <returns></returns>
         /// <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
         protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
@@ -92,37 +94,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             return string.Format("{0} r{1}, r{2}", Code, this.r1, this.r2);
         }
 
-        /// <summary>
-        /// When implemented Writes the op codes into buffer
-        /// </summary>
-        /// <param name="buffer">The buffer to write to</param>
-        /// <param name="offset">The offiset within the buffer to write to</param>
-        /// <returns>The number of bytes written</returns>
-        protected override int Emit(byte[] buffer, int offset)
-        {
-            int index = offset;
-            buffer[index++] = Convert.ToByte(Code);
-            buffer[index++] = Convert.ToByte(r1);
-            buffer[index++] = Convert.ToByte(r2);
-            return 3;
-         }
-
-        /// <summary>
-        /// Creates an MoveInstruction from the bytes in the buffer
-        /// </summary>
-        /// <param name="buffer">Bytes that hold the instruction</param>
-        /// <param name="offset">Position in the buffer to start reading</param>
-        /// <returns>The Instruction created</returns>
-        /// <exception>Application Exception if bytes are incorrect</exception>
-        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            int index = offset;
-            InstructionCodes code = (InstructionCodes)buffer[index++];
-            if (code != InstructionCodes.Move) throw new InvalidOperationException(string.Format("Expected Move Instruction but encountered: {0} instruction", code));
-            int r1 = (int)buffer[index++];
-            int r2 = (int)buffer[index++];
-            return NewInstruction(factory, r1, r2, string.Empty);
-        }
  
         protected Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, string comment)
         {

@@ -21,6 +21,7 @@
 using LagDaemon.ExperimentalOS.CPU.CPUKernel;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace LagDaemon.ExperimentalOS.Assembler
 {
@@ -42,14 +43,16 @@ namespace LagDaemon.ExperimentalOS.Assembler
                 foreach (string line in reader.Lines)
                 {
                     this.currentLine++;
-                    yield return Assemble(line);
+                    AssemblerLineDescription? desc = ParseLine(line);
+                    if (null == desc) continue;
+                    yield return Assemble(desc.Value);
                 }
             }
         }
 
         internal CPUKernel Kernel { get; private set; }
 
-        protected abstract Instruction Assemble(string line);
+        protected abstract Instruction Assemble(AssemblerLineDescription line);
 
         protected InstructionCodes GetInstructionCode(string codeString)
         {
@@ -65,6 +68,38 @@ namespace LagDaemon.ExperimentalOS.Assembler
                 throw new ParseException("Instruction Code {0} at line {1} not define.", codeString, currentLine);
             }
         }
+
+
+
+        protected AssemblerLineDescription? ParseLine(string line)
+        {
+            AssemblerLineDescription result = new AssemblerLineDescription();
+            string[] split = line.Split(new char[] { ';' });
+            if (split.Length == 0) return null;
+            if (split.Length == 2) result.comment = split[1].Trim();
+            string inst = split[0].Trim();
+            string expression = @"(?<lable>[\w_]+:)?(?<opcode>\w+)\s+(?<params>[\w\s,]*);?(?<comment>[\s.]*)";
+            Match match = Regex.Match(inst, expression);
+            if (match.Success)
+            {
+                result.lable = match.Groups["lable"].Value;
+                result.opcode = match.Groups["opcode"].Value;
+                result.paramters = match.Groups["params"].Value;
+                result.comment = match.Groups["comment"].Value;
+                return result;
+            }
+            return null;
+        }
+
+
+        protected struct AssemblerLineDescription
+        {
+            public string lable;
+            public string opcode;
+            public string paramters;
+            public string comment;
+        }
+
 
     }
 }

@@ -28,6 +28,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     /// <summary>
     /// Represents No Operation instruction
     /// </summary>
+    [Serializable]
     internal class NopInstruction : Instruction
     {
 
@@ -54,6 +55,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// Assembly a Nop Instruction
         /// </summary>
         /// <param name="assemblyLine">Assembly line representing a NOP</param>
+        /// <param name="factory">The instruction factory for this kernel</param>
         /// <returns>The instruction</returns>
         protected override Instruction Assemble(IInstructionFactory factory, string assemblyLine)
         {
@@ -75,31 +77,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             return string.Format("{0}  ; No operation", Code);
         }
 
-        /// <summary>
-        /// Emit a NOP instuction code into the buffer
-        /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="offset"></param>
-        /// <returns></returns>
-        protected override int Emit(byte[] buffer, int offset)
-        {
-            buffer[offset] = Convert.ToByte(Code);
-            return 1;
-        }
-
-
-        /// <summary>
-        /// Creates an NopInstruction from the bytes in the buffer
-        /// </summary>
-        /// <param name="buffer">Bytes that hold the instruction</param>
-        /// <param name="offset">Position in the buffer to start reading</param>
-        /// <returns>The Instruction created</returns>
-        /// <exception>Application Exception if bytes are incorrect</exception>
-        protected override Instruction CreateFromBytes(IInstructionFactory factory, byte[] buffer, int offset)
-        {
-            if (buffer[offset] == Convert.ToByte(Code)) return NewInstruction(factory, string.Empty);
-            throw new ApplicationException("Byte stream does not contain NOP at designated offset.");
-        }
 
         protected Instruction NewInstruction(IInstructionFactory factory, string comment)
         {

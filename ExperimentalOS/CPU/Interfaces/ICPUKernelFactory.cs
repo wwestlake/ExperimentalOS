@@ -23,10 +23,28 @@ using System.Collections.Generic;
 
 namespace LagDaemon.ExperimentalOS.CPU.Interfaces
 {
+    /// <summary>
+    /// Represents a CPUKernel
+    /// </summary>
     public interface ICPUKernelFactory
     {
+        /// <summary>
+        /// CPUKernel Mode
+        /// </summary>
+        /// <param name="mode">The Mode</param>
+        /// <returns>ICPUKernelFactory</returns>
         ICPUKernelFactory Mode(CPUModes mode);
+
+        /// <summary>
+        /// Creates the Kernel for this CPU
+        /// </summary>
+        /// <param name="program">A List of instructions to load</param>
+        /// <returns>A CPUKernel</returns>
         CPUKernel.CPUKernel CreateKernel(IList<Instruction> program);
+
+        /// <summary>
+        /// Gets the InstructionFactory for this CPUKernel
+        /// </summary>
         IInstructionFactory InstrucitnoFactory { get; }
     }
 }
