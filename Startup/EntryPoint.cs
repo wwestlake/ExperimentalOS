@@ -23,9 +23,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-
+  
 namespace LagDaemon.ExperimentalOS.Startup
 {
+    /// <summary>
+    /// Startup Class and Entry Point for ExperimentalOS
+    /// </summary>
     class EntryPoint
     {
         static FileStream file;
