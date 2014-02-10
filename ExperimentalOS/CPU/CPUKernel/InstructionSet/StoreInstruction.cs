@@ -42,14 +42,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
-        internal StoreInstruction(int r1, int r2, int value, uint address, string comment)
+        internal StoreInstruction(int r1, int r2, int value, int address, string comment)
             : base(InstructionCodes.Store, r1, r2, value, address, comment) {}
 
-        internal StoreInstruction(int r1, int r2, int value, uint address)
+        internal StoreInstruction(int r1, int r2, int value, int address)
             : base(InstructionCodes.Store, r1, r2, value, address) {}
 
 
-        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, int value, uint address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, int value, int address, string comment)
         {
             return factory.Store(r1, r2, value, address, comment);
         }

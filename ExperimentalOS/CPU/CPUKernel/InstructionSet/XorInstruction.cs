@@ -17,24 +17,35 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 using LagDaemon.ExperimentalOS.CPU.Interfaces;
 using System;
+using System.Text.RegularExpressions;
 
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
+    /// <summary>
+    /// Xors data from register 1 to register 2
+    /// Xor r1, r2
+    /// </summary>
     [Serializable]
-    internal class CallInstruction : JumpBase
+    internal class XorInstruction : MathBase
     {
 
-        internal CallInstruction(int r1, int address, string comment) : base(InstructionCodes.Call, r1, address, comment) { }
+        internal XorInstruction() : base(InstructionCodes.Xor) { }
 
-        internal CallInstruction(int r1, int address) : base(InstructionCodes.Call, r1, address) { }
+        internal XorInstruction(int r1, int r2, int r3)
+            : this(r1, r2, r3, string.Empty) { }
 
+        internal XorInstruction(int r1, int r2, int r3, string comment)
+            : base(InstructionCodes.Xor, r1, r2, r3, comment) { }
 
+        internal XorInstruction(XorInstruction inst)
+            : this(inst.r1, inst.r2, inst.r3, inst.Comment) { }
 
-        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, int r3, string comment)
         {
-            return factory.Call(r1, address, comment);
+            return factory.Xor(r1, r2, r3, comment);
         }
     }
 }

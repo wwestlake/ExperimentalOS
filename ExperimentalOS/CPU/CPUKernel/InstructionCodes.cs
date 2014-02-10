@@ -104,24 +104,28 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Call $address
         /// Call r1
         /// Call r1, $address
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Call,
 
         /// <summary>
         /// returns from a call by popping the addess from the stack
-        /// Ret
+        /// Return
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Return,
 
         /// <summary>
         /// Add register 2 to register 3 and stores the result in register 1
         /// Add r1, r2, r3
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Add,
 
         /// <summary>
         /// Subtracts r3 from r2 stores result in r1
         /// Sub r1, r2, r3
+        /// <remarks>inst completed</remarks>
         /// </summary>
         Sub,
 
@@ -129,36 +133,78 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// Multiplies r2 by r3 stores result in r1
         /// Mul r1, r2, r3
         /// </summary>
+        /// <remarks>inst completed</remarks>
         Mul,
 
         /// <summary>
         /// Divides r2 by r3 stores result in r1
         /// Div r1, r2, r3
         /// </summary>
+        /// <remarks>inst completed</remarks>
         Div,
+
+        /// <summary>
+        /// Ands r2 by r3 stores result in r1
+        /// Div r1, r2, r3
+        /// </summary>
+        And,
+
+        /// <summary>
+        /// Ors r2 by r3 stores result in r1
+        /// Div r1, r2, r3
+        /// </summary>
+        Or,
+
+        /// <summary>
+        /// Nots r2 by r3 stores result in r1
+        /// Div r1, r2, r3
+        /// </summary>
+        Not,
+
+        /// <summary>
+        /// Xors r2 by r3 stores result in r1
+        /// Div r1, r2, r3
+        /// </summary>
+        Xor,
+
+        /// <summary>
+        /// Not Ands r2 by r3 stores result in r1
+        /// Div r1, r2, r3
+        /// </summary>
+        Nand,
+
+        /// <summary>
+        /// Not Ors r2 by r3 stores result in r1
+        /// Div r1, r2, r3
+        /// </summary>
+        Nor,
 
         /// <summary>
         /// Increments register r1 by 1
         /// Inc r1
         /// </summary>
+        /// <remarks>inst completed</remarks>
         Inc,
 
         /// <summary>
         /// Decrements r1 by 1
         /// Dec r1
         /// </summary>
+        /// <remarks>inst completed</remarks>
         Dec,
 
         /// <summary>
         /// Compares r1 to r2 and sets the comparison flag to be acted upon my a conditional instruction
         /// Compare r1, r2
         /// </summary>
+        /// <remarks>inst completed</remarks>
         Compare,
 
         /// <summary>
         /// Clears the compare flag to Cleared
         /// ClearCompare
         /// </summary>
+        /// <remarks>inst completed</remarks>
         ClearCompare,
 
 
@@ -168,6 +214,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JE r1
         /// JE r1, $address
         /// </summary>
+        /// <remarks>inst completed</remarks>
         JE,
 
         /// <summary>
@@ -176,6 +223,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JNE r1
         /// JNE r1, $address
         /// </summary>
+        /// <remarks>inst completed</remarks>
         JNE,
 
         /// <summary>
@@ -184,6 +232,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JGT r1
         /// JGT r1, $address
         /// </summary>
+        /// <remarks>inst completed</remarks>
         JGT,
 
         /// <summary>
@@ -192,6 +241,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JLT r1
         /// JLT r1, $address
         /// </summary>
+        /// <remarks>inst completed</remarks>
         JLT,
 
         /// <summary>
@@ -200,6 +250,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JZ r1
         /// JZ r1, $address
         /// </summary>
+        /// <remarks>inst completed</remarks>
         JZ,
 
         /// <summary>
@@ -208,7 +259,36 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// JNZ r1
         /// JNZ r1, $address
         /// </summary>
+        /// <remarks>inst completed</remarks>
         JNZ,
+
+
+        /// <summary>
+        /// Alllocates memory to the processor memory manager and places the allocated memory handle in the designated register r1
+        /// AllocateMemory r1, num
+        /// </summary>
+        AllocateMemory,
+
+        /// <summary>
+        /// Frees previously allocated memory as designated by the handle in r1
+        /// FreeMemory r1
+        /// </summary>
+        FreeMemory,
+
+        /// <summary>
+        /// Clears the memory starting at the address in r1 for number of bytes in r2
+        /// MemoryClear r1, r2
+        /// </summary>
+        MemoryClear,
+
+        /// <summary>
+        /// Terminates the currently running process where r1 contains an exit code for the process which will be returned to the OS Kernel
+        /// Terminate r1
+        /// <remarks>inst completed</remarks>
+        /// </summary>
+        Terminate,
+
+        // --------------------------------------------------- Multitasking CPU Instructions -----------------------------------------
 
         /// <summary>
         /// Obtains a lock on a process where num is the lock number asscociated with the calling process
@@ -239,18 +319,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         SetPriority,
 
         /// <summary>
-        /// Alllocates memory to the processor memory manager and places the allocated memory handle in the designated register r1
-        /// AllocateMemory r1, num
-        /// </summary>
-        AllocateMemory,
-
-        /// <summary>
-        /// Frees previously allocated memory as designated by the handle in r1
-        /// FreeMemory r1
-        /// </summary>
-        FreeMemory,
-
-        /// <summary>
         /// Waits for an event designated by the event handle in r1
         /// WaitOnEvent r1
         /// </summary>
@@ -261,18 +329,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         /// FireEvent r1
         /// </summary>
         FireEvent,
-
-        /// <summary>
-        /// Clears the memory starting at the address in r1 for number of bytes in r2
-        /// MemoryClear r1, r2
-        /// </summary>
-        MemoryClear,
-
-        /// <summary>
-        /// Terminates the currently running process where r1 contains an exit code for the process which will be returned to the OS Kernel
-        /// Terminate r1
-        /// </summary>
-        Terminate,
 
         /// <summary>
         /// Starts an atomic block (this block will not be interupted by taks switching) and returns an AtomicBlock handle in r1

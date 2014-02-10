@@ -33,28 +33,28 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     internal abstract class JumpBase : Instruction
     {
         internal int r1;
-        internal uint address;
+        internal int address;
 
-        internal JumpBase(InstructionCodes code, int r1, uint address, string comment)
+        internal JumpBase(InstructionCodes code, int r1, int address, string comment)
             : base(code, comment)
         {
             this.r1 = r1;
             this.address = address;
-            if (address != (uint)Symbols.NullAddress)
+            if (address != (int)Symbols.NullAddress)
             {
-                this.Size = 4 + sizeof(uint);
+                this.Size = 4 + sizeof(int);
             }
-            else if (address != (uint)Symbols.NullAddress)
+            else if (address != (int)Symbols.NullAddress)
             {
-                this.Size = 3 + sizeof(uint);
+                this.Size = 3 + sizeof(int);
             }
-            else if (address == (uint)Symbols.NullAddress)
+            else if (address == (int)Symbols.NullAddress)
             {
                 this.Size = 3 + sizeof(int);
             }
         }
 
-        internal JumpBase(InstructionCodes code, int r1, uint address) : this(code, r1, address, string.Empty) { }
+        internal JumpBase(InstructionCodes code, int r1, int address) : this(code, r1, address, string.Empty) { }
 
         /// <summary>
         /// When implemented assembles a string into this op code
@@ -73,15 +73,15 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             {
                 if (m1.Success)
                 {
-                    return NewInstruction(factory, int.Parse(m1.Groups["r1"].Value), uint.Parse(m1.Groups["address"].Value), m1.Groups["comment"] != null ? m1.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m1.Groups["r1"].Value), int.Parse(m1.Groups["address"].Value), m1.Groups["comment"] != null ? m1.Groups["comment"].Value : string.Empty);
                 }
                 if (m2.Success)
                 {
-                    return NewInstruction(factory, int.Parse(m2.Groups["r1"].Value), (uint)Symbols.NullAddress, m2.Groups["comment"] != null ? m2.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m2.Groups["r1"].Value), (int)Symbols.NullAddress, m2.Groups["comment"] != null ? m2.Groups["comment"].Value : string.Empty);
                 }
                 if (m3.Success)
                 {
-                    return NewInstruction(factory, int.Parse(m3.Groups["r1"].Value), uint.Parse(m3.Groups["address"].Value), m3.Groups["comment"] != null ? m3.Groups["comment"].Value : string.Empty);
+                    return NewInstruction(factory, int.Parse(m3.Groups["r1"].Value), int.Parse(m3.Groups["address"].Value), m3.Groups["comment"] != null ? m3.Groups["comment"].Value : string.Empty);
                 }
             }
             throw new InstructionParseException("Incorrect op code for this class: {0}, {1}", this.GetType().FullName, assemblyLine);
@@ -118,6 +118,6 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         }
 
 
-        protected abstract Instruction NewInstruction(IInstructionFactory factory, int r1, uint address, string comment);
+        protected abstract Instruction NewInstruction(IInstructionFactory factory, int r1, int address, string comment);
     }
 }

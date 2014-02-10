@@ -80,7 +80,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <returns>Instruction</returns>
-        public Instruction Load(int r1, int r2, int value, uint address) { return Load(r1, r2, value, address, string.Empty); }
+        public Instruction Load(int r1, int r2, int value, int address) { return Load(r1, r2, value, address, string.Empty); }
 
         /// <summary>
         /// Create a Load Instruction with comment
@@ -91,7 +91,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
         /// <returns>Instruction</returns>
-        public Instruction Load(int r1, int r2, int value, uint address, string comment) { return _kernel.Connect( new LoadInstruction(r1, r2, value, address, comment) ); }
+        public Instruction Load(int r1, int r2, int value, int address, string comment) { return _kernel.Connect( new LoadInstruction(r1, r2, value, address, comment) ); }
 
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
         /// <returns>Instruction</returns>
-        public Instruction Store(int r1, int r2, int value, uint address, string comment) { return _kernel.Connect( new StoreInstruction(r1, r2, value, address, comment) ); }
+        public Instruction Store(int r1, int r2, int value, int address, string comment) { return _kernel.Connect( new StoreInstruction(r1, r2, value, address, comment) ); }
 
         /// <summary>
         /// Create a Store Instruction
@@ -113,7 +113,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <returns>Instruction</returns>
-        public Instruction Store(int r1, int r2, int value, uint address) { return Store(r1, r2, value, address, string.Empty); }
+        public Instruction Store(int r1, int r2, int value, int address) { return Store(r1, r2, value, address, string.Empty); }
 
         /// <summary>
         /// Create a Push Instruction with comment
@@ -185,7 +185,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r1">Index modifier to address or address</param>
         /// <param name="address">Address to jump to</param>
         /// <returns>Instruction</returns>
-        public Instruction Jump(int r1, uint address) { return Jump(r1, address, string.Empty); }
+        public Instruction Jump(int r1, int address) { return Jump(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates an Jump Instruction with comment
@@ -194,7 +194,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="address">Address to jump to</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
-        public Instruction Jump(int r1, uint address, string comment) { return _kernel.Connect( new JumpInstruction(r1, address, comment) ); }
+        public Instruction Jump(int r1, int address, string comment) { return _kernel.Connect( new JumpInstruction(r1, address, comment) ); }
 
         /// <summary>
         /// Creates a Call Instruction
@@ -202,7 +202,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r1">Index modifier to address or address</param>
         /// <param name="address">Address to call to</param>
         /// <returns>Instruction</returns>
-        public Instruction Call(int r1, uint address) { return Call(r1, address, string.Empty); }
+        public Instruction Call(int r1, int address) { return Call(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates a Call Instruction with comment
@@ -211,7 +211,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="address">Address to call to</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
-        public Instruction Call(int r1, uint address, string comment) { return _kernel.Connect( new CallInstruction(r1, address, comment) ); }
+        public Instruction Call(int r1, int address, string comment) { return _kernel.Connect( new CallInstruction(r1, address, comment) ); }
 
         /// <summary>
         /// Creates a Terminate Instruction
@@ -226,6 +226,294 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <returns>Instruction</returns>
         public Instruction Terminate(string comment) { return _kernel.Connect( new TerminateInstruction(comment) ); }
 
+        /// <summary>
+        /// Creates a Terminate Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Return() { return Return(string.Empty); }
+
+        /// <summary>
+        /// Creates a Terminate Instruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Return(string comment) { return _kernel.Connect(new ReturnInstruction(comment)); }
+
+        
+        /// <summary>
+        /// Creates a Add Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Add(int r1, int r2, int r3) { return Add(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a AddInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Add(int r1, int r2, int r3, string comment) { return _kernel.Connect(new AddInstruction(r1, r2, r3, comment)); }
+
+        
+        /// <summary>
+        /// Creates a Sub Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Sub(int r1, int r2, int r3) { return Sub(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a SubInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Sub(int r1, int r2, int r3, string comment) { return _kernel.Connect(new SubInstruction(r1, r2, r3, comment)); }
+
+
+        
+        /// <summary>
+        /// Creates a Mul Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Mul(int r1, int r2, int r3) { return Mul(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a MulInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Mul(int r1, int r2, int r3, string comment) { return _kernel.Connect(new MulInstruction(r1, r2, r3, comment)); }
+
+
+        
+        /// <summary>
+        /// Creates a Div Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Div(int r1, int r2, int r3) { return Div(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a DivInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Div(int r1, int r2, int r3, string comment) { return _kernel.Connect(new DivInstruction(r1, r2, r3, comment)); }
+
+        /// <summary>
+        /// Creates a And Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction And(int r1, int r2, int r3) { return And(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a AndInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction And(int r1, int r2, int r3, string comment) { return _kernel.Connect(new AndInstruction(r1, r2, r3, comment)); }
+
+        /// <summary>
+        /// Creates a Or Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Or(int r1, int r2, int r3) { return Or(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a AndInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Or(int r1, int r2, int r3, string comment) { return _kernel.Connect(new OrInstruction(r1, r2, r3, comment)); }
+
+        /// <summary>
+        /// Creates a Not Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Not(int r1, int r2, int r3) { return Not(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a NotInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Not(int r1, int r2, int r3, string comment) { return _kernel.Connect(new NotInstruction(r1, r2, r3, comment)); }
+
+        /// <summary>
+        /// Creates a Xor Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Xor(int r1, int r2, int r3) { return Xor(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a XortInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Xor(int r1, int r2, int r3, string comment) { return _kernel.Connect(new XorInstruction(r1, r2, r3, comment)); }
+
+
+
+        /// <summary>
+        /// Creates a Nand Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Nand(int r1, int r2, int r3) { return Nand(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a NandtInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Nand(int r1, int r2, int r3, string comment) { return _kernel.Connect(new NandInstruction(r1, r2, r3, comment)); }
+
+
+        /// <summary>
+        /// Creates a Nor Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Nor(int r1, int r2, int r3) { return Nor(r1, r2, r3, string.Empty); }
+
+        /// <summary>
+        /// Creates a NortInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Nor(int r1, int r2, int r3, string comment) { return _kernel.Connect(new NorInstruction(r1, r2, r3, comment)); }
+
+
+        /// <summary>
+        /// Creates a Inc Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Inc(int r1) { return Inc(r1, string.Empty); }
+
+        /// <summary>
+        /// Creates a IncInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Inc(int r1, string comment) { return _kernel.Connect(new IncInstruction(r1, comment)); }
+
+
+        
+        /// <summary>
+        /// Creates a Dec Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Dec(int r1) { return Dec(r1, string.Empty); }
+
+        /// <summary>
+        /// Creates a DecInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Dec(int r1, string comment) { return _kernel.Connect(new DecInstruction(r1, comment)); }
+
+        
+        /// <summary>
+        /// Creates a Compare Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction Compare(int r1, int r2) { return Compare(r1, r2, string.Empty); }
+
+        /// <summary>
+        /// Creates a CompareInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction Compare(int r1, int r2, string comment) { return _kernel.Connect(new CompareInstruction(r1, r2, comment)); }
+
+        
+        /// <summary>
+        /// Creates a ClearCompare Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction ClearCompare() { return ClearCompare(string.Empty); }
+
+        /// <summary>
+        /// Creates a ClearCompareInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction ClearCompare(string comment) { return _kernel.Connect(new ClearCompareInstruction(comment)); }
+
+        
+        /// <summary>
+        /// Creates a JE Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction JE(int r1, int address) { return JE(r1, address, string.Empty); }
+
+        /// <summary>
+        /// Creates a JEInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction JE(int r1, int address, string comment) { return _kernel.Connect(new JEInstruction(r1, address, comment)); }
+
+
+        /// <summary>
+        /// Creates a JNE Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction JNE(int r1, int address) { return JNE(r1, address, string.Empty); }
+
+        /// <summary>
+        /// Creates a JNEInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction JNE(int r1, int address, string comment) { return _kernel.Connect(new JNEInstruction(r1, address, comment)); }
+
+        /// <summary>
+        /// Creates a JGT Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction JGT(int r1, int address) { return JGT(r1, address, string.Empty); }
+
+        /// <summary>
+        /// Creates a JNEInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction JGT(int r1, int address, string comment) { return _kernel.Connect(new JGTInstruction(r1, address, comment)); }
+
+        /// <summary>
+        /// Creates a JLT Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction JLT(int r1, int address) { return JLT(r1, address, string.Empty); }
+
+        /// <summary>
+        /// Creates a JNEInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction JLT(int r1, int address, string comment) { return _kernel.Connect(new JLTInstruction(r1, address, comment)); }
+
+        /// <summary>
+        /// Creates a JZ Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction JZ(int r1, int address) { return JZ(r1, address, string.Empty); }
+
+        /// <summary>
+        /// Creates a JNEInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction JZ(int r1, int address, string comment) { return _kernel.Connect(new JZInstruction(r1, address, comment)); }
+
+        /// <summary>
+        /// Creates a JNZ Instruction
+        /// </summary>
+        /// <returns>Instruction</returns>
+        public Instruction JNZ(int r1, int address) { return JNZ(r1, address, string.Empty); }
+
+        /// <summary>
+        /// Creates a JNEInstruction with comment
+        /// </summary>
+        /// <param name="comment">The comment</param>
+        /// <returns>Instruction</returns>
+        public Instruction JNZ(int r1, int address, string comment) { return _kernel.Connect(new JNZInstruction(r1, address, comment)); }
 
 
         public Instruction FromCode(InstructionCodes code)
@@ -233,7 +521,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
             switch (code)
             {
                 case InstructionCodes.Add:
-                    break;
+                    return Add(0,0,0);
                 case InstructionCodes.AllocateMemory:
                     break;
                 case InstructionCodes.BeginAtomicBlock:
@@ -246,7 +534,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
                 case InstructionCodes.Dec:
                     break;
                 case InstructionCodes.Div:
-                    break;
+                    return Div(0,0,0);
                 case InstructionCodes.EndAtomicBlock:
                     break;
                 case InstructionCodes.FireEvent:
@@ -280,7 +568,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
                     return Move(0, 0);
                     
                 case InstructionCodes.Mul:
-                    break;
+                    return Mul(0, 0, 0);
                 case InstructionCodes.NOP:
                     return Nop();
                     
@@ -302,7 +590,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
                 case InstructionCodes.Store:
                     break;
                 case InstructionCodes.Sub:
-                    break;
+                    return Sub(0, 0, 0);
                 case InstructionCodes.Terminate:
                     return Terminate();
                     

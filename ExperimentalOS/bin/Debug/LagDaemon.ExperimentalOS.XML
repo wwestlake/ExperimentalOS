@@ -447,24 +447,28 @@
             Call $address
             Call r1
             Call r1, $address
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Return">
             <summary>
             returns from a call by popping the addess from the stack
-            Ret
+            Return
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Add">
             <summary>
             Add register 2 to register 3 and stores the result in register 1
             Add r1, r2, r3
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Sub">
             <summary>
             Subtracts r3 from r2 stores result in r1
             Sub r1, r2, r3
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Mul">
@@ -472,10 +476,48 @@
             Multiplies r2 by r3 stores result in r1
             Mul r1, r2, r3
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Div">
             <summary>
             Divides r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+            <remarks>inst completed</remarks>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.And">
+            <summary>
+            Ands r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Or">
+            <summary>
+            Ors r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Not">
+            <summary>
+            Nots r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Xor">
+            <summary>
+            Xors r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Nand">
+            <summary>
+            Not Ands r2 by r3 stores result in r1
+            Div r1, r2, r3
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Nor">
+            <summary>
+            Not Ors r2 by r3 stores result in r1
             Div r1, r2, r3
             </summary>
         </member>
@@ -484,24 +526,28 @@
             Increments register r1 by 1
             Inc r1
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Dec">
             <summary>
             Decrements r1 by 1
             Dec r1
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Compare">
             <summary>
             Compares r1 to r2 and sets the comparison flag to be acted upon my a conditional instruction
             Compare r1, r2
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.ClearCompare">
             <summary>
             Clears the compare flag to Cleared
             ClearCompare
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JE">
             <summary>
@@ -510,6 +556,7 @@
             JE r1
             JE r1, $address
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JNE">
             <summary>
@@ -518,6 +565,7 @@
             JNE r1
             JNE r1, $address
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JGT">
             <summary>
@@ -526,6 +574,7 @@
             JGT r1
             JGT r1, $address
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JLT">
             <summary>
@@ -534,6 +583,7 @@
             JLT r1
             JLT r1, $address
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JZ">
             <summary>
@@ -542,6 +592,7 @@
             JZ r1
             JZ r1, $address
             </summary>
+            <remarks>inst completed</remarks>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.JNZ">
             <summary>
@@ -549,6 +600,32 @@
             JNZ $address
             JNZ r1
             JNZ r1, $address
+            </summary>
+            <remarks>inst completed</remarks>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.AllocateMemory">
+            <summary>
+            Alllocates memory to the processor memory manager and places the allocated memory handle in the designated register r1
+            AllocateMemory r1, num
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.FreeMemory">
+            <summary>
+            Frees previously allocated memory as designated by the handle in r1
+            FreeMemory r1
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.MemoryClear">
+            <summary>
+            Clears the memory starting at the address in r1 for number of bytes in r2
+            MemoryClear r1, r2
+            </summary>
+        </member>
+        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Terminate">
+            <summary>
+            Terminates the currently running process where r1 contains an exit code for the process which will be returned to the OS Kernel
+            Terminate r1
+            <remarks>inst completed</remarks>
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Lock">
@@ -579,18 +656,6 @@
             SetPriority r1
             </summary>
         </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.AllocateMemory">
-            <summary>
-            Alllocates memory to the processor memory manager and places the allocated memory handle in the designated register r1
-            AllocateMemory r1, num
-            </summary>
-        </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.FreeMemory">
-            <summary>
-            Frees previously allocated memory as designated by the handle in r1
-            FreeMemory r1
-            </summary>
-        </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.WaitOnEvent">
             <summary>
             Waits for an event designated by the event handle in r1
@@ -601,18 +666,6 @@
             <summary>
             Fires the event in r1
             FireEvent r1
-            </summary>
-        </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.MemoryClear">
-            <summary>
-            Clears the memory starting at the address in r1 for number of bytes in r2
-            MemoryClear r1, r2
-            </summary>
-        </member>
-        <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.Terminate">
-            <summary>
-            Terminates the currently running process where r1 contains an exit code for the process which will be returned to the OS Kernel
-            Terminate r1
             </summary>
         </member>
         <member name="F:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes.BeginAtomicBlock">
@@ -633,6 +686,62 @@
             <summary>
             Starts multi tasking.
             EnterMultitaskingMode
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AddInstruction">
+            <summary>
+            Adds data from register 1 to register 2
+            Add r1, r2
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase">
+            <summary>
+            Adds data from register 1 to register 2
+            Add r1, r2
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructs a AddInstruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Constructs a AddInstruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase)">
+            <summary>
+            Copies a AddInstruction to this new object
+            </summary>
+            <param name="inst">The instruction to copy</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine"></param>
+            <param name="factory">The instruction factory for this kernel</param>
+            <returns></returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.AndInstruction">
+            <summary>
+            Ands data from register 1 to register 2
+            And r1, r2
             </summary>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.JumpBase.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
@@ -661,6 +770,138 @@
             Represents a Task execution thread
             </summary>
             <param name="taskId"></param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction">
+            <summary>
+            Represents No Operation instruction
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction.#ctor">
+            <summary>
+            Construciton a ClearCompare Instruciton
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction.#ctor(System.String)">
+            <summary>
+            Constructs a ClearCompare instruction
+            </summary>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="inst">The ClearCompareInstruction to copy</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
+            <summary>
+            Assembly a ClearCompare Instruction
+            </summary>
+            <param name="assemblyLine">Assembly line representing a ClearCompare</param>
+            <param name="factory">The instruction factory for this kernel</param>
+            <returns>The instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ClearCompareInstruction.DisAssemble">
+            <summary>
+            Generates Assembly code for a ClearCompare instruction
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction">
+            <summary>
+            Compares data from register 1 to register 2
+            Compare r1, r2
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructs a CompareInstruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Constructs a CompareInstruction
+            </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction)">
+            <summary>
+            Copies a CompareInstruction to this new object
+            </summary>
+            <param name="inst">The instruction to copy</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
+            <summary>
+            When implemented assembles a string into this op code
+            </summary>
+            <param name="assemblyLine"></param>
+            <param name="factory">The instruction factory for this kernel</param>
+            <returns></returns>
+            <exception>Throws an ApplicationExceptiion if the string is not valid for this instruction</exception>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.CompareInstruction.DisAssemble">
+            <summary>
+            When implemented produces a string representation of the instructiuon as assembly language
+            </summary>
+            <returns>The assembly language code as a string</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.DecInstruction">
+            <summary>
+            Represents a single atomic Push instruction.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.DecInstruction.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructs a Dec instruction
+            </summary>
+            <param name="r1">register</param>
+            <param name="comment">comments</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.DecInstruction.#ctor(System.Int32)">
+            <summary>
+            Constructs a Dec instruction
+            </summary>
+            <param name="r1">register</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.DecInstruction.DisAssemble">
+            <summary>
+            Converts instruction to assembly language representation
+            </summary>
+            <returns>String assembly language representation</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.DivInstruction">
+            <summary>
+            Divs data from register 1 to register 2
+            Div r1, r2
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.IncInstruction">
+            <summary>
+            Represents a single atomic Push instruction.
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.IncInstruction.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructs a Inc instruction
+            </summary>
+            <param name="r1">register</param>
+            <param name="comment">comments</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.IncInstruction.#ctor(System.Int32)">
+            <summary>
+            Constructs a Inc instruction
+            </summary>
+            <param name="r1">register</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.IncInstruction.DisAssemble">
+            <summary>
+            Converts instruction to assembly language representation
+            </summary>
+            <returns>String assembly language representation</returns>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory">
             <summary>
@@ -709,7 +950,7 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Create a Load Instruction with comment
             </summary>
@@ -720,7 +961,7 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Create a Load Instruction
             </summary>
@@ -730,7 +971,7 @@
             <param name="address">Address</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Create a Store Instruction with comment
             </summary>
@@ -741,7 +982,7 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Create a Store Instruction
             </summary>
@@ -815,7 +1056,7 @@
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Jump(System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Jump(System.Int32,System.Int32)">
             <summary>
             Creates an Jump Instruction
             </summary>
@@ -823,7 +1064,7 @@
             <param name="address">Address to jump to</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Jump(System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Jump(System.Int32,System.Int32,System.String)">
             <summary>
             Creates an Jump Instruction with comment
             </summary>
@@ -832,7 +1073,7 @@
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Call(System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Call(System.Int32,System.Int32)">
             <summary>
             Creates a Call Instruction
             </summary>
@@ -840,12 +1081,285 @@
             <param name="address">Address to call to</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Call(System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Call(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a Call Instruction with comment
             </summary>
             <param name="r1">Index modifier to address or address</param>
             <param name="address">Address to call to</param>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Return">
+            <summary>
+            Creates a Return Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Return(System.String)">
+            <summary>
+            Creates a Return Instruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Add(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Add Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Add(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a AddInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Sub(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Sub Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Sub(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a SubInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Mul(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Mul Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Mul(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a MulInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Div(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Div Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Div(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a DivInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.And(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a And Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.And(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a AndInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Or(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Or Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Or(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a AndInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Not(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Not Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Not(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a NotInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Xor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Xor Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Xor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a XortInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nand(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Nand Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nand(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a NandtInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Nor Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a NortInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Inc(System.Int32)">
+            <summary>
+            Creates a Inc Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Inc(System.Int32,System.String)">
+            <summary>
+            Creates a IncInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Dec(System.Int32)">
+            <summary>
+            Creates a Dec Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Dec(System.Int32,System.String)">
+            <summary>
+            Creates a DecInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Compare(System.Int32,System.Int32)">
+            <summary>
+            Creates a Compare Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Compare(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a CompareInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.ClearCompare">
+            <summary>
+            Creates a ClearCompare Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.ClearCompare(System.String)">
+            <summary>
+            Creates a ClearCompareInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JE(System.Int32,System.Int32)">
+            <summary>
+            Creates a JE Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JE(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JNE(System.Int32,System.Int32)">
+            <summary>
+            Creates a JNE Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JNE(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JGT(System.Int32,System.Int32)">
+            <summary>
+            Creates a JGT Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JGT(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JLT(System.Int32,System.Int32)">
+            <summary>
+            Creates a JLT Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JLT(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JZ(System.Int32,System.Int32)">
+            <summary>
+            Creates a JZ Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JZ(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JNZ(System.Int32,System.Int32)">
+            <summary>
+            Creates a JNZ Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JNZ(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -892,7 +1406,7 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Create a Load Instruction
             </summary>
@@ -902,7 +1416,7 @@
             <param name="address">Address</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Load(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Create a Load Instruction with comment
             </summary>
@@ -913,7 +1427,7 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Create a Store Instruction with comment
             </summary>
@@ -924,7 +1438,7 @@
             <param name="comment">Comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Store(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Create a Store Instruction
             </summary>
@@ -998,7 +1512,7 @@
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.Int32)">
             <summary>
             Creates an Jump Instruction
             </summary>
@@ -1006,7 +1520,7 @@
             <param name="address">Address to jump to</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Jump(System.Int32,System.Int32,System.String)">
             <summary>
             Creates an Jump Instruction with comment
             </summary>
@@ -1015,7 +1529,7 @@
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Call(System.Int32,System.UInt32)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Call(System.Int32,System.Int32)">
             <summary>
             Creates a Call Instruction
             </summary>
@@ -1023,7 +1537,7 @@
             <param name="address">Address to call to</param>
             <returns>Instruction</returns>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Call(System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Call(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a Call Instruction with comment
             </summary>
@@ -1041,6 +1555,279 @@
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Terminate(System.String)">
             <summary>
             Creates a Terminate Instruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Return">
+            <summary>
+            Creates a Terminate Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Return(System.String)">
+            <summary>
+            Creates a Terminate Instruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Add(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Add Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Add(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a AddInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Sub(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Sub Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Sub(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a SubInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Mul(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Mul Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Mul(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a MulInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Div(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Div Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Div(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a DivInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.And(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a And Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.And(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a AndInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Or(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Or Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Or(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a AndInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Not(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Not Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Not(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a NotInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Xor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Xor Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Xor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a XortInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nand(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Nand Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nand(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a NandtInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Nor Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a NortInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Inc(System.Int32)">
+            <summary>
+            Creates a Inc Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Inc(System.Int32,System.String)">
+            <summary>
+            Creates a IncInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Dec(System.Int32)">
+            <summary>
+            Creates a Dec Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Dec(System.Int32,System.String)">
+            <summary>
+            Creates a DecInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Compare(System.Int32,System.Int32)">
+            <summary>
+            Creates a Compare Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Compare(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a CompareInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.ClearCompare">
+            <summary>
+            Creates a ClearCompare Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.ClearCompare(System.String)">
+            <summary>
+            Creates a ClearCompareInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JE(System.Int32,System.Int32)">
+            <summary>
+            Creates a JE Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JE(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JNE(System.Int32,System.Int32)">
+            <summary>
+            Creates a JNE Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JNE(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JGT(System.Int32,System.Int32)">
+            <summary>
+            Creates a JGT Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JGT(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JLT(System.Int32,System.Int32)">
+            <summary>
+            Creates a JLT Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JLT(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JZ(System.Int32,System.Int32)">
+            <summary>
+            Creates a JZ Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JZ(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
+            </summary>
+            <param name="comment">The comment</param>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JNZ(System.Int32,System.Int32)">
+            <summary>
+            Creates a JNZ Instruction
+            </summary>
+            <returns>Instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JNZ(System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates a JNEInstruction with comment
             </summary>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
@@ -1064,7 +1851,7 @@
             <param name="format">The format string</param>
             <param name="args">The arguments</param>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadStoreBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Base class for Load and Store instructions handles all parsing in a consistent manner
             </summary>
@@ -1099,7 +1886,7 @@
             Load r1, r2, address   ; indexed indirect addressing  
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.#ctor(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.LoadInstruction.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Create a load instruction
             </summary>
@@ -1184,6 +1971,18 @@
             </summary>
             <returns>The assembly language code as a string</returns>
         </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MulInstruction">
+            <summary>
+            Muls data from register 1 to register 2
+            Mul r1, r2
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NandInstruction">
+            <summary>
+            Nands data from register 1 to register 2
+            Nand r1, r2
+            </summary>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction">
             <summary>
             Represents No Operation instruction
@@ -1219,6 +2018,24 @@
             Generates Assembly code for a Nop instruction
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NorInstruction">
+            <summary>
+            Nors data from register 1 to register 2
+            Nor r1, r2
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NotInstruction">
+            <summary>
+            Nots data from register 1 to register 2
+            Not r1, r2
+            </summary>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.OrInstruction">
+            <summary>
+            Ors data from register 1 to register 2
+            Or r1, r2
+            </summary>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.PopInstruction">
             <summary>
@@ -1268,6 +2085,42 @@
             </summary>
             <returns>String assembly language representation</returns>
         </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ReturnInstruction">
+            <summary>
+            Represents No Operation instruction
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ReturnInstruction.#ctor">
+            <summary>
+            Construciton a Nop Instruciton
+            </summary>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ReturnInstruction.#ctor(System.String)">
+            <summary>
+            Constructs a NOP instruction
+            </summary>
+            <param name="comment">Comment</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ReturnInstruction.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.NopInstruction)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="inst">The NopInstruction to copy</param>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ReturnInstruction.Assemble(LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory,System.String)">
+            <summary>
+            Assembly a Nop Instruction
+            </summary>
+            <param name="assemblyLine">Assembly line representing a NOP</param>
+            <param name="factory">The instruction factory for this kernel</param>
+            <returns>The instruction</returns>
+        </member>
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.ReturnInstruction.DisAssemble">
+            <summary>
+            Generates Assembly code for a Nop instruction
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction">
             <summary>
             Stores data from a register to a memory
@@ -1277,7 +2130,7 @@
             Store r1, r2, address   ; indexed indirect addressing  
             </summary>
         </member>
-        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction.#ctor(System.Int32,System.Int32,System.Int32,System.UInt32,System.String)">
+        <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.StoreInstruction.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Create a store instruction
             </summary>
@@ -1286,6 +2139,12 @@
             <param name="value">Imediate value</param>
             <param name="address">Address</param>
             <param name="comment">Comment</param>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.SubInstruction">
+            <summary>
+            Subs data from register 1 to register 2
+            Sub r1, r2
+            </summary>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.Symbols">
             <summary>
@@ -1340,6 +2199,12 @@
             <param name="factory">The factory to use</param>
             <param name="comment">Any comments for the instruction</param>
             <returns>Terminate Instruction</returns>
+        </member>
+        <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.XorInstruction">
+            <summary>
+            Xors data from register 1 to register 2
+            Xor r1, r2
+            </summary>
         </member>
         <member name="T:LagDaemon.ExperimentalOS.CPU.CPUKernel.SymbolCache">
             <summary>

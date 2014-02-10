@@ -42,13 +42,13 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="value">Imediate value</param>
         /// <param name="address">Address</param>
         /// <param name="comment">Comment</param>
-        internal LoadInstruction(int r1, int r2, int value, uint address, string comment)
+        internal LoadInstruction(int r1, int r2, int value, int address, string comment)
             : base(InstructionCodes.Load, r1,r2, value, address, comment) {}
 
-        internal LoadInstruction(int r1, int r2, int value, uint address)
+        internal LoadInstruction(int r1, int r2, int value, int address)
             : base(InstructionCodes.Load,r1, r2, value, address) {}
 
-        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, int value, uint address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int r2, int value, int address, string comment)
         {
             return factory.Load(r1, r2, value, address, comment);
         }

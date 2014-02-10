@@ -35,6 +35,6 @@ ForwardReference:
 
 BackReference:
 
-	;Sub r3, r1, r2
+	Sub r3, r1, r2
 	;JNZ  BackReference
 	Return

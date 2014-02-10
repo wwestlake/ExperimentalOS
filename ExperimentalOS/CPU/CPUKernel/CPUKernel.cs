@@ -74,14 +74,50 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel
         internal void Jump(Instruction inst) { throw new NotImplementedException(); }
         internal void Call(Instruction inst) { throw new NotImplementedException(); }
         internal void Return(Instruction inst) { throw new NotImplementedException(); }
-        internal void Add(Instruction inst) { throw new NotImplementedException(); }
-        internal void Sub(Instruction inst) { throw new NotImplementedException(); }
-        internal void Mul(Instruction inst) { throw new NotImplementedException(); }
-        internal void Div(Instruction inst) { throw new NotImplementedException(); }
-        internal void Inc(Instruction inst) { throw new NotImplementedException(); }
-        internal void Dec(Instruction inst) { throw new NotImplementedException(); }
-        internal void Compare(Instruction inst) { throw new NotImplementedException(); }
-        internal void ClearCompare(Instruction inst) { throw new NotImplementedException(); }
+        internal void Add(Instruction inst) 
+        {
+            AddInstruction i = inst as AddInstruction;
+            Processor.Registers[i.r1] = Processor.Registers[i.r2] + Processor.Registers[i.r3];
+        }
+        internal void Sub(Instruction inst)
+        {
+            SubInstruction i = inst as SubInstruction;
+            Processor.Registers[i.r1] = Processor.Registers[i.r2] - Processor.Registers[i.r3];
+        }
+        internal void Mul(Instruction inst)
+        {
+            MulInstruction i = inst as MulInstruction;
+            Processor.Registers[i.r1] = Processor.Registers[i.r2] * Processor.Registers[i.r3];
+        }
+        internal void Div(Instruction inst)
+        {
+            DivInstruction i = inst as DivInstruction;
+            Processor.Registers[i.r1] = Processor.Registers[i.r2] / Processor.Registers[i.r3];
+        }
+        internal void Inc(Instruction inst) 
+        {
+            IncInstruction i = inst as IncInstruction;
+            Processor.Registers[i.r1]++;
+        }
+        internal void Dec(Instruction inst) 
+        {
+            IncInstruction i = inst as IncInstruction;
+            Processor.Registers[i.r1]--;
+        }
+        internal void Compare(Instruction inst) 
+        {
+            CompareInstruction i = inst as CompareInstruction;
+            int comp = Processor.Registers[i.r1].CompareTo(Processor.Registers[i.r2]);
+            if (comp < 0) Processor.ComparisonFlag = ComparisonFlags.LessThan;
+            else if (comp > 0) Processor.ComparisonFlag = ComparisonFlags.GreateThan;
+            else if (comp == 0) Processor.ComparisonFlag = ComparisonFlags.Equal;
+        }
+
+        internal void ClearCompare(Instruction inst) 
+        {
+            Processor.ComparisonFlag = ComparisonFlags.Cleared; 
+        }
+
         internal void JE(Instruction inst) { throw new NotImplementedException(); }
         internal void JNE(Instruction inst) { throw new NotImplementedException(); }
         internal void JGT(Instruction inst) { throw new NotImplementedException(); }

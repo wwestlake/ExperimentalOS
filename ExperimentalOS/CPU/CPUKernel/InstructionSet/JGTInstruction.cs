@@ -23,18 +23,15 @@ using System;
 namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
 {
     [Serializable]
-    internal class CallInstruction : JumpBase
+    internal class JGTInstruction : JumpBase
     {
+        internal JGTInstruction(int r1, int address, string comment) : base(InstructionCodes.JGT, r1, address, comment) { }
 
-        internal CallInstruction(int r1, int address, string comment) : base(InstructionCodes.Call, r1, address, comment) { }
-
-        internal CallInstruction(int r1, int address) : base(InstructionCodes.Call, r1, address) { }
-
-
+        internal JGTInstruction(int r1, int address) : base(InstructionCodes.JGT, r1, address) { }
 
         protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int address, string comment)
         {
-            return factory.Call(r1, address, comment);
+            return factory.JGT(r1, address, comment);
         }
     }
 }

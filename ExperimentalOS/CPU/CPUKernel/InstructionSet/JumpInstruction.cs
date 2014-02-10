@@ -25,11 +25,11 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
     [Serializable]
     internal class JumpInstruction : JumpBase
     {
-        internal JumpInstruction(int r1, uint address, string comment) : base(InstructionCodes.Jump, r1, address, comment) { }
+        internal JumpInstruction(int r1, int address, string comment) : base(InstructionCodes.Jump, r1, address, comment) { }
 
-        internal JumpInstruction(int r1, uint address) : base(InstructionCodes.Jump, r1, address) { }
+        internal JumpInstruction(int r1, int address) : base(InstructionCodes.Jump, r1, address) { }
 
-        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, uint address, string comment)
+        protected override Instruction NewInstruction(IInstructionFactory factory, int r1, int address, string comment)
         {
             return factory.Jump(r1, address, comment);
         }
