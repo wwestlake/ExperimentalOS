@@ -41,6 +41,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r1">Register 1</param>
         /// <param name="r2">Register 2</param>
         /// <param name="r3">Register 3</param>
+        /// <param name="code">The instruction code</param>
         internal MathBase(InstructionCodes code, int r1, int r2, int r3)
             : this(code, r1, r2, r3, string.Empty)
         {
@@ -53,6 +54,7 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <param name="r2">Register 2</param>
         /// <param name="r3">Register 3</param>
         /// <param name="comment">Comment</param>
+        /// <param name="code">The instruction code</param>
         internal MathBase(InstructionCodes code, int r1, int r2, int r3, string comment)
             : base(code, comment)
         {

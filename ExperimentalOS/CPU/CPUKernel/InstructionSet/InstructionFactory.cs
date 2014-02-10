@@ -243,12 +243,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Add Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Add(int r1, int r2, int r3) { return Add(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a AddInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Add(int r1, int r2, int r3, string comment) { return _kernel.Connect(new AddInstruction(r1, r2, r3, comment)); }
@@ -257,12 +263,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Sub Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Sub(int r1, int r2, int r3) { return Sub(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a SubInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Sub(int r1, int r2, int r3, string comment) { return _kernel.Connect(new SubInstruction(r1, r2, r3, comment)); }
@@ -272,12 +284,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Mul Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Mul(int r1, int r2, int r3) { return Mul(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a MulInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Mul(int r1, int r2, int r3, string comment) { return _kernel.Connect(new MulInstruction(r1, r2, r3, comment)); }
@@ -287,12 +305,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Div Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Div(int r1, int r2, int r3) { return Div(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a DivInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Div(int r1, int r2, int r3, string comment) { return _kernel.Connect(new DivInstruction(r1, r2, r3, comment)); }
@@ -300,12 +324,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a And Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction And(int r1, int r2, int r3) { return And(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a AndInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction And(int r1, int r2, int r3, string comment) { return _kernel.Connect(new AndInstruction(r1, r2, r3, comment)); }
@@ -313,12 +343,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Or Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Or(int r1, int r2, int r3) { return Or(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a AndInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Or(int r1, int r2, int r3, string comment) { return _kernel.Connect(new OrInstruction(r1, r2, r3, comment)); }
@@ -326,12 +362,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Not Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Not(int r1, int r2, int r3) { return Not(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a NotInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Not(int r1, int r2, int r3, string comment) { return _kernel.Connect(new NotInstruction(r1, r2, r3, comment)); }
@@ -339,12 +381,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Xor Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Xor(int r1, int r2, int r3) { return Xor(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a XortInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Xor(int r1, int r2, int r3, string comment) { return _kernel.Connect(new XorInstruction(r1, r2, r3, comment)); }
@@ -354,12 +402,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Nand Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Nand(int r1, int r2, int r3) { return Nand(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a NandtInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Nand(int r1, int r2, int r3, string comment) { return _kernel.Connect(new NandInstruction(r1, r2, r3, comment)); }
@@ -368,12 +422,18 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Nor Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         public Instruction Nor(int r1, int r2, int r3) { return Nor(r1, r2, r3, string.Empty); }
 
         /// <summary>
         /// Creates a NortInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Nor(int r1, int r2, int r3, string comment) { return _kernel.Connect(new NorInstruction(r1, r2, r3, comment)); }
@@ -382,12 +442,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Inc Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <returns>Instruction</returns>
         public Instruction Inc(int r1) { return Inc(r1, string.Empty); }
 
         /// <summary>
         /// Creates a IncInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Inc(int r1, string comment) { return _kernel.Connect(new IncInstruction(r1, comment)); }
@@ -397,12 +459,14 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Dec Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <returns>Instruction</returns>
         public Instruction Dec(int r1) { return Dec(r1, string.Empty); }
 
         /// <summary>
         /// Creates a DecInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Dec(int r1, string comment) { return _kernel.Connect(new DecInstruction(r1, comment)); }
@@ -411,12 +475,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a Compare Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
         /// <returns>Instruction</returns>
         public Instruction Compare(int r1, int r2) { return Compare(r1, r2, string.Empty); }
 
         /// <summary>
         /// Creates a CompareInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction Compare(int r1, int r2, string comment) { return _kernel.Connect(new CompareInstruction(r1, r2, comment)); }
@@ -445,6 +513,8 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a JEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction JE(int r1, int address, string comment) { return _kernel.Connect(new JEInstruction(r1, address, comment)); }
@@ -453,12 +523,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a JNE Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         public Instruction JNE(int r1, int address) { return JNE(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction JNE(int r1, int address, string comment) { return _kernel.Connect(new JNEInstruction(r1, address, comment)); }
@@ -466,12 +540,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a JGT Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         public Instruction JGT(int r1, int address) { return JGT(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction JGT(int r1, int address, string comment) { return _kernel.Connect(new JGTInstruction(r1, address, comment)); }
@@ -479,12 +557,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a JLT Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         public Instruction JLT(int r1, int address) { return JLT(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction JLT(int r1, int address, string comment) { return _kernel.Connect(new JLTInstruction(r1, address, comment)); }
@@ -492,12 +574,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a JZ Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         public Instruction JZ(int r1, int address) { return JZ(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction JZ(int r1, int address, string comment) { return _kernel.Connect(new JZInstruction(r1, address, comment)); }
@@ -505,12 +591,16 @@ namespace LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet
         /// <summary>
         /// Creates a JNZ Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         public Instruction JNZ(int r1, int address) { return JNZ(r1, address, string.Empty); }
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         public Instruction JNZ(int r1, int address, string comment) { return _kernel.Connect(new JNZInstruction(r1, address, comment)); }

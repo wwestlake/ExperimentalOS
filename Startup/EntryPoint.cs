@@ -29,7 +29,6 @@ namespace LagDaemon.ExperimentalOS.Startup
     class EntryPoint
     {
         static FileStream file;
-        static AssemblerFileReader fileReader;
 
         static void Main(string[] args)
         {

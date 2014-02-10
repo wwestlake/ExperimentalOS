@@ -227,6 +227,9 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a AddInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Add(int r1, int r2, int r3, string comment);
@@ -235,12 +238,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Sub Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Sub(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a SubInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Sub(int r1, int r2, int r3, string comment);
@@ -250,12 +259,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Mul Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Mul(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a MulInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Mul(int r1, int r2, int r3, string comment);
@@ -265,12 +280,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Div Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Div(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a DivInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Div(int r1, int r2, int r3, string comment);
@@ -278,12 +299,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a And Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction And(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a AndInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction And(int r1, int r2, int r3, string comment);
@@ -291,12 +318,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Or Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Or(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a AndInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Or(int r1, int r2, int r3, string comment);
@@ -304,12 +337,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Not Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Not(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a NotInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Not(int r1, int r2, int r3, string comment);
@@ -317,12 +356,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Xor Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Xor(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a XortInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Xor(int r1, int r2, int r3, string comment);
@@ -332,12 +377,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Nand Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Nand(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a NandtInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Nand(int r1, int r2, int r3, string comment);
@@ -346,12 +397,18 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Nor Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <returns>Instruction</returns>
         Instruction Nor(int r1, int r2, int r3);
 
         /// <summary>
         /// Creates a NortInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
+        /// <param name="r3">Register 3</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Nor(int r1, int r2, int r3, string comment);
@@ -361,12 +418,14 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Inc Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <returns>Instruction</returns>
         Instruction Inc(int r1);
 
         /// <summary>
         /// Creates a IncInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Inc(int r1, string comment);
@@ -376,12 +435,14 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Dec Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <returns>Instruction</returns>
         Instruction Dec(int r1);
 
         /// <summary>
         /// Creates a DecInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Dec(int r1, string comment);
@@ -389,12 +450,16 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a Compare Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
         /// <returns>Instruction</returns>
         Instruction Compare(int r1, int r2);
 
         /// <summary>
         /// Creates a CompareInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="r2">Register 2</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction Compare(int r1, int r2, string comment);
@@ -421,6 +486,8 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a JEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction JE(int r1, int address, string comment);
@@ -429,12 +496,16 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a JNE Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         Instruction JNE(int r1, int address);
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction JNE(int r1, int address, string comment);
@@ -442,12 +513,16 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a JGT Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         Instruction JGT(int r1, int address);
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction JGT(int r1, int address, string comment);
@@ -455,12 +530,16 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a JLT Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         Instruction JLT(int r1, int address);
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction JLT(int r1, int address, string comment);
@@ -468,12 +547,16 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a JZ Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         Instruction JZ(int r1, int address);
 
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction JZ(int r1, int address, string comment);
@@ -481,11 +564,16 @@ namespace LagDaemon.ExperimentalOS.CPU.Interfaces
         /// <summary>
         /// Creates a JNZ Instruction
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <returns>Instruction</returns>
         Instruction JNZ(int r1, int address);
+
         /// <summary>
         /// Creates a JNEInstruction with comment
         /// </summary>
+        /// <param name="r1">Register 1</param>
+        /// <param name="address">The address</param>
         /// <param name="comment">The comment</param>
         /// <returns>Instruction</returns>
         Instruction JNZ(int r1, int address, string comment);

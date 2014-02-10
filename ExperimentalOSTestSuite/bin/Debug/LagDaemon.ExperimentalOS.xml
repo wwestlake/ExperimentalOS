@@ -707,6 +707,7 @@
             <param name="r1">Register 1</param>
             <param name="r2">Register 2</param>
             <param name="r3">Register 3</param>
+            <param name="code">The instruction code</param>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionCodes,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
@@ -716,6 +717,7 @@
             <param name="r2">Register 2</param>
             <param name="r3">Register 3</param>
             <param name="comment">Comment</param>
+            <param name="code">The instruction code</param>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase.#ctor(LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.MathBase)">
             <summary>
@@ -1113,6 +1115,9 @@
             <summary>
             Creates a AddInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1120,12 +1125,18 @@
             <summary>
             Creates a Sub Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Sub(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a SubInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1133,12 +1144,18 @@
             <summary>
             Creates a Mul Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Mul(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a MulInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1146,12 +1163,18 @@
             <summary>
             Creates a Div Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Div(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a DivInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1159,12 +1182,18 @@
             <summary>
             Creates a And Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.And(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a AndInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1172,12 +1201,18 @@
             <summary>
             Creates a Or Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Or(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a AndInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1185,12 +1220,18 @@
             <summary>
             Creates a Not Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Not(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a NotInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1198,12 +1239,18 @@
             <summary>
             Creates a Xor Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Xor(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a XortInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1211,12 +1258,18 @@
             <summary>
             Creates a Nand Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nand(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a NandtInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1224,12 +1277,18 @@
             <summary>
             Creates a Nor Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Nor(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a NortInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1237,12 +1296,14 @@
             <summary>
             Creates a Inc Instruction
             </summary>
+            <param name="r1">Register 1</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Inc(System.Int32,System.String)">
             <summary>
             Creates a IncInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1250,12 +1311,14 @@
             <summary>
             Creates a Dec Instruction
             </summary>
+            <param name="r1">Register 1</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Dec(System.Int32,System.String)">
             <summary>
             Creates a DecInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1263,12 +1326,16 @@
             <summary>
             Creates a Compare Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.Compare(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a CompareInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1295,6 +1362,8 @@
             <summary>
             Creates a JEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1302,12 +1371,16 @@
             <summary>
             Creates a JNE Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JNE(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1315,12 +1388,16 @@
             <summary>
             Creates a JGT Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JGT(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1328,12 +1405,16 @@
             <summary>
             Creates a JLT Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JLT(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1341,12 +1422,16 @@
             <summary>
             Creates a JZ Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JZ(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1354,12 +1439,16 @@
             <summary>
             Creates a JNZ Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.Interfaces.IInstructionFactory.JNZ(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1576,12 +1665,18 @@
             <summary>
             Creates a Add Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Add(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a AddInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1589,12 +1684,18 @@
             <summary>
             Creates a Sub Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Sub(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a SubInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1602,12 +1703,18 @@
             <summary>
             Creates a Mul Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Mul(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a MulInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1615,12 +1722,18 @@
             <summary>
             Creates a Div Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Div(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a DivInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1628,12 +1741,18 @@
             <summary>
             Creates a And Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.And(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a AndInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1641,12 +1760,18 @@
             <summary>
             Creates a Or Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Or(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a AndInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1654,12 +1779,18 @@
             <summary>
             Creates a Not Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Not(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a NotInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1667,12 +1798,18 @@
             <summary>
             Creates a Xor Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Xor(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a XortInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1680,12 +1817,18 @@
             <summary>
             Creates a Nand Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nand(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a NandtInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1693,12 +1836,18 @@
             <summary>
             Creates a Nor Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Nor(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             Creates a NortInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
+            <param name="r3">Register 3</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1706,12 +1855,14 @@
             <summary>
             Creates a Inc Instruction
             </summary>
+            <param name="r1">Register 1</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Inc(System.Int32,System.String)">
             <summary>
             Creates a IncInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1719,12 +1870,14 @@
             <summary>
             Creates a Dec Instruction
             </summary>
+            <param name="r1">Register 1</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Dec(System.Int32,System.String)">
             <summary>
             Creates a DecInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1732,12 +1885,16 @@
             <summary>
             Creates a Compare Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.Compare(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a CompareInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="r2">Register 2</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1764,6 +1921,8 @@
             <summary>
             Creates a JEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1771,12 +1930,16 @@
             <summary>
             Creates a JNE Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JNE(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1784,12 +1947,16 @@
             <summary>
             Creates a JGT Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JGT(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1797,12 +1964,16 @@
             <summary>
             Creates a JLT Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JLT(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1810,12 +1981,16 @@
             <summary>
             Creates a JZ Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JZ(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
@@ -1823,12 +1998,16 @@
             <summary>
             Creates a JNZ Instruction
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <returns>Instruction</returns>
         </member>
         <member name="M:LagDaemon.ExperimentalOS.CPU.CPUKernel.InstructionSet.InstructionFactory.JNZ(System.Int32,System.Int32,System.String)">
             <summary>
             Creates a JNEInstruction with comment
             </summary>
+            <param name="r1">Register 1</param>
+            <param name="address">The address</param>
             <param name="comment">The comment</param>
             <returns>Instruction</returns>
         </member>
